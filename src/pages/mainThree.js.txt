@@ -1,0 +1,64 @@
+import * as THREE from 'three';
+import  {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
+import  {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader.js'
+     
+     
+     //потом сделаем 3д плюшки 
+        /*
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        const renderer = new THREE.WebGLRenderer( {alpha: true});
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        
+        let objLoader = new OBJLoader();
+
+        const controls = new OrbitControls( camera, renderer.domElement );
+
+        let container = document.createElement('div')
+        container.classList.add('123')
+        renderer.domElement.classList.add('mainCanvas')
+        container.appendChild(renderer.domElement)
+        document.body.appendChild(container)
+        
+        const light = new THREE.PointLight( 0xffffff, 1, 100 );
+        light.position.set( 10, 10, 10 );
+        scene.add( light );
+
+   
+
+        const geometry = new THREE.BoxGeometry(1,1,1)
+        const material = new THREE.MeshStandardMaterial({color: 0xfe00ff})
+        const cube = new THREE.Mesh(geometry,material)
+        scene.add(cube)
+        renderer.setClearColor(0xff00ff, 0)
+        /*
+        loader.load('../../src/assets/models/rocket.obj', (root) => {
+            root.position.x = 0;
+            root.position.z = 0;
+            root.position.y = 0;
+            console.log(root)
+            scene.add(root)
+            alert('added')
+        })
+
+  
+        objLoader.load('', (root) => {
+        console.log(root)
+        scene.add(root)
+        console.log(scene)
+        });
+
+        
+        camera.position.z = 15;
+        controls.update();
+        
+        function animate() {
+            
+              cube.rotation.y += 0.002
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+      
+        }
+        animate();
+        */
