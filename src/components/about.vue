@@ -44,7 +44,7 @@ h1{
     transition: 1s;
 }
 .about-preview:hover .about-preview-img{
-  width: 150%;
+  width: 230%;
   height: 100vh;
 }
 .about-preview-info{

@@ -1,9 +1,9 @@
 <template>
     <div class="capsulesAbout">
         <About 
-        :impPath="'https://i.pinimg.com/originals/6f/a5/49/6fa54949658d7ae6893898074bfa5d1d.jpg'"
-        :header ="'CrewDragon'"
-        :description="'Dragon 2 — американский многоразовый пилотируемый космический корабль компании SpaceX, разработанный по заказу НАСА'" />
+        :impPath="'https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2019/10/starship.jpg'"
+        :header ="'Capsules'"
+        :description="'Capsules  — что-то'" />
     </div>
 </template>
 

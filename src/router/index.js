@@ -14,7 +14,7 @@ import capsulesAll from '@/pages/capsulesAll.vue'
 //dragons
 import dragons from '@/pages/dragons.vue'
 import dragonsAll from '@/pages/dragonsAll.vue'
-
+import dragonsAbout from '@/pages/dragonsAbout.vue'
 export default new VueRouter({
     mode:'history',
     routes: [
@@ -30,7 +30,8 @@ export default new VueRouter({
                 { 
                     name: 'capsules',
                     path: '', 
-                    component: capsulesAbout,},
+                    component: capsulesAbout,
+                },
                 {
                     path: 'all',
                     name: 'capsules-all',
@@ -50,10 +51,15 @@ export default new VueRouter({
             ]
         },
         {
-            name: 'dragons',
+
             path: '/dragons',
             component: dragons,
             children:[
+                {
+                    name: 'dragons',
+                    path: '',
+                    component: dragonsAbout
+                },
                 {
                     path: 'all',
                     name: 'dragons-all',
