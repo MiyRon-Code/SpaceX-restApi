@@ -32,6 +32,7 @@ export default {
   .container{
     width: 1100px;
     margin:  0 auto;
+    overflow: hidden;
   }
   *{
     font-family: 'Lexend Giga', sans-serif;

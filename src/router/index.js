@@ -15,6 +15,14 @@ import capsulesAll from '@/pages/capsulesAll.vue'
 import dragons from '@/pages/dragons.vue'
 import dragonsAll from '@/pages/dragonsAll.vue'
 import dragonsAbout from '@/pages/dragonsAbout.vue'
+
+//lanpads
+import landpads from '@/pages/landpads.vue'
+import landpadsAbout from '@/pages/landpadsAbout.vue'
+import landpadsAll from '@/pages/landpadsAll.vue'
+import landpadsPast from '@/pages/landpadsAll.vue'
+import landpadsUpcoming from '@/pages/landpadsAll.vue'
+
 export default new VueRouter({
     mode:'history',
     routes: [
@@ -79,9 +87,32 @@ export default new VueRouter({
             ]
         },
         {
-            name: 'landpads',
+            
             path: '/landpads',
-            component: dragons
+            component: landpads,
+            children:[
+                {
+                    path: '',
+                    name: 'landpads',
+                    component: landpadsAbout
+                },
+                {
+                    path: 'all',
+                    name: 'landpads-all',
+                    component: landpadsAll,
+                },
+                {
+                    path: 'past',
+                    name: 'landpads-past',
+                    component: landpadsPast,
+                },
+                {
+                    path: 'upcoming',
+                    name: 'landpads-upcoming',
+                    component: landpadsUpcoming,
+                    
+                }
+            ]
         },
        
     ]

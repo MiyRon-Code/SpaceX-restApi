@@ -29,28 +29,30 @@ h1{
 .about{
     margin: 20px 0px;
     display: flex;
+    width: 100%;
 }
 .about-preview{
-  position: absolute;
-  width: 50%;
+  width: 100%;
   height: 100vh;
   transition: 1s;
   display: flex;
 }
 .about-preview-img{
     object-fit: cover;
-    width: 80%;
+    width: 50%;
     height: 100vh;
     transition: 1s;
 }
 .about-preview:hover .about-preview-img{
-  width: 230%;
+  width: 100%;
   height: 100vh;
 }
+
+
 .about-preview-info{
     position: absolute;
     top: 45%;
-    left: 65%;
+    left: 55%;
 }
 .about-header{
     padding: 0px 15px;
@@ -59,15 +61,17 @@ h1{
     mix-blend-mode:lighten;
     background-blend-mode:multiply ;
     background-color: rgb(255, 255, 255);
-   
+    color:rgba(0, 0, 0);;
 }
 .about-desc{
+    transition: 3s;
     font-size: 16px;
     line-height: 17px;
-    padding: 5px;
-    width: 140%;
-    mix-blend-mode:overlay;
+    padding: 15px;
+    width: 400px;
+    mix-blend-mode:screen;
     background-blend-mode:multiply ;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    color:white
 }
 </style>

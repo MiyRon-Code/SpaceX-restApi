@@ -47,7 +47,7 @@ background-color: rgb(8, 101, 207);
 
 .main-item{
     background-color: rgb(19, 50, 228);
-    margin-right: 20px;
+    margin-right: 5px;
     transition: .5s;
 }
 .main-item.menu-item-active{

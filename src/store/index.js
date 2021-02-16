@@ -10,7 +10,9 @@ export default   new Vuex.Store({
     capsulesPast: null,
     capsulesUpcoming: null,
 
-    dragons: null
+    dragons: null,
+
+    landpads: null,
   },
   actions: {
     //capsules
@@ -63,6 +65,22 @@ export default   new Vuex.Store({
           // handle error
           console.log(error);
       })
+    },
+
+
+      
+
+      //landpads
+      fetchLandpadsAll(ctx){
+        axios.get('https://api.spacex.land/rest/landpads')
+        .then(function (response) {
+            // handle success
+            ctx.commit('updateLandpads',response)
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
   },
 
  
@@ -84,6 +102,11 @@ export default   new Vuex.Store({
     updateDragons(state, dragons){
       state.dragons = dragons;
     },
+
+    //landpads
+    updateLandpads(state, landpads){
+      state.landpads = landpads;
+    },
     
   },
   getters: {
@@ -101,7 +124,12 @@ export default   new Vuex.Store({
     //dragons get
     getDragons: state => {
       return  state.dragons
-  },
+    },
+
+    //landpads get
+    getLandpads: state => {
+      return  state.dragons
+    },
   },
   modules: {
 
