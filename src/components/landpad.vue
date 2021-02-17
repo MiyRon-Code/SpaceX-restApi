@@ -106,6 +106,10 @@ export default {
     transform: translateY(-4px) ;
     background-color: rgb(8, 101, 207);
 }
+.search-button:active{
+    transform: translateY(-2px) ;
+    background-color: rgb(88, 101, 207);
+}
 .search-button-img{
     width: 80%;
     height: 80%;

@@ -1,22 +1,25 @@
 <template>
     <div class="main">
         <div class="container">
-            <div class="main-inner">
-                <h1>
-                    Это визуализация данных из Space-X rest-api
-                </h1>
-            </div>
+                    <About 
+                    :impPath="'https://images.unsplash.com/photo-1457364983758-510f8afa9f5f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'"
+                    :header ="'SpaceX-Api'"
+                    :description="'Визуализация данных из SpaceX restApi '" />
         </div>
 
     </div>
 </template>
 <script>
 
+import About from '@/components/about.vue'
 
 export default {
-    created(){
+    components:{
+        About
+    },
+created(){
     }    
-    
+
 }
 </script>
 <style scoped>
