@@ -23,6 +23,10 @@ import landpadsAll from '@/pages/landpadsAll.vue'
 import landpadsPast from '@/pages/landpadsAll.vue'
 import landpadsUpcoming from '@/pages/landpadsAll.vue'
 
+//rockets
+import rockets from '@/pages/rockets.vue'
+import rocketsAbout from '@/pages/rocketsAbout.vue'
+
 export default new VueRouter({
     mode:'history',
     routes: [
@@ -30,6 +34,34 @@ export default new VueRouter({
             name: 'main',
             path: '',
             component: main
+        },
+        {
+
+            path: '/rockets',
+            component: rockets,
+            children:[
+                {
+                    name: 'rockets',
+                    path: '',
+                    component: rocketsAbout
+                },
+                {
+                    path: 'all',
+                    name: 'rockets-all',
+                    component: dragonsAll,
+                },
+                {
+                    path: 'past',
+                    name: 'rockets-past',
+                    component: capsulesPast,
+                },
+                {
+                    path: 'upcoming',
+                    name: 'rockets-upcoming',
+                    component: capsulesUpcoming,
+                    
+                }
+            ]
         },
         {
             path: '/capsules',
