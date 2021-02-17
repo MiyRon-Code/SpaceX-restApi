@@ -130,7 +130,7 @@ export default   new Vuex.Store({
 
     //landpads get
     getLandpads: state => {
-      return  state.dragons
+      return  state.landpads
     },
   },
   modules: {

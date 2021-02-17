@@ -38,4 +38,5 @@ export default {
     font-family: 'Lexend Giga', sans-serif;
     font-family: 'Montserrat', sans-serif;
   }
+
 </style>

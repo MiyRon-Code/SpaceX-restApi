@@ -2,8 +2,8 @@
     <div class="dragonsAll">
         <div class="container">
             <div class="dragonsAll-inner">
-                 <h5>всего платформ: {{getDragons.data.length}}</h5>
-                 <Dragon v-for="(dragon,index) in getDragons.data" :key="index" :data="dragon"/>
+                 <h5>всего платформ: {{getLandpads.data.length}}</h5>
+                 <Landpad v-for="(landpad,index) in getLandpads.data" :key="index" :data="landpad"/>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
     import {mapGetters} from 'vuex'
 
     /*components*/
-    import Dragon from '@/components/dragon.vue'
+    import Landpad from '@/components/landpad.vue'
    
     export default{
         data(){
@@ -22,13 +22,13 @@
             }
         },
         components:{
-            Dragon
+            Landpad
         },
         mounted() {
-          this.$store.dispatch('fetchDragonsAll');
+          this.$store.dispatch('fetchLandpadsAll');
         },
         computed : {
-  ...mapGetters(['getDragons']),
+  ...mapGetters(['getLandpads']),
   // Другие вычисляемые свойства
 },
         created(){
