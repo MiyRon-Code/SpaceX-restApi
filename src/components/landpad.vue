@@ -14,9 +14,14 @@
                     <li class="landpad-info-item">      <span :class="['detail',{'detail-active':details}]" >{{data.details}}</span> </li>
                 </ul>
             </div>
+            <chart
+                 :labels="['one','two']"
+                  :data="[1,2,3]"
+            />
     </div>
 </template>
 <script>
+import chart from '@/components/chartPie.vue'
 export default {
     props:{
         data: Object
@@ -26,6 +31,9 @@ export default {
             checked : false,
             details : false,
         }
+    },
+    components:{
+        chart
     }
 }
 </script>
