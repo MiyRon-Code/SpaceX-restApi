@@ -27,6 +27,11 @@ import landpadsUpcoming from '@/pages/landpadsAll.vue'
 import rockets from '@/pages/rockets.vue'
 import rocketsAbout from '@/pages/rocketsAbout.vue'
 
+//launches
+import launches from '@/pages/launches.vue'
+import launchesAll from '@/pages/launchesAll.vue'
+import launchesAbout from '@/pages/launchesAbout.vue'
+
 export default new VueRouter({
     mode:'history',
     routes: [
@@ -141,6 +146,34 @@ export default new VueRouter({
                 {
                     path: 'upcoming',
                     name: 'landpads-upcoming',
+                    component: landpadsUpcoming,
+                    
+                }
+            ]
+        },
+        {
+            
+            path: '/launches',
+            component: launches,
+            children:[
+                {
+                    path: '',
+                    name: 'launches',
+                    component: launchesAbout
+                },
+                {
+                    path: 'all',
+                    name: 'launches-all',
+                    component: launchesAll,
+                },
+                {
+                    path: 'past',
+                    name: 'launches-past',
+                    component: landpadsPast,
+                },
+                {
+                    path: 'upcoming',
+                    name: 'launches-upcoming',
                     component: landpadsUpcoming,
                     
                 }

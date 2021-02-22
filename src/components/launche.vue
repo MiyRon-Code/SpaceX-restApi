@@ -1,0 +1,83 @@
+<template>
+    <div class="launche">
+            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id запуска: {{data.id}} </div> <div class="preview-info-item"> id миссии : {{data.mission_id}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div v-show="checked" class="launche-body">
+                <ul class="launche-info">
+                    <li class="launche-info-item">год запуска: {{data.launch_year}}</li>
+                    <li class="launche-info-item">аппарат: {{data.rocket.rocket_name}}</li>
+                    <li class="launche-info-item">версия-аппарата: {{data.rocket.rocket_type}}</li>
+                     <li class="launche-info-item">полная дата: {{data.launch_date_local}}</li>
+                </ul>
+            </div>
+                       
+    </div>
+</template>
+<script>
+export default {
+    props:{
+        data: Object
+    },
+    data(){
+        return{
+            checked : false,
+        }
+    }
+}
+</script>
+<style scoped>
+.launche{
+    color: black;
+    background-color: #EEEEEE;
+    margin-bottom:5px; 
+}
+.preview-info{
+    display: flex;
+}
+.preview-info-item{
+    min-width: 100px;
+    margin: 0px 10px;
+}
+.id{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.launche-body{
+       padding: 10px;
+    box-sizing: border-box;
+    background-color: #F9F9F9;
+    font-size: 12px; 
+    font-weight: 300;
+    border: 3px solid #eeeeee;
+}
+.launche-info{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.launche-info-item:not(:last-child){
+    margin-bottom: 16px;
+}
+.more{
+
+}
+.missions{
+    display: flex;
+    align-items: center;
+}
+.mission-item{
+    margin: 0px 10px;
+    padding: 10px;
+    background-color: #EEEEEE;
+    font-size: 8px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+</style>

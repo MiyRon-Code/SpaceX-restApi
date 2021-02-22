@@ -12,16 +12,36 @@
                     <li class="landpad-info-item">статус:       {{data.status}}</li>
                     <li class="landpad-info-item">показать детали?     <input type="checkbox" v-model="details">  </li>
                     <li class="landpad-info-item">      <span :class="['detail',{'detail-active':details}]" >{{data.details}}</span> </li>
+                    <li :class="['landpad-info-item show-chart',{'show-chart-active':showChart}]" @click="showChart = !showChart"><span v-show="!showChart"> Показать данные в виде графика </span> <span v-show="showChart">Скрыть данные в виде графика </span> </li>
                 </ul>
+                <div class="chart-info" v-show="showChart">
+                    <div class="chart">
+                        <chart
+                        :labels="['успешные посадки','всего посадок']"
+                        :data="[data.successful_landings,data.attempted_landings]"
+                        />
+                    </div>
+                    <div class="chart">
+                        <chartLine
+                        :labels="['','успешные посадки','всего посадок']"
+                        :data="[0,data.successful_landings,data.attempted_landings]"
+                        />
+                    </div>
+                    <div class="chart">
+                        <chartBar
+                        :labels="['','успешные посадки','всего посадок']"
+                        :data="[0,data.successful_landings,data.attempted_landings]"
+                        />
+                    </div>
+                </div>
             </div>
-            <chart
-                 :labels="['one','two']"
-                  :data="[1,2,3]"
-            />
+           
     </div>
 </template>
 <script>
 import chart from '@/components/chartPie.vue'
+import chartLine from '@/components/chartLine.vue'
+import chartBar from '@/components/chartBar.vue'
 export default {
     props:{
         data: Object
@@ -30,18 +50,42 @@ export default {
         return{
             checked : false,
             details : false,
+            showChart: false
         }
     },
     components:{
-        chart
+        chart,
+        chartLine,
+        chartBar
     }
 }
 </script>
 <style scoped>
+.show-chart{
+     padding: 5px;
+     background-color: rgb(19, 116, 228);
+     color: white;
+     font-size: 17px;
+     font-weight: 500;
+     transition: .3s;
+     cursor: pointer;
+}
+.show-chart:hover{
+    background-color: rgb(19, 50, 228);
+    color: white;
+}
+.show-chart-active{
+    background-color: rgba(19, 116, 228,0.1);
+    color: black;
+}
 .landpad{
     color: black;
     background-color: #EEEEEE;
     margin-bottom:5px; 
+}
+.chart-info{
+    display: flex;
+    justify-content: space-between;
 }
 .id{
     font-weight: 600;
@@ -134,6 +178,7 @@ export default {
     height: 0px;
     opacity: 0;
     transition: .5s;
+    overflow: hidden;
 }
 .detail-active{
     height: auto;
@@ -142,5 +187,9 @@ export default {
     padding: 5px;
     line-height: 17px;
     background-color: rgba(19, 116, 228,0.1);
+}
+.chart{
+    width: 300px;
+    height: 300px;
 }
 </style>

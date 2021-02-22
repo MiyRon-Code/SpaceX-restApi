@@ -11,10 +11,12 @@ export default   new Vuex.Store({
     capsules: null,
     capsulesPast: null,
     capsulesUpcoming: null,
-
     dragons: null,
-
     landpads: null,
+    launches: null,
+
+    //loader
+    loader: false
   },
   actions: {
     //capsules
@@ -72,22 +74,41 @@ export default   new Vuex.Store({
 
       
 
-      //landpads
-      fetchLandpadsAll(ctx){
-        axios.get('https://api.spacex.land/rest/landpads')
-        .then(function (response) {
-            // handle success
-            ctx.commit('updateLandpads',response)
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
+    //landpads
+    fetchLandpadsAll(ctx){
+      axios.get('https://api.spacex.land/rest/landpads')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateLandpads',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+    },
+
+    //launches
+    fetchLaunchesAll(ctx){
+      axios.get('https://api.spacex.land/rest/launches')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateLaunches',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+
+
   },
 
  
   },
   mutations: {
+    
+    
+
+
     //capsules Update
     updateCapsules(state, capsules){
         state.capsules = capsules;
@@ -109,9 +130,19 @@ export default   new Vuex.Store({
     updateLandpads(state, landpads){
       state.landpads = landpads;
     },
+
+    //launches
+    updateLaunches(state, launches){
+      state.launches = launches;
+    },
     
   },
   getters: {
+    //launches get
+    getLoaderStatus: state => {
+      return  state.loader
+    },
+
     //capsules get
     getCapsules: state => {
         return  state.capsules
@@ -131,6 +162,12 @@ export default   new Vuex.Store({
     //landpads get
     getLandpads: state => {
       return  state.landpads
+    },
+
+
+    //launches get
+    getLaunches: state => {
+      return  state.launches
     },
   },
   modules: {

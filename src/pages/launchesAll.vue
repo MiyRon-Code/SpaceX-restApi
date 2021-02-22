@@ -2,9 +2,10 @@
     <div class="capsules">
         <div class="container">
             <div class="capsules-inner">
-                <h3>capsules</h3>
-                <Menu :mainRoute="'capsules'" :routes="['capsules-all','capsules-past','capsules-upcoming']" :names="['все','запущеные','будущие']" />
-                <router-view> </router-view>
+                 
+                 <h5>всего запусков: {{getLaunches.data.length}}</h5>
+                
+                 <Launche v-for="(launche,index) in getLaunches.data" :key="index" :data="launche"/>
             </div>
         </div>
     </div>
@@ -13,27 +14,30 @@
 <script> 
     import {mapGetters} from 'vuex'
 
-    import Menu from '@/components/menu.vue'
-
+    /*components*/
+    import Launche from '@/components/launche.vue'
+   
     
 
     export default{
         data(){
             return{
-               activeButton:-1
+               loader:true
             }
         },
         components:{
-           Menu,
+            Launche,
+            
         },
         mounted() {
-          this.$store.dispatch('fetchCapsulesAll');
+          this.$store.dispatch('fetchLaunchesAll');
         },
         computed : {
-  ...mapGetters(['getCapsules']),
+  ...mapGetters(['getLaunches']),
   // Другие вычисляемые свойства
 },
         created(){
+             this.$emit('login')
              console.log(this.$store.state)
         }
     }
@@ -43,5 +47,4 @@
 h5{
     font-weight: 500;
 }
-
 </style>

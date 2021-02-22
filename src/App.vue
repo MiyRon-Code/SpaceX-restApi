@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <Header/>
+    <Loader v-show="getLoaderStatus" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex'
 /*components*/
 import Header from '@/components/header.vue'
 
 
-
+import Loader from '@/components/loader.vue'
 
 
 export default {
@@ -19,8 +20,12 @@ export default {
 
   components: {
     Header,
-
-  }
+    Loader
+  },
+  computed : {
+    ...mapGetters(['getLoaderStatus']),
+    // Другие вычисляемые свойства
+  },
 }
 </script>
 
