@@ -10,12 +10,16 @@
                     <li class="dragon-info-item">высота грузового отсека (метры): {{data.height_w_trunk.meters}}</li>
                     <li class="dragon-info-item">высота грузового отсека (футов): {{data.height_w_trunk.feet}}</li>
                     <li class="dragon-info-item">стартовая масса полезной нагрузки (кг): {{data.launch_payload_mass.kg}}</li>
-                    <li class="dragon-info-item">описание: {{data.description}}</li>
+                    <Description
+                        :show="false"
+                        :text = data.description
+                    />
                 </ul>
             </div>
     </div>
 </template>
 <script>
+import Description from "@/components/description.vue"
 export default {
     props:{
         data: Object
@@ -24,6 +28,9 @@ export default {
         return{
             checked : false,
         }
+    },
+    components:{
+        Description,
     }
 }
 </script>

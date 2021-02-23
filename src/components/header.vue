@@ -7,6 +7,7 @@
                 </div>
                 <div class="nav">
                     <ul class="nav">
+                        <li class="nav-item" @click="$router.push({name:'description'})">description</li>
                         <li class="nav-item" @click="$router.push({name:'launches'})">launches</li>
                         <li class="nav-item" @click="$router.push({name:'rockets'})">rockets</li>
                         <li class="nav-item" @click="$router.push({name:'capsules'})">capsules</li>

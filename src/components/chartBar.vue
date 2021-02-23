@@ -3,6 +3,7 @@ import { Bar } from 'vue-chartjs'
 export default {
     extends: Bar,
     props:{
+        label: String,
         labels: Array,
         data: Array,
     },
@@ -10,7 +11,7 @@ export default {
         this.renderChart({
         labels: this.labels,
         datasets: [{
-            label: '# of Votes',
+            label: this.label,
             data: this.data,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

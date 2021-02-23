@@ -1,12 +1,17 @@
 <template>
     <div class="launche">
-            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id запуска: {{data.id}} </div> <div class="preview-info-item"> id миссии : {{data.mission_id}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id запуска: {{data.id}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> id миссии : {{data.mission_id}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
             <div v-show="checked" class="launche-body">
                 <ul class="launche-info">
                     <li class="launche-info-item">год запуска: {{data.launch_year}}</li>
                     <li class="launche-info-item">аппарат: {{data.rocket.rocket_name}}</li>
                     <li class="launche-info-item">версия-аппарата: {{data.rocket.rocket_type}}</li>
-                     <li class="launche-info-item">полная дата: {{data.launch_date_local}}</li>
+                    
+                     <li class="launche-info-item date" @click="changeDateFormat">
+                       полная дата: 
+                      <span v-show="dateMode"> {{date.getDay()+1}} {{months[date.getMonth()]}} {{date.getFullYear()}} в {{date.getHours()}}:{{date.getMinutes()}} </span>
+                      <span v-show="!dateMode">{{data.launch_date_local}}</span>
+                     </li>
                 </ul>
             </div>
                        
@@ -20,11 +25,38 @@ export default {
     data(){
         return{
             checked : false,
+            date: new Date(0,0,0),
+            dateMode: false,
+            months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+        }
+    },
+    created(){
+       this.date = new Date(this.data.launch_date_local); 
+    },
+    methods:{
+        changeDateFormat(){
+            this.dateMode = !this.dateMode
         }
     }
 }
 </script>
 <style scoped>
+.date{
+   cursor: pointer;
+   padding: 5px;
+   animation: pulsar 3s infinite;
+}
+@keyframes pulsar{
+    0%{
+        background-color: rgba(19, 116, 228,0.1);
+    }
+    50%{
+        background-color: transparent;
+    }
+    100%{
+        background-color: rgba(19, 116, 228,0.1);
+    }
+}
 .launche{
     color: black;
     background-color: #EEEEEE;

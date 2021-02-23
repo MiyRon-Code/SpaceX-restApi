@@ -32,6 +32,10 @@ import launches from '@/pages/launches.vue'
 import launchesAll from '@/pages/launchesAll.vue'
 import launchesAbout from '@/pages/launchesAbout.vue'
 
+
+//description
+import description from '@/pages/description.vue'
+
 export default new VueRouter({
     mode:'history',
     routes: [
@@ -179,6 +183,11 @@ export default new VueRouter({
                 }
             ]
         },
-       
+        {
+            
+            path: '/description',
+            component: description,
+            name: 'description',
+        },
     ]
   })
