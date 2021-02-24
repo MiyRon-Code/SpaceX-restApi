@@ -1,6 +1,6 @@
 <template>
     <div class="description">
-        <div class="description-controls">показать детали?<input type="checkbox" v-model="show">  </div>
+        <div class="description-controls">показать описание?<input type="checkbox" v-model="show">  </div>
         <div class="description-item" >
                   <div :class="['detail',{'detail-active':show}]">{{text}}</div> 
         </div>
@@ -10,8 +10,10 @@
 export default {
     props:{
         show: Boolean,
-        text: String
+        text: String,
+
     },
+
 }
 </script>
 <style scoped>

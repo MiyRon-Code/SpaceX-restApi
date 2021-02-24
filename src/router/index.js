@@ -26,12 +26,13 @@ import landpadsUpcoming from '@/pages/landpadsAll.vue'
 //rockets
 import rockets from '@/pages/rockets.vue'
 import rocketsAbout from '@/pages/rocketsAbout.vue'
+import rocketsAll from '@/pages/rocketsAll.vue'
 
 //launches
 import launches from '@/pages/launches.vue'
-import launchesAll from '@/pages/launchesAll.vue'
 import launchesAbout from '@/pages/launchesAbout.vue'
-
+import launchesAll from '@/pages/launchesAll.vue'
+import launchesUpcoming from '@/pages/launchesUpcoming.vue'
 
 //description
 import description from '@/pages/description.vue'
@@ -57,7 +58,7 @@ export default new VueRouter({
                 {
                     path: 'all',
                     name: 'rockets-all',
-                    component: dragonsAll,
+                    component: rocketsAll,
                 },
                 {
                     path: 'past',
@@ -178,7 +179,7 @@ export default new VueRouter({
                 {
                     path: 'upcoming',
                     name: 'launches-upcoming',
-                    component: landpadsUpcoming,
+                    component: launchesUpcoming,
                     
                 }
             ]

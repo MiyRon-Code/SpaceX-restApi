@@ -3,8 +3,7 @@
         <div class="container">
             <div class="launches-inner">
                 <h3>launches</h3>
-                <Menu :mainRoute="'launches'" :routes="['launches-all']" :names="['все']" />
-              
+                <Menu :mainRoute="'launches'" :routes="['launches-all','launches-upcoming']" :names="['все','предстоящие']"/>
                 <router-view> </router-view>
             </div>
         </div>

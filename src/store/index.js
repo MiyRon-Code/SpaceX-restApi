@@ -14,6 +14,7 @@ export default   new Vuex.Store({
     dragons: null,
     landpads: null,
     launches: null,
+    rockets:null,
 
     //loader
     loader: false
@@ -98,11 +99,32 @@ export default   new Vuex.Store({
           // handle error
           console.log(error);
       })
+    },
 
+    fetchLaunchesUpcoming(ctx){
+      axios.get('https://api.spacex.land/rest/launches-upcoming')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateLaunchesUpcoming',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+    },
 
-  },
-
- 
+    //rockets
+    fetchRockets(ctx){
+      axios.get('https://api.spacex.land/rest/rockets')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateRockets',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+    },
   },
   mutations: {
     
@@ -136,6 +158,14 @@ export default   new Vuex.Store({
       state.launches = launches;
     },
     
+    updateLaunchesUpcoming(state, launches){
+      state.launches = launches;
+    },
+    
+    //rockets
+    updateRockets(state, rockets){
+      state.rockets = rockets;
+    },
   },
   getters: {
     //launches get
@@ -168,6 +198,15 @@ export default   new Vuex.Store({
     //launches get
     getLaunches: state => {
       return  state.launches
+    },
+
+    getLaunchesUpcoming: state => {
+      return  state.launches
+    },
+
+    //Rockets get 
+    getRockets: state => {
+      return  state.rockets
     },
   },
   modules: {

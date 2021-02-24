@@ -1,7 +1,7 @@
 <template>
     <div class="capsulesAbout">
         <About 
-        :impPath="'https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2019/10/starship.jpg'"
+        :impPath="'https://cdn.pixabay.com/photo/2015/03/26/18/36/spacecraft-693231_960_720.jpg'"
         :header ="'Capsules'"
         :description="'Capsules  — что-то'" />
     </div>
