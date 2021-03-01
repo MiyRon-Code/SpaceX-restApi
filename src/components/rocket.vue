@@ -1,5 +1,9 @@
 <template>
     <div :class="['rocket',{'active-rocket':data.active}]">
+           <portal to="destination">
+  <p>This slot content will be rendered wherever the with name 'destination'
+    is  located.</p>
+</portal>
             <div class="id">версия: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">АКТИВНАЯ!</div> <input type="checkbox" class="more" v-model="checked"></span>       </div>
             <div v-show="checked" class="rocket-body">
                 <ul class="rocket-info">
@@ -16,7 +20,11 @@
                             <div class="stage-info-item"> <img class="stage-info-item-icon"> время горения ступени {{data.first_stage.burn_time_sec}} секунд</div>
                             <div class="stage-info-item"> <img class="stage-info-item-icon"> количество топлива {{data.first_stage.fuel_amount_tons}} тонн</div>reusable
                             <div class="stage-info-item res"> <img class="stage-info-item-icon"> многоразовый?  <div v-show="!data.first_stage.reusable" class="isReusable"></div> <div v-show="data.first_stage.reusable" class="isReusable-active"></div></div>
+                            
                          </div> 
+                     </li>
+                     <li class="dragon-info-item">просмотреть изображения
+                         
                      </li>
                 </ul>
             </div>
@@ -24,6 +32,7 @@
 </template>
 <script>
 import Description from "@/components/description.vue"
+//import Slider from "@/components/slider.vue"
 export default {
     props:{
         data: Object
@@ -34,7 +43,8 @@ export default {
         }
     },
     components:{
-        Description
+        Description,
+  //      Slider
     }
 }
 </script>
@@ -59,6 +69,7 @@ export default {
 .res{
     display: flex;
     align-items: center;
+
 }
 .isReusable{
     width: 30px;
@@ -77,7 +88,6 @@ export default {
     background-color: rgb(155, 255, 169);
 }
 .isActive{
-    
    margin: 0px 5px;
 }
 .status{

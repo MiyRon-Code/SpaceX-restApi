@@ -3,7 +3,9 @@
         <div class="container">
             <div class="rocketsAll-inner">
                  <h5>всего ракет: {{getRockets.data.length}}</h5>
-                 <Rocket v-for="(rocket,index) in getRockets.data" :key="index" :data="rocket"/>
+                 <Rocket v-for="(rocket,index) in getRockets.data" :key="index" :data="rocket"
+                    
+                 />
             </div>
         </div>
     </div>
@@ -13,7 +15,7 @@
     import {mapGetters} from 'vuex'
 
     /*components*/
-    import Rocket from '@/components/rocket.vue'
+    import Rocket from '@/components/rockett.vue'
    
     export default{
         data(){

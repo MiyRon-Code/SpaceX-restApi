@@ -10,6 +10,7 @@
                     <li class="dragon-info-item">высота грузового отсека (метры): {{data.height_w_trunk.meters}}</li>
                     <li class="dragon-info-item">высота грузового отсека (футов): {{data.height_w_trunk.feet}}</li>
                     <li class="dragon-info-item">стартовая масса полезной нагрузки (кг): {{data.launch_payload_mass.kg}}</li>
+                    
                     <Description
                         :show="false"
                         :text = data.description

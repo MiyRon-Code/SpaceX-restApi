@@ -39,12 +39,13 @@ export default {
 .slider-images{
     width: 100%;
     height: 100vh;
+   
 }
 .slide{
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 9;
 }
 .slide-img{
   object-fit: cover;
@@ -53,10 +54,11 @@ export default {
 }
     .sliner-controls{
         position: absolute;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         display:flex;
-        justify-content: space-between
+        justify-content: space-between;
+         z-index: 10;
     }
 
     .slider-controls_button{
