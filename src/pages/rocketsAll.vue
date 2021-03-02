@@ -15,7 +15,7 @@
     import {mapGetters} from 'vuex'
 
     /*components*/
-    import Rocket from '@/components/rockett.vue'
+    import Rocket from '@/components/rocket.vue'
    
     export default{
         data(){

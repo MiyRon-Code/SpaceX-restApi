@@ -1,141 +1,304 @@
 <template>
-    <div :class="['rocket',{'active-rocket':data.active}]">
-           <portal to="destination">
-  <p>This slot content will be rendered wherever the with name 'destination'
-    is  located.</p>
-</portal>
-            <div class="id">версия: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">АКТИВНАЯ!</div> <input type="checkbox" class="more" v-model="checked"></span>       </div>
-            <div v-show="checked" class="rocket-body">
-                <ul class="rocket-info">
-                    <li class="rocket-info-item">страна:       {{data.country}}</li>
-                    <li class="rocket-info-item">диаметр:       {{data.diameter.meters}} метров / {{data.diameter.feet}} футов</li>
-                    <Description
-                        :text="data.description"
-                    />
-                     <li class="rocket-info-item">первый вылет:       {{data.first_flight}}</li>
-                     <li class="rocket-info-item ">
-                         первая ступень 
-                         <div class="stage">
-                            <div class="stage-info-item"> <img class="stage-info-item-icon"> время горения ступени {{data.first_stage.burn_time_sec}} секунд</div>
-                            <div class="stage-info-item"> <img class="stage-info-item-icon"> время горения ступени {{data.first_stage.burn_time_sec}} секунд</div>
-                            <div class="stage-info-item"> <img class="stage-info-item-icon"> количество топлива {{data.first_stage.fuel_amount_tons}} тонн</div>reusable
-                            <div class="stage-info-item res"> <img class="stage-info-item-icon"> многоразовый?  <div v-show="!data.first_stage.reusable" class="isReusable"></div> <div v-show="data.first_stage.reusable" class="isReusable-active"></div></div>
-                            
-                         </div> 
-                     </li>
-                     <li class="dragon-info-item">просмотреть изображения
-                         
-                     </li>
-                </ul>
+    <div class="rocket">
+        <div class="rocket-preview">
+            <div class="flag">
+                <img src="@/assets/flags/United States.png"  alt="" class="flag-img">
             </div>
+            <img src="@/assets/falcon.jpg" alt="" class="rocket-preview-img">
+            <h1 class="rocket-version">{{data.id}}</h1>
+            <h5 class="rocket-desc">{{data.description}}</h5>
+        </div>
+        <div class="rocket-body" >
+            <div :class="['rocket','id',{'active-rocket':data.active}]" >версия: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">АКТИВНАЯ!</div></span>       </div>
+            <div class="slider">
+                    <VueSlickCarousel v-bind="settings">
+                        <div :class="['slider-item',{'meter':this.americanNotation}]" @click="changeNotation">
+                            <div class="slide">
+                                 <h5>диаметр</h5>
+                                <img src="@/assets/icons/diameter.svg" alt="" class="slider-item-icon">
+                                <span class="slider-item-info" v-show="americanNotation">
+                                        {{data.diameter.meters}} meters
+                                </span>
+                                 <span class="slider-item-info" v-show="!americanNotation">
+                                        {{data.diameter.feet}} feet
+                                </span>
+                            </div>
+                        </div>
+                        <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
+                            <div class="slide">
+                                 <h5>высота</h5>
+                                <img src="@/assets/icons/height.svg" alt="" class="slider-item-icon">
+                                <span class="slider-item-info" v-show="americanNotation">
+                                        {{data.height.meters}} meters
+                                </span>
+                                 <span class="slider-item-info" v-show="!americanNotation">
+                                        {{data.height.feet}} feet
+                                </span>
+                            </div>
+                           
+                        </div>
+                        <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
+                            <div class="slide">
+                                 <h5>масса</h5>
+                                <img src="@/assets/icons/weight.svg" alt="" class="slider-item-icon">
+                                <span class="slider-item-info" v-show="americanNotation">
+                                        {{data.mass.kg}} kg
+                                </span>
+                                 <span class="slider-item-info" v-show="!americanNotation">
+                                        {{data.mass.lb}} lb
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="slide">
+                                 <h5>стоимость за запуск</h5>
+                                <img src="@/assets/icons/dollar.svg" alt="" class="slider-item-icon">
+                                 <span class="slider-item-info">
+                                        {{data.mass.lb}} $
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="slide">
+                                 <h5>дата первого вылета</h5>
+                                <img src="@/assets/icons/rocket.svg" alt="" class="slider-item-icon">
+                                 <span class="slider-item-info">
+                                        {{data.first_flight}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="slide">
+                                 <h5>время горения</h5>
+                                <img src="@/assets/icons/fire.svg" alt="" class="slider-item-icon">
+                                 <span class="slider-item-info">
+                                        {{data.first_stage.burn_time_sec+data.second_stage.burn_time_sec}} сек
+                                </span>
+                            </div>
+                        </div>
+                        <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
+                            <div class="slide">
+                                 <h5>тяга в вакуме</h5>
+                                <img src="@/assets/icons/rocket-flying.svg" alt="" class="slider-item-icon">
+                                <span class="slider-item-info" v-show="americanNotation">
+                                        {{data.engines.thrust_vacuum.kN}} kN
+                                </span>
+                                 <span class="slider-item-info" v-show="!americanNotation">
+                                        {{data.engines.thrust_vacuum.lbf}} lbf
+                                </span>
+                            </div>
+                        </div>
+                         <div class="slider-item">
+                            <div class="slide">
+                                 <h5>процент успешных запусков</h5>
+                                <img src="@/assets/icons/pie-chart.svg" alt="" class="slider-item-icon">
+                                 <span class="slider-item-info">
+                                        {{data.success_rate_pct}} %
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="slide">
+                                 <h5>количество топлива</h5>
+                                <img src="@/assets/icons/fuel.svg" alt="" class="slider-item-icon">
+                                 <span class="slider-item-info">
+                                        {{data.first_stage.fuel_amount_tons+data.second_stage.fuel_amount_tons}} тонн
+                                </span>
+                            </div>
+                        </div>
+                    </VueSlickCarousel>
+            </div>
+            
+           
+            <div class="buttons">
+                <wikiButton
+                    :link="data.wikipedia"
+                />
+                прочтите статью на википедии!
+            </div>
+        </div>
     </div>
 </template>
 <script>
-import Description from "@/components/description.vue"
-//import Slider from "@/components/slider.vue"
+import wikiButton from '@/components/wikiButton.vue'
+
+ 
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+
 export default {
-    props:{
-        data: Object
+    components:{
+        wikiButton,
+        VueSlickCarousel
     },
-    data(){
+    props:{
+        data: Object,
+        preview: String
+    },
+    data (){
         return{
-            checked : false,
+            americanNotation:false,
+            settings:{
+                "dots": false,
+                "focusOnSelect": false,
+                "infinite": true,
+                "speed": 500,
+                "slidesToShow": 4,
+                "slidesToScroll": 1,
+                "touchThreshold": 5,
+                "autoplay":true,
+            }
         }
     },
-    components:{
-        Description,
-  //      Slider
+    methods:{
+        changeNotation: function(){
+            this.americanNotation = !this.americanNotation;
+        }
     }
 }
 </script>
+
 <style scoped>
-@keyframes  active {
-    0%{
-        background-color: rgb(155, 255, 169);
+
+    .rocket{
+        position: relative;
+        display:flex;
     }
-    50%{
-        background-color: rgb(134, 248, 149);
+    .rocket-preview{
+        cursor: pointer;
+        width:300px;
+        height: 500px;
+        transition: 1s;
     }
-    0%{
-        background-color: rgb(155, 255, 169);
+    .rocket-preview:active{
+        width:350px;
+        height: 500px;
+        position: relative;
     }
-}
-.rocket{
-    color: black;
-    background-color: #EEEEEE;
-    margin-bottom:5px; 
-   
-}
-.res{
-    display: flex;
-    align-items: center;
+    .rocket-preview:hover .flag{
+        opacity: 1;
+    }
+    .rocket-preview:active .rocket-version {
+        display: block;
+    }
+    .rocket-preview:active  .rocket-desc{
+        display: block;
+    }
+    .rocket-preview:active  ~ .rocket-body{
+        display: none;
+    }
+    .rocket-preview-img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .rocket-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .flag{
+        transition: .1s;
+        opacity: 0;
+        top: 10px;
+        left:10px;
+        position: absolute;
+        height: 40px;
+        width: 70px;
+    }
+    .flag-img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .rocket-version{
+        display: none;
+    }
+    .rocket-version{
+        position: absolute;
+        z-index: 1;
+        color: white;
+        font-size: 30px;
+        top: calc(50% - 30px);
+        left: 70%;
+        text-transform: uppercase;
+        mix-blend-mode:lighten;
+        background-blend-mode:multiply ;
+        background-color: rgb(255, 255, 255);
+        color:rgba(0, 0, 0);
+    }
 
-}
-.isReusable{
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    background-color: rgb(252, 38, 0);
-}
-.isReusable-active{
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    background-color: rgb(155, 255, 169);
-}
-.active-rocket{
-    animation: active 2s infinite;
-    background-color: rgb(155, 255, 169);
-}
-.isActive{
-   margin: 0px 5px;
-}
-.status{
-    display: flex;
-    align-items: center;
+    .id{
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .isActive{
+    margin: 0px 5px;
+    }
+    @keyframes  active {
+        0%{
+            background-color: rgb(13, 115, 231);
+        }
+        50%{
+            background-color: rgb(8, 101, 207);
+        }
+        0%{
+            background-color: rgb(13, 115, 231);
+        }
+    }
+    .rocket-desc{
+            display: none;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            color: white;
+            top: calc(50% + 10px);
+            left: 70%;
+            width: 500px;
+            background-color: rgb(13, 115, 231);
+            color:white;
+            line-height: 20px;
+            mix-blend-mode:lighten;
+    }
 
-}
-.id{
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-}
-.rocket-body{
-       padding: 10px;
-    box-sizing: border-box;
-    background-color: #F9F9F9;
-    font-size: 12px; 
-    font-weight: 300;
-    border: 3px solid #eeeeee;
-}
-.rocket-info{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.rocket-info-item:not(:last-child){
-    margin-bottom: 16px;
-}
-.more{
-
-}
-.missions{
-    display: flex;
-    align-items: center;
-}
-.mission-item{
-    margin: 0px 10px;
-    padding: 10px;
-    background-color: #EEEEEE;
-    font-size: 8px;
-    display: flex;
-    flex-direction: column;
-
-}
-
-
+    .slider{
+        width: 700px;
+    }
+    .slide{
+        width: 100%;
+        height: 100%;
+         display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        color:white;
+    }
+    .slider-item{
+        height: 400px;
+        cursor:move;
+        background: linear-gradient( #396afc, #2948ff);
+    }
+    .meter{
+         background: linear-gradient( #393cfc, #6229ff);
+    }
+    .slider-item-icon{
+        width: 120px;
+        height: 120px;
+    }
+    .slider-item-info{
+        font-size: 26px; 
+    }
+    .buttons{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        letter-spacing: 1.5px; 
+    }
 </style>

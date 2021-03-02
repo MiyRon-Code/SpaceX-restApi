@@ -14,7 +14,8 @@
     "three": "^0.125.2",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
-    "vue-router": "^3.5.1"
+    "vue-router": "^3.5.1",
+    "vue-slick-carousel": "^1.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -5,6 +5,7 @@
                 <h3>rockets</h3>
                 <Menu :mainRoute="'rockets'" :routes="['rockets-all']" :names="['все ракеты']" />
                 <router-view> </router-view>
+               
             </div>
         </div>
     </div>
