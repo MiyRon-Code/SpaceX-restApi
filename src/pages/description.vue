@@ -7,9 +7,7 @@
                     :description="'Description - описание Json данных каждого запроса. '" />
         </div>
         {{getLaunches[0] }}
-        <JsonDescription
-            :data="getLaunches.data[0]"
-        />
+        
     </div>
 </template>
 <script>
@@ -17,13 +15,11 @@ import {mapGetters} from 'vuex'
 
 /* components */
 import About from '@/components/about.vue'
-import JsonDescription from '@/components/jsonDescription.vue'
 
 
 export default {
     components:{
         About,
-        JsonDescription
     },
 
 created(){},
