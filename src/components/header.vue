@@ -2,7 +2,7 @@
     <div class="header">
         <div class="container">
             <div class="header-inner">
-                 <div class="logo" @click="$router.push({name:'main'})">
+                <div class="logo" @click="$router.push({name:'main'})">
                     SpaceX-Api
                 </div>
                 <div class="nav">
@@ -27,7 +27,7 @@ export default {
 </script>
 <style scoped>
     .header{
-        background-color: rgb(19, 116, 228);
+        background: linear-gradient(80deg, #2B04E8, rgb(137, 64, 255)) ;
         color:white;
     }
     .header-inner{
@@ -36,8 +36,11 @@ export default {
         justify-content: space-between
     }
     .logo{
-        font-weight: 900
+        transition: 1s;
+        font-weight: 900;
+        cursor: pointer;
     }
+   
     .nav{
         margin: 0;
         padding: 0;

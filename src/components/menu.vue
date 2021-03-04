@@ -33,8 +33,7 @@ export default {
 .menu-item{
     text-transform: uppercase;
     padding: 5px;
-    background-color: rgb(19, 116, 228);
-    
+    background-color: #5009FF;
     color: white;
     margin-right: 5px;
     border-radius: 5px ;
@@ -42,7 +41,7 @@ export default {
 }
 
 .menu-item-active{
-background-color: rgb(8, 101, 207);
+background-color: #8B09FF;
 }
 
 .main-item{
@@ -51,7 +50,7 @@ background-color: rgb(8, 101, 207);
     transition: .5s;
 }
 .main-item.menu-item-active{
-    background-color: rgb(8, 101, 207);
+    background-color: #5009FF;
     padding: 5px 10px;
     margin-right: 5px;
     color:white;

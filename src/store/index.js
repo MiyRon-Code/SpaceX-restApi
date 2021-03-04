@@ -8,6 +8,8 @@ Vue.use(Vuex);
 export default   new Vuex.Store({
 
   state: {
+    aboutCompany: null,
+    //данные
     capsules: null,
     capsulesPast: null,
     capsulesUpcoming: null,
@@ -20,6 +22,18 @@ export default   new Vuex.Store({
     loader: false
   },
   actions: {
+    //aboutCompany
+    fetchAboutCompany(ctx){
+      axios.get('https://api.spacex.land/rest/company')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateAboutCompany',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+    },
     //capsules
     fetchCapsulesAll(ctx){
         axios.get('https://api.spacex.land/rest/capsules')
@@ -128,7 +142,9 @@ export default   new Vuex.Store({
   },
   mutations: {
     
-    
+    updateAboutCompany(state, info){
+      state.aboutCompany = info;
+  },
 
 
     //capsules Update
@@ -168,7 +184,12 @@ export default   new Vuex.Store({
     },
   },
   getters: {
-    //launches get
+    //aboutCompany get
+    getAboutCompany: state => {
+      return  state.aboutCompany
+    },
+
+    //loaderStatus get
     getLoaderStatus: state => {
       return  state.loader
     },

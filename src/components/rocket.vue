@@ -122,7 +122,7 @@
 <script>
 import wikiButton from '@/components/wikiButton.vue'
 
- 
+
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
