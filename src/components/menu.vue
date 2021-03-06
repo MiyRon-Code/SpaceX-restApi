@@ -31,6 +31,7 @@ export default {
 }
 
 .menu-item{
+    cursor:pointer;
     text-transform: uppercase;
     padding: 5px;
     background-color: #5009FF;
@@ -50,8 +51,7 @@ background-color: #8B09FF;
     transition: .5s;
 }
 .main-item.menu-item-active{
-    background-color: #5009FF;
-    padding: 5px 10px;
+    background-color: #8B09FF;
     margin-right: 5px;
     color:white;
 }

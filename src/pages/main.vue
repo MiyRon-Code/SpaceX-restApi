@@ -3,7 +3,8 @@
         <div class="main-iiner">
             <portal-target name="destination"></portal-target>
         <div class="container">
-          <VueSlickCarousel v-bind="firstCarousel" v-on:click="deleted" class="slider">
+        <div class="slider"></div>
+          <VueSlickCarousel v-bind="firstCarousel" v-on:click="deleted">
             <div class="slide">
                 <div class="info-item">
                     <span class="category">Генеральный директор компании (CEO)</span>
@@ -76,8 +77,14 @@ export default {
     },
     methods: {
         deleted: function(){
-            alert("hello")
+
             document.body.removeChild(this.container)
+        },
+        onWindowResize: function(camera, renderer){
+            alert("resize")
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
         }
     },
      computed : {
@@ -88,6 +95,7 @@ export default {
     data (){
             return{
                 container : null,
+                slider: false,
                 firstCarousel:{
                     "infinite": true,
                     "speed": 900,
@@ -108,6 +116,9 @@ export default {
             }
         }
     },
+beforeDestroy(){
+    this.deleted()
+},
 created(){
     //потом сделаем 3д плюшки 
         
@@ -119,24 +130,46 @@ created(){
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
         const renderer = new THREE.WebGLRenderer( {alpha: true});
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( window.innerWidth-17, window.innerHeight);
         
        
 
         const controls = new OrbitControls( camera, renderer.domElement );
-
-     this.container = document.createElement('div')
-     this.container.classList.add('canvas-container')
-     renderer.domElement.classList.add('mainCanvas')
-     this.container.appendChild(renderer.domElement)
+        controls.autoRotate=true;
+        controls.minDistance = 12;
+        controls.maxDistance = 72;
+    this.container = document.createElement('div')
+    this.container.classList.add('canvas-container')
+    renderer.domElement.classList.add('mainCanvas')
+    //  <div class="about-preview-info">
+    //                     <h1 class="about-header">{{header}}</h1>
+    //                     <p class="about-desc">{{description}}</p>
+    // </div>
+    let headerWrapper = document.createElement('div')
+    let header = document.createElement('h1')
+    let description = document.createElement('p')
+    headerWrapper.classList.add('about-preview-info')
+    header.classList.add('about-header')
+    description.classList.add('about-desc')
+    header.innerHTML="UI SpaceX-Api"
+    description.innerHTML="визуализация данных из SpaceX RestApi"
+    headerWrapper.appendChild(header); 
+    headerWrapper.appendChild(description);
+    this.container.appendChild(headerWrapper) 
+    this.container.appendChild(renderer.domElement)
     document.body.appendChild(this.container)
     
-    let rocketMaterial = new THREE.MeshPhysicalMaterial({color: 0xfe00ff,clearcoat:0.5})
-
     
+    const loader = new THREE.TextureLoader();
+    let rocketMaterial = new THREE.MeshBasicMaterial({color: 0xffff00,wireframe:true})
+    loader.load('/texture/images/FalconTexture.png', (texture) => {
+        rocketMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+    }); 
+    })
 
     const objLoader = new OBJLoader();
-    objLoader.load('/Falcon.obj', (root) => {
+    objLoader.load('/models/Falcon.obj', (root) => {
     root.name="rocket"
     root.material = rocketMaterial;
     console.log(root);
@@ -146,6 +179,10 @@ created(){
     root.rotation.x = -Math.PI / 2;
     scene.add(root);
     });
+    
+
+
+    
 
     
 
@@ -196,41 +233,38 @@ created(){
         light10.position.set( -90, 0, 0 );
         scene.add( light10 );
 
-    
+        window.addEventListener( 'resize', ()=>{onWindowResize()});
 
-        const geometry = new THREE.BoxGeometry(1,1,1)
-        const material = new THREE.MeshPhysicalMaterial({color: 0xfe00ff,clearcoat:0.5})
-        const cube = new THREE.Mesh(geometry,material)
-        scene.add(cube)
-        renderer.setClearColor(0x0000ff, 1)
+
+        renderer.setClearColor(0x2B04E8, 1)
        
         camera.position.z = 1;
         camera.position.y = 150;
-        controls.update();
+        function onWindowResize(){
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }
         
         function animate() {
-            
-        cube.rotation.y += 0.002
-        requestAnimationFrame( animate );
-        renderer.render( scene, camera );
-      
+                
+            requestAnimationFrame( animate );
+            controls.update();
+            renderer.render( scene, camera );
         }
         animate();
+
+
         
     }    
 
 }
 </script>
 <style>
-.main{
-    background-color: blue;
-}
-.slider{
-    position: absolute;
-    opacity: .5;
-}
+
 .info-item{
-    margin: 10px 0px;
+    margin: 6px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center
@@ -238,7 +272,54 @@ created(){
 }
 .category{
     color: rgb(3, 36, 75);
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 600;
 }
+.category-info{
+    font-size: 13px;
+}
+.about-preview{
+  width: 100%;
+  height: 100vh;
+  transition: 1s;
+  display: flex;
+}
+.about-preview-img{
+    object-fit: cover;
+    width: 50%;
+    height: 100vh;
+    transition: 1s;
+}
+.about-preview:hover .about-preview-img{
+  width: 100%;
+  height: 100vh;
+}
+
+
+.about-preview-info{
+    position: absolute;
+    top: 35%;
+    left: 55%;
+}
+.about-header{
+    padding: 0px 15px;
+    font-size: 55px;
+    /*screen */
+    mix-blend-mode:lighten;
+    background-blend-mode:multiply ;
+    background-color: rgb(255, 255, 255);
+    color:rgba(0, 0, 0);;
+}
+.about-desc{
+    transition: 3s;
+    font-size: 16px;
+    line-height: 17px;
+    padding: 15px;
+    width: 400px;
+    mix-blend-mode:screen;
+    background-blend-mode:multiply ;
+    background-color: rgb(0, 0, 0);
+    color:white
+}
+
 </style>

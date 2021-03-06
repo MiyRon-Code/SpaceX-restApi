@@ -55,7 +55,7 @@ export default {
         cursor: pointer;
     }
     .logo:hover{
-        font-weight: 900;
+        text-shadow: 1px 0px 4px white;
     }
     .footer{
         box-sizing: border-box;
