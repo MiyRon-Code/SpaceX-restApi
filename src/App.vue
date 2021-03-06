@@ -37,7 +37,8 @@ export default {
     margin: 0;
     position:relative; 
     min-height:100vh; 
-    padding-bottom: 320px; 
+    padding-bottom: 320px;
+     
   }
   .container{
     width: 1100px;
