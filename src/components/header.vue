@@ -6,14 +6,12 @@
                     SpaceX-Api
                 </div>
                 <div class="nav">
-                    <ul class="nav">
-                        <li class="nav-item" @click="$router.push({name:'description'})">description</li>
-                        <li class="nav-item" @click="$router.push({name:'launches'})">launches</li>
-                        <li class="nav-item" @click="$router.push({name:'rockets'})">rockets</li>
-                        <li class="nav-item" @click="$router.push({name:'capsules'})">capsules</li>
-                        <li class="nav-item" @click="$router.push({name:'dragons'})">dragon</li>
-                        <li class="nav-item" @click="$router.push({name:'landpads'})">landpads</li>
-                    </ul>
+                        <button class="nav-item" @click="$router.push({name:'description'})"> description</button>
+                        <button class="nav-item" @click="$router.push({name:'launches'})">launches </button>
+                        <button class="nav-item" @click="$router.push({name:'rockets'})">rockets</button>
+                        <button class="nav-item" @click="$router.push({name:'capsules'})">capsules</button>
+                        <button class="nav-item" @click="$router.push({name:'dragons'})">dragon</button>
+                        <button class="nav-item" @click="$router.push({name:'landpads'})">landpads</button>
                 </div>
             </div>
         </div>
@@ -26,6 +24,10 @@ export default {
 }
 </script>
 <style scoped>
+    a{
+        text-decoration: none;
+        color: white;
+    }
     .header{
         background: linear-gradient(80deg, #2B04E8, rgb(137, 64, 255)) ;
         color:white;
@@ -48,8 +50,14 @@ export default {
         list-style: none;
     }
     .nav-item{
+        display: block;
         margin-left: 30px;
         position: relative;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        font-size: 15px;
+        color: white;
     }
     .nav-item::after{
         content: '';
@@ -64,4 +72,5 @@ export default {
         top:30px;
         background-color: white;
     }
+
 </style>

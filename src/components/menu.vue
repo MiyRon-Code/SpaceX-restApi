@@ -1,9 +1,9 @@
 <template>
     <div class="menu">
                     <!-- главная кнопка -->
-                    <div :class='["main-item", "menu-item",{"menu-item-active":activeButton==-1}]' @click="activeButton=-1; $router.push({name:mainRoute})">что это?</div>
+                    <button :class='["main-item", "menu-item",{"menu-item-active":activeButton==-1}]' @click="activeButton=-1; $router.push({name:mainRoute})">что это?</button>
                     <!--создаём кнопки -->
-                    <div v-for="(route,index) in routes" :key="index" :class='["menu-item",{"menu-item-active":activeButton==index}]' @click="activeButton=index; $router.push({name:route})">{{names[index]||'none'}}</div>
+                    <button v-for="(route,index) in routes" :key="index" :class='["menu-item",{"menu-item-active":activeButton==index}]' @click="activeButton=index; $router.push({name:route})">{{names[index]||'none'}}</button>
                     <!--вставляем по клику перенаправление на наш роут и имя кнопки-->
     </div>
 </template>
@@ -39,8 +39,8 @@ export default {
     margin-right: 5px;
     border-radius: 5px ;
     font-size: 12px;
+    border: none;
 }
-
 .menu-item-active{
 background-color: #8B09FF;
 }

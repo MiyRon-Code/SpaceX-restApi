@@ -30,6 +30,7 @@ h1{
     margin: 20px 0px;
     display: flex;
     width: 100%;
+    position: relative;
 }
 .about-preview{
   width: 100%;

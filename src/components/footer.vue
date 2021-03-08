@@ -2,9 +2,9 @@
     <div class="footer">
         <div class="container">
             <div class="footer-inner">
-            <div class="logo" @click="$router.push({name:'main'})">
-                SpaceX-Api
-            </div>
+            <button class="logo" @click="$router.push({name:'main'})">
+                  <span>SpaceX-Api</span>
+            </button>
             <ul class="footer-list">
                 <h5>Контакты SpaceX</h5>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.twitter}`" target="blank">SpaceX Twitter</a></li>
@@ -12,15 +12,15 @@
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.website}`" target="blank">official website</a></li>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.elon_twitter}`" target="blank">Elon Twitter</a></li>
             </ul>
-            <ul class="footer-list">
+            <div class="footer-list-btn">
                 <h5>Навигация</h5>
-                <li class="footer-list-item" @click="$router.push({name:'description'})">description</li>
-                <li class="footer-list-item" @click="$router.push({name:'launches'})">launches</li>
-                <li class="footer-list-item" @click="$router.push({name:'rockets'})">rockets</li>
-                <li class="footer-list-item" @click="$router.push({name:'capsules'})">capsules</li>
-                <li class="footer-list-item" @click="$router.push({name:'dragons'})">dragons</li>
-                <li class="footer-list-item" @click="$router.push({name:'landpads'})">landpads</li>
-            </ul>
+                <button class="footer-list-item-btn" @click="$router.push({name:'description'})" > description</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'launches'})" >launches</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'rockets'})"> rockets </button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'capsules'})"> capsules </button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'dragons'})"> dragons </button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'landpads'})"> landpads </button>
+            </div>
              <ul class="footer-list">
                 <h5>Иходники</h5>
                 <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/SpaceX-restApi" target="blank">репозиторий этого проекта на GitHub</a></li>
@@ -44,18 +44,40 @@ export default {
 }
 </script>
 <style  scoped>
+    @keyframes logoAnim{
+        0%{
+            text-shadow: 1px 0px 0px white;    
+        }
+        50%{
+            text-shadow: 1px 0px 4px white;
+        }
+        100%{
+            text-shadow: 1px 0px 0px white;
+        }
+    }
     h5{
         font-size: 20px;
     }
     .logo{
+        background-color: transparent;
+        border: none;
         transition: 1s;
         height: 100%;
         display: flex;
         align-items: center;
         cursor: pointer;
+        color: white;
+        outline: none;
     }
     .logo:hover{
-        text-shadow: 1px 0px 4px white;
+        animation: logoAnim 2s infinite;
+    }
+    
+    .logo:focus span{
+        border: 1px solid white;
+    }
+    .logo:hover span{
+        border: none
     }
     .footer{
         box-sizing: border-box;
@@ -82,6 +104,8 @@ export default {
     }
 
     .footer-list-item{
+        background-color: transparent;
+        border: none;
         position: relative;
         cursor: pointer;
         margin: 15px 0px;
@@ -100,7 +124,51 @@ export default {
     .footer-list-item:hover::before{
         opacity: 1;
     }
-    .footer-list-item a{
+    .footer-list-item:focus::before{
+        opacity: 1;
+    }
+    .footer-list-btn{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        font-weight: 100;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .footer-list-item-btn{
+        display: flex;
+        justify-content: flex-start;
+        background-color: transparent;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        margin: 7px 0px;
+        padding: 0px;
+        font-size: 14px;
+        height: fit-content;
+        color: white;
+    }
+
+    .footer-list-item-btn::before{
+        content: '';
+        transition: .3s;
+        position: absolute;
+        top: 2px;
+        left: -14px;
+        border: 7px solid transparent; border-left: 7px solid white;
+        border-radius: 4px;
+        opacity: 0;
+    }
+    .footer-list-item-btn:hover::before{
+        opacity: 1;
+    }
+
+    .footer-list-item-btn:focus::before{
+        opacity: .5;
+    }
+
+    a{
         text-decoration: none;
         color: white;
     }

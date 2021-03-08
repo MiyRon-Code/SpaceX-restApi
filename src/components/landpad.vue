@@ -16,7 +16,7 @@
                         :show="true"
                         :text="data.details"
                     />
-                    <li :class="['landpad-info-item show-chart',{'show-chart-active':showChart}]" @click="showChart = !showChart"><span v-show="!showChart"> Показать данные в виде графика </span> <span v-show="showChart">Скрыть данные в виде графика </span> </li>
+                    <button :class="['landpad-info-item show-chart',{'show-chart-active':showChart}]" @click="showChart = !showChart"><span v-show="!showChart"> Показать данные в виде графика </span> <span v-show="showChart">Скрыть данные в виде графика </span> </button>
                 
 
                 </ul>
@@ -125,6 +125,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: none;
+    width: 100%;
 }
 .landpad-info-item:not(:last-child){
     margin-bottom: 16px;
