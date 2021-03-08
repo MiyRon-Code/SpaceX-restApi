@@ -4,10 +4,16 @@
             <About 
             :impPath="'https://cdn.pixabay.com/photo/2015/03/26/18/35/satellite-693194_960_720.jpg'"
             :header ="'Description'"
-            :description="'Description - описание Json данных каждого запроса. '" />
+            :description="'Description - описание Json данных каждого запроса. '" 
+            
+            />
         </div>
-        {{getLaunches[0]}}
-        <jsonDescription :data="getLaunches.data" />
+        
+
+        <jsonDescription 
+            :data="getLaunches.data[0]"
+            :link="'https://api.spacex.land/rest/landpads'"
+        />
     </div>
 </template>
 <script>
@@ -22,8 +28,15 @@ export default {
         About,
         jsonDescription,
     },
+    data (){
+        return{
+            
+        }
+    },
 
-created(){},
+created(){
+    
+},
 mounted() {
             this.$store.dispatch('fetchLaunchesAll');
             
