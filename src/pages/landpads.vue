@@ -2,7 +2,7 @@
     <div class="landpads">
         <div class="container">
             <div class="landpads-inner">
-                <h3>landpads</h3>
+                <h3>посадочные платформы</h3>
                 <Menu :mainRoute="'landpads'" :routes="['landpads-all']" :names="['все']" />
                 <router-view> </router-view>
             </div>

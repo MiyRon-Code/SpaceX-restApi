@@ -1,6 +1,6 @@
 <template>
     <div class="capsula">
-            <div class="id">id : {{data.id}}  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id">серийный номер : {{data.capsule_serial}}  <input type="checkbox" class="more" v-model="checked"> </div>
             <div v-show="checked" class="capsula-body">
                 <ul class="capsula-info">
                     <li class="capsula-info-item">Кол-во: высадок:       {{data.landings}}</li>

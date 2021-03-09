@@ -2,7 +2,7 @@
     <div class="rockets">
         <div class="container">
             <div class="rockets-inner">
-                <h3>rockets</h3>
+                <h3>ракеты</h3>
                 <Menu :mainRoute="'rockets'" :routes="['rockets-all']" :names="['все ракеты']" />
                 <router-view> </router-view>
                

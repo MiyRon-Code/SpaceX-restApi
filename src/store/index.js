@@ -24,7 +24,7 @@ export default   new Vuex.Store({
   actions: {
     //aboutCompany
     fetchAboutCompany(ctx){
-      axios.get('https://api.spacex.land/rest/company')
+      axios.get('https://api.spacexdata.com/v3/info')
       .then(function (response) {
           // handle success
           ctx.commit('updateAboutCompany',response)
@@ -36,7 +36,7 @@ export default   new Vuex.Store({
     },
     //capsules
     fetchCapsulesAll(ctx){
-        axios.get('https://api.spacex.land/rest/capsules')
+        axios.get('https://api.spacexdata.com/v3/capsules')
         .then(function (response) {
             // handle success
             ctx.commit('updateCapsules',response)
@@ -48,7 +48,7 @@ export default   new Vuex.Store({
     },
 
     fetchCapsulesPast(ctx){
-      axios.get('https://api.spacex.land/rest/capsules-past')
+      axios.get('https://api.spacexdata.com/v3/capsules/past')
       .then(function (response) {
           // handle success
           ctx.commit('updateCapsulesPast',response)
@@ -60,7 +60,7 @@ export default   new Vuex.Store({
     },
     
     fetchCapsulesUpcoming(ctx){
-      axios.get('https://api.spacex.land/rest/capsules-upcoming')
+      axios.get('https://api.spacexdata.com/v3/capsules/upcoming')
       .then(function (response) {
           // handle success
           ctx.commit('updateCapsulesUpcoming',response)
@@ -75,7 +75,7 @@ export default   new Vuex.Store({
 
     //dragons
     fetchDragonsAll(ctx){
-      axios.get('https://api.spacex.land/rest/dragons')
+      axios.get('https://api.spacexdata.com/v3/dragons')
       .then(function (response) {
           // handle success
           ctx.commit('updateDragons',response)
@@ -91,7 +91,7 @@ export default   new Vuex.Store({
 
     //landpads
     fetchLandpadsAll(ctx){
-      axios.get('https://api.spacex.land/rest/landpads')
+      axios.get('https://api.spacexdata.com/v3/launchpads')
       .then(function (response) {
           // handle success
           ctx.commit('updateLandpads',response)
@@ -104,7 +104,7 @@ export default   new Vuex.Store({
 
     //launches
     fetchLaunchesAll(ctx){
-      axios.get('https://api.spacex.land/rest/launches')
+      axios.get('https://api.spacexdata.com/v3/launches')
       .then(function (response) {
           // handle success
           ctx.commit('updateLaunches',response)
@@ -114,9 +114,19 @@ export default   new Vuex.Store({
           console.log(error);
       })
     },
-
+    fetchLaunchesPast(ctx){
+      axios.get('https://api.spacexdata.com/v3/launches/past')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateLaunchesUpcoming',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+    },
     fetchLaunchesUpcoming(ctx){
-      axios.get('https://api.spacex.land/rest/launches-upcoming')
+      axios.get('https://api.spacexdata.com/v3/launches/upcoming')
       .then(function (response) {
           // handle success
           ctx.commit('updateLaunchesUpcoming',response)
@@ -129,7 +139,7 @@ export default   new Vuex.Store({
 
     //rockets
     fetchRockets(ctx){
-      axios.get('https://api.spacex.land/rest/rockets')
+      axios.get('https://api.spacexdata.com/v3/rockets')
       .then(function (response) {
           // handle success
           ctx.commit('updateRockets',response)

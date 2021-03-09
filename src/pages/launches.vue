@@ -2,7 +2,7 @@
     <div class="launches" :created="OnCreate" >
         <div class="container">
             <div class="launches-inner">
-                <h3>launches</h3>
+                <h3>запуски</h3>
                 <Menu :mainRoute="'launches'" :routes="['launches-all','launches-upcoming']" :names="['все','предстоящие']"/>
                 <router-view> </router-view>
             </div>

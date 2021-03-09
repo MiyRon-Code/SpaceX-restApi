@@ -2,7 +2,7 @@
     <div class="dragon">
         <div class="container">
             <div class="dragonst-inner">
-                <h3>dragons</h3>
+                <h3>crew dragons</h3>
                 <Menu :mainRoute="'dragons'" :routes="['dragons-all']" :names="['все']" />
                 <router-view> </router-view>
             </div>

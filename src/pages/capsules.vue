@@ -2,7 +2,7 @@
     <div class="capsules">
         <div class="container">
             <div class="capsules-inner">
-                <h3>capsules</h3>
+                <h3>капсулы</h3>
                 <Menu :mainRoute="'capsules'" :routes="['capsules-all','capsules-past','capsules-upcoming']" :names="['все','запущеные','будущие']" />
                 <router-view> </router-view>
             </div>
