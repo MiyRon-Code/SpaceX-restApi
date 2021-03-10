@@ -5,9 +5,11 @@
                  <h5>всего миссий: {{getMissions.data.length}}</h5>
                  <Mission v-for="mission in getMissions.data" :key="(mission,index)" :data="mission"/>
             </div>
-            <chartLine 
-                data
+            <chartLine
+                :data="getDataForChart"
+                :labels="getTitleForChart"
             />
+            {{getDataForChart}}
         </div>
     </div>
 </template>
@@ -36,11 +38,18 @@
         computed : {
             ...mapGetters(['getMissions']),
             getDataForChart(){
-                this.getMissions.forEach(element => {
-                    console.log(element)
-
-                });
-                return 0;
+                let data = []
+                for( let i=0; i<10; i++){
+                    data.push(i%2);
+                }
+                return data;
+            },
+            getTitleForChart(){
+                let data = []
+                for( let i=0; i<10; i++){
+                    data.push((i%2)+'');
+                }
+                return data;
             },
         },
         created(){
