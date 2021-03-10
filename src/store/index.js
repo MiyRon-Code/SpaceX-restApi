@@ -5,9 +5,13 @@ import Vuex from 'vuex';
 import axios from 'axios'
 Vue.use(Vuex);
 
+import * as THREE from 'three';
+
 export default   new Vuex.Store({
 
   state: {
+    scene:  new THREE.Scene(),
+
     aboutCompany: null,
     //данные
     capsules: null,
@@ -17,13 +21,17 @@ export default   new Vuex.Store({
     landpads: null,
     launches: null,
     rockets:null,
+    missions: false,
 
     //loader
-    loader: false
+    loader: false,
+
+
   },
   actions: {
     //aboutCompany
     fetchAboutCompany(ctx){
+      this.scene =   new THREE.Scene(),
       axios.get('https://api.spacexdata.com/v3/info')
       .then(function (response) {
           // handle success
@@ -149,12 +157,30 @@ export default   new Vuex.Store({
           console.log(error);
       })
     },
+
+    //missions
+    fetchMissions(ctx){
+      axios.get('https://api.spacexdata.com/v3/rockets')
+      .then(function (response) {
+          // handle success
+          ctx.commit('updateMissions',response)
+      })
+      .catch(function (error) {
+          // handle error
+          console.log(error);
+      })
+    },
   },
   mutations: {
-    
+    //missions
+    updateMissions(state, missions){
+      state.missions = missions;
+    },
+
+    //company
     updateAboutCompany(state, info){
       state.aboutCompany = info;
-  },
+    },
 
 
     //capsules Update
@@ -239,6 +265,11 @@ export default   new Vuex.Store({
     getRockets: state => {
       return  state.rockets
     },
+
+      //Missions get 
+      getMissions: state => {
+        return  state.missions
+      },
   },
   modules: {
 

@@ -9,36 +9,54 @@
             />
             <h3>Информация о компании</h3>
             <jsonDescription 
-                :data="getLaunches.data[0]"
+                :title="'о компании'"
+                :data="getLaunches"
                 :link="'https://api.spacexdata.com/v3/info'"
             />
-            <h3>Запуски</h3>
             <jsonDescription 
+                :title="'о spaceX api'"
+                :data="getLaunches.data[0]"
+                :link="'https://api.spacexdata.com/v3'"
+            />
+            <h3>Платформы для запуска</h3>
+            <jsonDescription 
+                :title="'все платформы'"
                 :data="getLaunches.data[0]"
                 :link="'https://api.spacexdata.com/v3/launchpads'"
             />
             <h3>Капсулы</h3>
             <jsonDescription 
+                :title="'все капсулы'"
                 :data="getLaunches.data[0]"
                 :link="'https://api.spacexdata.com/v3/capsules'"
             />
             <jsonDescription 
+                :title="'прошлые капуслы'"
                 :data="getLaunches.data[0]"
                 :link="'https://api.spacexdata.com/v3/capsules/past'"
             />
             <jsonDescription 
+                :title="'запланированные капсулы'"
                 :data="getLaunches.data[0]"
                 :link="'https://api.spacexdata.com/v3/capsules/upcoming'"
             />
             <h3>Ракеты</h3>
             <jsonDescription 
+                :title="'все ракеты'"
                 :data="getLaunches.data[0]"
                 :link="'https://api.spacexdata.com/v3/rockets'"
             />
             <h3>Crew Dragon</h3>
             <jsonDescription 
+                :title="'все версии аппарата crew dragon'"
                 :data="getLaunches.data[0]"
                 :link="'https://api.spacexdata.com/v3/dragons'"
+            />
+            <h3>Миссии</h3>
+            <jsonDescription 
+                :title="'все миссии'"
+                :data="getLaunches.data[0]"
+                :link="'https://api.spacexdata.com/v3/missions'"
             />
         </div>
       

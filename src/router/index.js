@@ -5,6 +5,10 @@ Vue.use(VueRouter)
 
 /*pages*/
 import main from '@/pages/main.vue'
+//missions
+import missions from '@/pages/missions.vue'
+import missionsAbout from '@/pages/missionsAbout.vue'
+import missionsAll from '@/pages/missionsAll.vue'
 //capsules
 import capsules from '@/pages/capsules.vue'
 import capsulesAbout from '@/pages/capsulesAbout.vue'
@@ -44,6 +48,22 @@ export default new VueRouter({
             name: 'main',
             path: '',
             component: main
+        },
+        {
+            path: '/missions',
+            component: missions,
+            children:[
+                {
+                    name: 'missions',
+                    path: '',
+                    component: missionsAbout,
+                },
+                {
+                    name: 'missions-all',
+                    path: 'all',
+                    component: missionsAll,
+                },
+            ]
         },
         {
 

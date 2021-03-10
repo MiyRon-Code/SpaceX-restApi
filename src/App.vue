@@ -41,10 +41,10 @@ export default {
      
   }
   .container{
-    width: 1100px;
+    width: 1150px;
     margin:  0 auto;
-    overflow: hidden;
     height: 100%;
+    overflow: visible;
   }
   *{
     font-family: 'Lexend Giga', sans-serif;

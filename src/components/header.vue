@@ -6,7 +6,8 @@
                     SpaceX-Api
                 </div>
                 <div class="nav">
-                        <button class="nav-item" @click="$router.push({name:'description'})"> описание</button>
+                        <button class="nav-item" @click="$router.push({name:'description'})">описание</button>
+                        <button class="nav-item" @click="$router.push({name:'missions'})">миссии</button>
                         <button class="nav-item" @click="$router.push({name:'launches'})">запуски </button>
                         <button class="nav-item" @click="$router.push({name:'rockets'})">ракеты</button>
                         <button class="nav-item" @click="$router.push({name:'capsules'})">капсулы</button>

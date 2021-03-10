@@ -262,6 +262,21 @@ created(){
 }
 </script>
 <style>
+::-webkit-scrollbar {
+    width: 12px; /* ширина для вертикального скролла */
+    height: 8px; /* высота для горизонтального скролла */
+    background-color:#143861;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color:  rgba(137, 64, 255,.5);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color:  rgba(137, 64, 255,1);
+}
 
 .info-item{
     margin: 6px 0px;

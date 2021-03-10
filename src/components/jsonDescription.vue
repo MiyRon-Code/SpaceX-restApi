@@ -2,6 +2,7 @@
     <div class="json-description">
         <div class="container">
             <div class="json-description-inner">
+                <div class="title">{{title}}</div>
                 <div class="indicator" v-show="indicator">скопиравано!</div>
                 <div class="json-description-head">        
                     <div class="json-description-info">
@@ -24,7 +25,10 @@
                     </div>
                 </div>
             <div class="json-description-items" v-show="show">
-                <textarea class="textarea" name="" id="" cols="30" rows="10" v-model="strJson" disabled></textarea>
+                <textarea class="textarea-head" name="" id="" cols="30" rows="10" v-model="strJsonHeaders" disabled></textarea>
+            </div>
+            <div class="json-description-items" v-show="show">
+                <textarea class="textarea-body" name="" id="" cols="30" rows="10" v-model="strJsonBody" disabled></textarea>
             </div>
             </div>
         </div>
@@ -36,11 +40,13 @@ export default {
     props:{
         data: Object,
         link: String,
+        title: String,
     },
     data:function (){
         return{
             show: false,
-            strJson: JSON.stringify( this.data, null, '\t'),
+            strJsonHeaders: JSON.stringify( this.data.headers, null, '\t'),
+            strJsonBody: JSON.stringify( this.data.data, null, '\t'),
             indicator: false
         }
     },
@@ -62,16 +68,37 @@ export default {
 
 </script>
 <style scoped>
+
     .buttons{
         display: flex;
     }
-    .textarea{
-        background-color: #2a028f;
+    .title{
+        position: absolute;
+        top: -16px;
+        left: 55px;
+        height: 17px;
+        width:fit-content;
+        background-color: #e0f8ff;
+        color: black;   
+        z-index: 2; 
+        font-size: 13px; 
+        padding:0px 10px;
+    }
+    .textarea-head{
+        background-color: #343749;
+        resize: none;
+        height: 150px;
+    }
+    .textarea-body{
+        background: #212430;
         resize: none;
         height: 600px;
     }
     .json-description{
-        margin: 20px 0px;
+        margin: 25px 0px 20px 0px;
+    }
+    .json-description:hover .title{
+        animation: title 2s infinite;
     }
     .json-description-inner{
         position: relative;
@@ -179,5 +206,16 @@ export default {
         background-color: darkgray;
         color: white;
         resize: auto;
+    }
+    @keyframes title{
+        0%{ 
+            background-color: #e0f8ff;
+        }
+        50%{ 
+            background-color: #a1b7ff;
+        }
+        100%{ 
+            background-color: #e0f8ff;
+        }
     }
 </style>
