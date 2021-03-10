@@ -2,9 +2,12 @@
     <div class="missionsAll">
         <div class="container">
             <div class="missionsAll-inner">
-                 <h5>всего миссий: {{getDragons.data.length}}</h5>
-                 
+                 <h5>всего миссий: {{getMissions.data.length}}</h5>
+                 <Mission v-for="mission in getMissions.data" :key="(mission,index)" :data="mission"/>
             </div>
+            <chartLine 
+                data
+            />
         </div>
     </div>
 </template>
@@ -14,23 +17,32 @@
 
     /*components*/
     import Mission from '@/components/mission.vue'
-   
+    import chartLine from '@/components/chartLine.vue'
     export default{
         data(){
             return{
-               
+               dataForChart: this.getDataForChart()
             }
         },
         components:{
-            Dragon
+            Mission,chartLine
         },
         mounted() {
-          this.$store.dispatch('fetchDragonsAll');
+          this.$store.dispatch('fetchMissions');
+        },
+        methods:{
+            
         },
         computed : {
-  ...mapGetters(['getDragons']),
-  // Другие вычисляемые свойства
-},
+            ...mapGetters(['getMissions']),
+            getDataForChart(){
+                this.getMissions.forEach(element => {
+                    console.log(element)
+
+                });
+                return 0;
+            },
+        },
         created(){
              console.log(this.$store.state)
         }
@@ -41,4 +53,5 @@
 h5{
     font-weight: 500;
 }
+
 </style>

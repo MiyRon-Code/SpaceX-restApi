@@ -160,7 +160,7 @@ export default   new Vuex.Store({
 
     //missions
     fetchMissions(ctx){
-      axios.get('https://api.spacexdata.com/v3/rockets')
+      axios.get('https://api.spacexdata.com/v3/missions')
       .then(function (response) {
           // handle success
           ctx.commit('updateMissions',response)
