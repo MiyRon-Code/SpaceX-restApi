@@ -24,23 +24,15 @@
                loader:true,
             }
         },
+        mounted(){
+            this.$store.dispatch('fetchLaunchesUpcoming')            
+        },
         components:{
             Launche,
         },
-        mounted() {
-            this.$store.dispatch('fetchLaunchesUpcoming');
-            
-        },
         computed : {
-  ...mapGetters(['getLaunchesUpcoming']),
-  // Другие вычисляемые свойства
-   
-},
-        created(){
-             this.$emit('login')
-             console.log(this.$store.state)
-
-        }
+            ...mapGetters(['getLaunchesUpcoming']),
+        },
     }
 </script>
 

@@ -2,9 +2,6 @@
     <div class="capsules">
         <div class="container">
             <div class="capsules-inner">
-                 <div class="chart">
-                 </div>
-                 
                  <h5>всего запусков: {{getLaunches.data.length}}</h5>
                  <Launche v-for="(launche,index) in getLaunches.data" :key="index" :data="launche"/>
             </div>
@@ -17,31 +14,20 @@
 
     /*components*/
     import Launche from '@/components/launche.vue'
-    
 
     export default{
-        data(){
-            return{
-               loader:true,
-
-            }
-        },
         components:{
             Launche,
         },
-        mounted() {
-            this.$store.dispatch('fetchLaunchesAll');
-            
-        },
         computed : {
-  ...mapGetters(['getLaunches']),
-  // Другие вычисляемые свойства
-   
-},
+            ...mapGetters(['getLaunches']),
+        },
+        mounted(){
+            this.$store.dispatch('fetchLaunchesAll')            
+        },
         created(){
              this.$emit('login')
              console.log(this.$store.state)
-
         }
     }
 </script>

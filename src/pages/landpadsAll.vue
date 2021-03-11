@@ -17,22 +17,15 @@
     import Landpad from '@/components/landpad.vue'
 
     export default{
-        data(){
-            return{
-               
-            }
-        },
         components:{
-            Landpad,
-           
+            Landpad,    
         },
         mounted() {
           this.$store.dispatch('fetchLandpadsAll');
         },
         computed : {
-  ...mapGetters(['getLandpads']),
-  // Другие вычисляемые свойства
-},
+            ...mapGetters(['getLandpads']),
+        },
         created(){
              console.log(this.$store.state)
         }

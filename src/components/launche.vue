@@ -1,6 +1,6 @@
 <template>
     <div class="launche">
-            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id запуска: {{data.id}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> id миссии : {{data.mission_id}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id запуска: {{data.id}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> имя миссии : {{data.mission_name}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
             <div v-show="checked" class="launche-body">
                 <ul class="launche-info">
                     <li class="launche-info-item">год запуска: {{data.launch_year}}</li>

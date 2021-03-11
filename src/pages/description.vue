@@ -10,52 +10,68 @@
             <h3>Информация о компании</h3>
             <jsonDescription 
                 :title="'о компании'"
-                :data="getLaunches"
+                :data="getAboutCompany"
                 :link="'https://api.spacexdata.com/v3/info'"
             />
             <jsonDescription 
                 :title="'о spaceX api'"
-                :data="getLaunches.data[0]"
+                :data="getAboutCompany"
                 :link="'https://api.spacexdata.com/v3'"
             />
             <h3>Платформы для запуска</h3>
             <jsonDescription 
                 :title="'все платформы'"
-                :data="getLaunches.data[0]"
+                :data="getLandpads"
                 :link="'https://api.spacexdata.com/v3/launchpads'"
             />
             <h3>Капсулы</h3>
             <jsonDescription 
                 :title="'все капсулы'"
-                :data="getLaunches.data[0]"
+                :data="getCapsules"
                 :link="'https://api.spacexdata.com/v3/capsules'"
             />
             <jsonDescription 
                 :title="'прошлые капуслы'"
-                :data="getLaunches.data[0]"
+                :data="getPastCapsules"
                 :link="'https://api.spacexdata.com/v3/capsules/past'"
             />
             <jsonDescription 
                 :title="'запланированные капсулы'"
-                :data="getLaunches.data[0]"
+                :data="getUpcomingCapsules"
                 :link="'https://api.spacexdata.com/v3/capsules/upcoming'"
             />
             <h3>Ракеты</h3>
             <jsonDescription 
                 :title="'все ракеты'"
-                :data="getLaunches.data[0]"
+                :data="getRockets"
                 :link="'https://api.spacexdata.com/v3/rockets'"
+            />
+            <h3>Запуски</h3>
+            <jsonDescription 
+                :title="'все запуски'"
+                :data="getLaunches"
+                :link="'https://api.spacexdata.com/v3/rockets'"
+            />
+            <jsonDescription 
+                :title="'будущие запуски'"
+                :data="getLaunchesUpcoming"
+                :link="'https://api.spacexdata.com/v3/launches/upcoming'"
+            />
+            <jsonDescription 
+                :title="'прошедшие запуски'"
+                :data="getLaunchesPast"
+                :link="'https://api.spacexdata.com/v3/launches/past'"
             />
             <h3>Crew Dragon</h3>
             <jsonDescription 
                 :title="'все версии аппарата crew dragon'"
-                :data="getLaunches.data[0]"
+                :data="getDragons"
                 :link="'https://api.spacexdata.com/v3/dragons'"
             />
             <h3>Миссии</h3>
             <jsonDescription 
                 :title="'все миссии'"
-                :data="getLaunches.data[0]"
+                :data="getMissions"
                 :link="'https://api.spacexdata.com/v3/missions'"
             />
         </div>
@@ -75,24 +91,32 @@ export default {
         About,
         jsonDescription,
     },
-    data (){
-        return{
-            
-        }
+    mounted() {
+        this.$store.dispatch('fetchAboutCompany');
+        this.$store.dispatch('fetchLandpadsAll');
+        this.$store.dispatch('fetchCapsulesAll');
+        this.$store.dispatch('fetchCapsulesPast');
+        this.$store.dispatch('fetchCapsulesUpcoming');
+        this.$store.dispatch('fetchLaunchesAll');
+        this.$store.dispatch('fetchLaunchesPast');
+        this.$store.dispatch('fetchLaunchesUpcoming');
+        this.$store.dispatch('fetchDragonsAll');
+        this.$store.dispatch('fetchRockets');
+        this.$store.dispatch('fetchMissions');
     },
-
-created(){
-    
-},
-mounted() {
-            this.$store.dispatch('fetchLaunchesAll');
-            
-        },
- computed : {
-  ...mapGetters(['getLaunches']),
-  // Другие вычисляемые свойства
-   
-},    
+    computed:{
+        ...mapGetters(['getAboutCompany']),
+        ...mapGetters(['getLandpads']),
+        ...mapGetters(['getCapsules']),
+        ...mapGetters(['getPastCapsules']),
+        ...mapGetters(['getUpcomingCapsules']),
+        ...mapGetters(['getLaunches']),
+        ...mapGetters(['getLaunchesUpcoming']),
+        ...mapGetters(['getLaunchesPast']),
+        ...mapGetters(['getDragons']),
+        ...mapGetters(['getRockets']),
+        ...mapGetters(['getMissions']),
+    },    
 
 
 }

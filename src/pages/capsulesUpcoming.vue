@@ -28,9 +28,8 @@
           this.$store.dispatch('fetchCapsulesUpcoming');
         },
         computed : {
-  ...mapGetters(['getUpcomingCapsules']),
-  // Другие вычисляемые свойства
-},
+            ...mapGetters(['getUpcomingCapsules']),
+        },
         created(){
              console.log(this.$store.state)
         }

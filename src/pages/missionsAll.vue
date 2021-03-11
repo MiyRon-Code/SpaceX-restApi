@@ -32,9 +32,6 @@
         mounted() {
           this.$store.dispatch('fetchMissions');
         },
-        methods:{
-            
-        },
         computed : {
             ...mapGetters(['getMissions']),
             getDataForChart(){

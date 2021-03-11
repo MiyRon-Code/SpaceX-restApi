@@ -23,11 +23,16 @@
                             <div>copy</div>
                         </button>
                     </div>
-                </div>
+            </div>
+            <div class="status" v-show="show">
+                статус {{data.status}}
+            </div>
             <div class="json-description-items" v-show="show">
+                <span class="type"><span>headers</span></span>
                 <textarea class="textarea-head" name="" id="" cols="30" rows="10" v-model="strJsonHeaders" disabled></textarea>
             </div>
             <div class="json-description-items" v-show="show">
+                <span class="type"><span>body</span></span>
                 <textarea class="textarea-body" name="" id="" cols="30" rows="10" v-model="strJsonBody" disabled></textarea>
             </div>
             </div>
@@ -68,9 +73,27 @@ export default {
 
 </script>
 <style scoped>
-
+    .status{
+        padding: 4px;
+        background-color: rgb(47, 255, 141);
+        color: black;
+        font-size: 13px;
+        font-weight: 600;
+    }
     .buttons{
         display: flex;
+    }
+    .type{
+        width: 100%;
+        display: flex;
+        position: absolute;
+    }
+    .type span{
+        padding: 4px;
+        background-color: rgba(80, 9, 255, 0.5);
+        color: white;
+        font-size: 13px;
+        border-radius: 3px;
     }
     .title{
         position: absolute;
@@ -102,6 +125,9 @@ export default {
     }
     .json-description-inner{
         position: relative;
+    }
+    .json-description-items:hover .type{
+        opacity: .2;
     }
     .json-description-head{
         position: relative;
@@ -200,7 +226,7 @@ export default {
         overflow: visible;
     }
     textarea{
-        width: 100%;
+        width: calc(100% - 7px);
         display: block;
         height: fit-content;
         background-color: darkgray;

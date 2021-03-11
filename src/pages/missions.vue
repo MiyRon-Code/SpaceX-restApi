@@ -12,9 +12,9 @@
 <script>
 import Menu from '@/components/menu.vue'
 export default {
-     components:{
-           Menu,
-        },
+    components:{
+        Menu,
+    },
 }
 
 </script>

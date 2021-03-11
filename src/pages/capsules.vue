@@ -26,9 +26,6 @@
         components:{
            Menu,
         },
-        mounted() {
-          this.$store.dispatch('fetchCapsulesAll');
-        },
         computed : {
   ...mapGetters(['getCapsules']),
   // Другие вычисляемые свойства

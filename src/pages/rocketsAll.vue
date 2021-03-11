@@ -18,21 +18,15 @@
     import Rocket from '@/components/rocket.vue'
    
     export default{
-        data(){
-            return{
-               
-            }
-        },
         components:{
             Rocket
         },
         mounted() {
-          this.$store.dispatch('fetchRockets');
+            this.$store.dispatch('fetchRockets');
         },
         computed : {
-  ...mapGetters(['getRockets']),
-  // Другие вычисляемые свойства
-},
+            ...mapGetters(['getRockets']),
+        },
     }
 </script>
 

@@ -14,7 +14,7 @@
 
     /*components*/
     import Dragon from '@/components/dragon.vue'
-   
+
     export default{
         data(){
             return{
@@ -24,16 +24,12 @@
         components:{
             Dragon
         },
-        mounted() {
+        mounted(){
           this.$store.dispatch('fetchDragonsAll');
         },
-        computed : {
-  ...mapGetters(['getDragons']),
-  // Другие вычисляемые свойства
-},
-        created(){
-             console.log(this.$store.state)
-        }
+        computed:{
+         ...mapGetters(['getDragons']),
+        },
     }
 </script>
 

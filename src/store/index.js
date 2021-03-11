@@ -12,14 +12,16 @@ export default   new Vuex.Store({
   state: {
     scene:  new THREE.Scene(),
 
-    aboutCompany: null,
     //данные
+    aboutCompany: null,
     capsules: null,
     capsulesPast: null,
     capsulesUpcoming: null,
     dragons: null,
     landpads: null,
     launches: null,
+    launchesUpcoming: null,
+    launchesPast: null,
     rockets:null,
     missions: false,
 
@@ -126,7 +128,7 @@ export default   new Vuex.Store({
       axios.get('https://api.spacexdata.com/v3/launches/past')
       .then(function (response) {
           // handle success
-          ctx.commit('updateLaunchesUpcoming',response)
+          ctx.commit('updateLaunchesPast',response)
       })
       .catch(function (error) {
           // handle error
@@ -211,9 +213,11 @@ export default   new Vuex.Store({
     },
     
     updateLaunchesUpcoming(state, launches){
-      state.launches = launches;
+      state.launchesUpcoming = launches;
     },
-    
+    updateLaunchesPast(state, launches){
+      state.launchesPast = launches;
+    },
     //rockets
     updateRockets(state, rockets){
       state.rockets = rockets;
@@ -258,7 +262,11 @@ export default   new Vuex.Store({
     },
 
     getLaunchesUpcoming: state => {
-      return  state.launches
+      return  state.launchesUpcoming
+    },
+
+    getLaunchesPast: state => {
+      return  state.launchesPast
     },
 
     //Rockets get 

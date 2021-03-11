@@ -73,11 +73,10 @@ export default {
     },
 
     mounted() {
-            this.$store.dispatch('fetchAboutCompany');
+        this.$store.dispatch('fetchAboutCompany');
     },
     methods: {
         deleted: function(){
-
             document.body.removeChild(this.container)
         },
         onWindowResize: function(camera, renderer){
@@ -89,8 +88,6 @@ export default {
     },
      computed : {
         ...mapGetters(['getAboutCompany']),
-        // Другие вычисляемые свойства
-        
     },
     data (){
             return{
@@ -120,12 +117,6 @@ beforeDestroy(){
     this.deleted()
 },
 created(){
-    //потом сделаем 3д плюшки 
-        
-// setTimeout(()=>{
-//     this.deleted()
-// },3000)
-
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
