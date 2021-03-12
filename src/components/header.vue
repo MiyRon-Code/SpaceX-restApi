@@ -6,22 +6,33 @@
                     SpaceX-Api
                 </div>
                 <div class="nav">
-                        <button class="nav-item" @click="$router.push({name:'description'})">описание</button>
-                        <button class="nav-item" @click="$router.push({name:'missions'})">миссии</button>
-                        <button class="nav-item" @click="$router.push({name:'launches'})">запуски </button>
-                        <button class="nav-item" @click="$router.push({name:'rockets'})">ракеты</button>
-                        <button class="nav-item" @click="$router.push({name:'capsules'})">капсулы</button>
-                        <button class="nav-item" @click="$router.push({name:'dragons'})">crew dragons</button>
-                        <button class="nav-item" @click="$router.push({name:'landpads'})">посадочные платформы</button>
+                        <button class="nav-item" @click="$router.push({name:'description'})">{{getLocalCategory.description}}</button>
+                        <button class="nav-item" @click="$router.push({name:'missions'})">{{getLocalCategory.missions}}</button>
+                        <button class="nav-item" @click="$router.push({name:'launches'})">{{getLocalCategory.launches}}</button>
+                        <button class="nav-item" @click="$router.push({name:'rockets'})">{{getLocalCategory.rockets}}</button>
+                        <button class="nav-item" @click="$router.push({name:'capsules'})">{{getLocalCategory.capsules}}</button>
+                        <button class="nav-item" @click="$router.push({name:'dragons'})">{{getLocalCategory.dragons}}</button>
+                        <button class="nav-item" @click="$router.push({name:'landpads'})">{{getLocalCategory.landpads}}</button>
+                        <button class="lang" @click="changeLocal">{{getLocalLang}}</button>
                 </div>
+
             </div>
         </div>
        
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
-    
+    computed:{
+        ...mapGetters(['getLocalCategory']),
+        ...mapGetters(['getLocalLang'])
+    },
+    methods:{
+        changeLocal: function(){
+            this.$store.dispatch('changeLocalLang')
+        }
+    }
 }
 </script>
 <style scoped>
@@ -59,6 +70,19 @@ export default {
         border: none;
         font-size: 15px;
         color: white;
+    }
+    .lang{
+        transition: .5s;
+        cursor: pointer;
+        margin: 0px 15px;
+        background: transparent;
+        border: 1px solid white;
+        color:white;
+        border-radius: 5px;
+    }
+    .lang:hover{
+        background-color: white;
+        color:rgb(137, 64, 255);
     }
     .nav-item::after{
         content: '';

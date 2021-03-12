@@ -7,7 +7,7 @@
             :description="'Description - описание Json данных каждого запроса. '" 
             
             />
-            <h3>Информация о компании</h3>
+            <h3>{{getLocalCategory.company}}</h3>
             <jsonDescription 
                 :title="'о компании'"
                 :data="getAboutCompany"
@@ -18,13 +18,13 @@
                 :data="getAboutCompany"
                 :link="'https://api.spacexdata.com/v3'"
             />
-            <h3>Платформы для запуска</h3>
+            <h3>{{getLocalCategory.landpads}}</h3>
             <jsonDescription 
                 :title="'все платформы'"
                 :data="getLandpads"
                 :link="'https://api.spacexdata.com/v3/launchpads'"
             />
-            <h3>Капсулы</h3>
+            <h3>{{getLocalCategory.capsules}}</h3>
             <jsonDescription 
                 :title="'все капсулы'"
                 :data="getCapsules"
@@ -40,13 +40,13 @@
                 :data="getUpcomingCapsules"
                 :link="'https://api.spacexdata.com/v3/capsules/upcoming'"
             />
-            <h3>Ракеты</h3>
+            <h3>{{getLocalCategory.rockets}}</h3>
             <jsonDescription 
                 :title="'все ракеты'"
                 :data="getRockets"
                 :link="'https://api.spacexdata.com/v3/rockets'"
             />
-            <h3>Запуски</h3>
+            <h3>{{getLocalCategory.launches}}</h3>
             <jsonDescription 
                 :title="'все запуски'"
                 :data="getLaunches"
@@ -62,13 +62,13 @@
                 :data="getLaunchesPast"
                 :link="'https://api.spacexdata.com/v3/launches/past'"
             />
-            <h3>Crew Dragon</h3>
+            <h3>{{getLocalCategory.dragons}}</h3>
             <jsonDescription 
                 :title="'все версии аппарата crew dragon'"
                 :data="getDragons"
                 :link="'https://api.spacexdata.com/v3/dragons'"
             />
-            <h3>Миссии</h3>
+            <h3>{{getLocalCategory.missions}}</h3>
             <jsonDescription 
                 :title="'все миссии'"
                 :data="getMissions"
@@ -116,6 +116,8 @@ export default {
         ...mapGetters(['getDragons']),
         ...mapGetters(['getRockets']),
         ...mapGetters(['getMissions']),
+        //local
+        ...mapGetters(['getLocalCategory']),
     },    
 
 

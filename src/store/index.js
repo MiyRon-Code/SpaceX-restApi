@@ -5,6 +5,8 @@ import Vuex from 'vuex';
 import axios from 'axios'
 Vue.use(Vuex);
 
+import {russian,english} from   '../store/lang.js'
+
 import * as THREE from 'three';
 
 export default   new Vuex.Store({
@@ -28,6 +30,20 @@ export default   new Vuex.Store({
     //loader
     loader: false,
 
+    //локализация 
+    local:{
+      lang: "en",
+      category:{
+        description: "description",
+        company: "about company",
+        missions: "missions",
+        launches: "launches",
+        rockets: "rockets",
+        capsules: "capsules",
+        dragons: "crew dragon",
+        landpads: "landpads",
+      }
+    }
 
   },
   actions: {
@@ -172,8 +188,19 @@ export default   new Vuex.Store({
           console.log(error);
       })
     },
+
+    changeLocalLang(ctx){
+      let data = russian;
+      if(this.state.local.lang=="ru"){
+        data = english;
+      }
+      ctx.commit('updateLocalLang',data)
+    }
   },
   mutations: {
+    updateLocalLang(state, lang){
+      state.local = lang;
+    },
     //missions
     updateMissions(state, missions){
       state.missions = missions;
@@ -274,10 +301,18 @@ export default   new Vuex.Store({
       return  state.rockets
     },
 
-      //Missions get 
-      getMissions: state => {
-        return  state.missions
-      },
+    //Missions get 
+    getMissions: state => {
+      return  state.missions
+    },
+
+    //getLocal
+    getLocalCategory: state =>{
+      return state.local.category
+    },
+    getLocalLang: state =>{
+      return state.local.lang
+    }
   },
   modules: {
 
