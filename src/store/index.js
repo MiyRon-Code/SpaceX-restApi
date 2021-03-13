@@ -31,19 +31,8 @@ export default   new Vuex.Store({
     loader: false,
 
     //локализация 
-    local:{
-      lang: "en",
-      category:{
-        description: "description",
-        company: "about company",
-        missions: "missions",
-        launches: "launches",
-        rockets: "rockets",
-        capsules: "capsules",
-        dragons: "crew dragon",
-        landpads: "landpads",
-      }
-    }
+    //по умолчание engish
+    local: english
 
   },
   actions: {
@@ -290,6 +279,9 @@ export default   new Vuex.Store({
     },
     getLocalLang: state =>{
       return state.local.lang
+    },
+    getLocalHelpers: state =>{
+      return state.local.helpers
     }
   },
   modules: {

@@ -2,7 +2,7 @@
     <div class="capsules">
         <div class="container">
             <div class="capsules-inner">
-                 <h5>всего капсул: {{getUpcomingCapsules.data.length}}</h5>
+                 <h5>{{getLocalHelpers.total}} {{getLocalCategory.capsules}}: {{getUpcomingCapsules.data.length}}</h5>
                 <Capsula v-for="(capsula,index) in getUpcomingCapsules.data" :key="index" :data="capsula"/>
             </div>
         </div>
@@ -28,7 +28,7 @@
           this.$store.dispatch('fetchCapsulesUpcoming');
         },
         computed : {
-            ...mapGetters(['getUpcomingCapsules']),
+            ...mapGetters(['getUpcomingCapsules','getLocalCategory','getLocalHelpers']),
         },
         created(){
              console.log(this.$store.state)

@@ -1,8 +1,8 @@
 <template>
-    <div class="dragonsAll" @click="check">
+    <div class="dragonsAll">
         <div class="container">
             <div class="dragonsAll-inner">
-                 <h5>всего драконов: {{getDragons.data.length}}</h5>
+                 <h5>{{getLocalHelpers.total}} {{getLocalCategory.dragons}}: {{getDragons.data.length}}</h5>
                  <Dragon v-for="(dragon,index) in getDragons.data" :key="index" :data="dragon"/>
             </div>
         </div>
@@ -16,15 +16,6 @@
     import Dragon from '@/components/dragon.vue'
 
     export default{
-        methods:{
-            check: function(){
-                alert()
-                console.log(mapGetters(['getDragons']))
-                console.log(this.getDragons)
-                let test = eval('this.getDragons')
-                console.log(test)
-            }
-        },
         components:{
             Dragon
         },
@@ -32,7 +23,7 @@
           this.$store.dispatch('fetchDragonsAll');
         },
         computed:{
-         ...mapGetters(['getDragons']),
+         ...mapGetters(['getDragons','getLocalCategory','getLocalHelpers']),
         },
     }
 </script>

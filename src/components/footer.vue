@@ -6,23 +6,23 @@
                   <span>SpaceX-Api</span>
             </button>
             <ul class="footer-list">
-                <h5>Контакты SpaceX</h5>
+                <h5>{{getLocalHelpers.contacts}} SpaceX</h5>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.twitter}`" target="blank">SpaceX Twitter</a></li>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.flickr}`" target="blank">Flickr</a></li>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.website}`" target="blank">official website</a></li>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.elon_twitter}`" target="blank">Elon Twitter</a></li>
             </ul>
             <div class="footer-list-btn">
-                <h5>Навигация</h5>
-                <button class="footer-list-item-btn" @click="$router.push({name:'description'})" >описание</button>
-                <button class="footer-list-item-btn" @click="$router.push({name:'launches'})" >запуски</button>
-                <button class="footer-list-item-btn" @click="$router.push({name:'rockets'})"> ракеты </button>
-                <button class="footer-list-item-btn" @click="$router.push({name:'capsules'})"> капсулы </button>
-                <button class="footer-list-item-btn" @click="$router.push({name:'dragons'})"> crew dragons </button>
-                <button class="footer-list-item-btn" @click="$router.push({name:'landpads'})"> посадочные платформы </button>
+                <h5>{{getLocalCategory.navigation}}</h5>
+                <button class="footer-list-item-btn" @click="$router.push({name:'description'})" >{{getLocalCategory.description}}</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'launches'})" >{{getLocalCategory.launches}}</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'rockets'})">{{getLocalCategory.rockets}}</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'capsules'})">{{getLocalCategory.capsules}}</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'dragons'})">{{getLocalCategory.dragons}}</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'landpads'})">{{getLocalCategory.landpads}}</button>
             </div>
              <ul class="footer-list">
-                <h5>Иходники</h5>
+                <h5>{{getLocalCategory.sourse}}</h5>
                 <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/SpaceX-restApi" target="blank">репозиторий этого проекта на GitHub</a></li>
                 <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/" target="blank">мой GitHub</a></li>
                 <li class="footer-list-item"><a href="">лицензия</a></li>
@@ -38,7 +38,7 @@ export default {
           await  this.$store.dispatch('fetchAboutCompany');
     },
     computed : {
-        ...mapGetters(['getAboutCompany']),
+        ...mapGetters(['getAboutCompany','getLocalCategory','getLocalHelpers']),
         // Другие вычисляемые свойства
     },
 }

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="dragonsAll-inner">
            
-                 <h5>всего платформ: {{getLandpads.data.length}}</h5>
+                 <h5>{{getLocalHelpers.total}} {{getLocalCategory.landpads}}: {{getLandpads.data.length}}</h5>
                  <Landpad v-for="(landpad,index) in getLandpads.data" :key="index" :data="landpad"/>
             </div>
         </div>
@@ -24,7 +24,7 @@
           this.$store.dispatch('fetchLandpadsAll');
         },
         computed : {
-            ...mapGetters(['getLandpads']),
+            ...mapGetters(['getLandpads','getLocalCategory','getLocalHelpers']),
         },
         created(){
              console.log(this.$store.state)

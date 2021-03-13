@@ -2,8 +2,8 @@
     <div class="capsules">
         <div class="container">
             <div class="capsules-inner">
-                <h3>капсулы</h3>
-                <Menu :mainRoute="'capsules'" :routes="['capsules-all','capsules-past','capsules-upcoming']" :names="['все','запущеные','будущие']" />
+                <h3>{{getLocalCategory.capsules}}</h3>
+                <Menu :mainRoute="'capsules'" :routes="['capsules-all','capsules-past','capsules-upcoming']" :names="[`${getLocalHelpers.all}`,`${getLocalHelpers.past}`,`${getLocalHelpers.upcoming}`]" />
                 <router-view> </router-view>
             </div>
         </div>
@@ -27,9 +27,8 @@
            Menu,
         },
         computed : {
-  ...mapGetters(['getCapsules']),
-  // Другие вычисляемые свойства
-},
+            ...mapGetters(['getCapsules','getLocalCategory','getLocalHelpers']),
+        },
         created(){
              console.log(this.$store.state)
         }
