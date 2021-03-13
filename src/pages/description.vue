@@ -10,68 +10,80 @@
             <h3>{{getLocalCategory.company}}</h3>
             <jsonDescription 
                 :title="'о компании'"
-                :data="getAboutCompany"
                 :link="'https://api.spacexdata.com/v3/info'"
+                :action="'fetchAboutCompany'"
+                :getter="'getAboutCompany'"
             />
             <jsonDescription 
-                :title="'о spaceX api'"
-                :data="getAboutCompany"
-                :link="'https://api.spacexdata.com/v3'"
+                :title="'о компании'"
+                :link="'https://api.spacexdata.com/v3/info'"
+                :action="'fetchAboutCompany'"
+                :getter="'getAboutCompany'"
             />
             <h3>{{getLocalCategory.landpads}}</h3>
             <jsonDescription 
-                :title="'все платформы'"
-                :data="getLandpads"
-                :link="'https://api.spacexdata.com/v3/launchpads'"
+                :title="'о компании'"
+                :link="'https://api.spacexdata.com/v3/info'"
+                :action="'fetchAboutCompany'"
+                :getter="'getAboutCompany'"
             />
             <h3>{{getLocalCategory.capsules}}</h3>
             <jsonDescription 
                 :title="'все капсулы'"
-                :data="getCapsules"
+                :action="'fetchCapsulesAll'"
+                :getter="'getCapsules'"
                 :link="'https://api.spacexdata.com/v3/capsules'"
             />
             <jsonDescription 
                 :title="'прошлые капуслы'"
-                :data="getPastCapsules"
+                :action="'fetchCapsulesPast'"
+                :getter="'getPastCapsules'"
                 :link="'https://api.spacexdata.com/v3/capsules/past'"
             />
             <jsonDescription 
                 :title="'запланированные капсулы'"
-                :data="getUpcomingCapsules"
+                :action="'fetchCapsulesUpcoming'"
+                :getter="'getUpcomingCapsules'"
                 :link="'https://api.spacexdata.com/v3/capsules/upcoming'"
             />
             <h3>{{getLocalCategory.rockets}}</h3>
             <jsonDescription 
                 :title="'все ракеты'"
-                :data="getRockets"
+                :action="'fetchRockets'"
+                :getter="'getRockets'"
                 :link="'https://api.spacexdata.com/v3/rockets'"
             />
             <h3>{{getLocalCategory.launches}}</h3>
             <jsonDescription 
                 :title="'все запуски'"
-                :data="getLaunches"
+                :action="'fetchLaunchesAll'"
+                :getter="'getLaunches'"
                 :link="'https://api.spacexdata.com/v3/rockets'"
             />
             <jsonDescription 
                 :title="'будущие запуски'"
-                :data="getLaunchesUpcoming"
+                :action="'fetchLaunchesUpcoming'"
+                :getter="'getLaunchesUpcoming'"
                 :link="'https://api.spacexdata.com/v3/launches/upcoming'"
             />
             <jsonDescription 
                 :title="'прошедшие запуски'"
-                :data="getLaunchesPast"
+                :action="'fetchLaunchesPast'"
+                :getter="'getLaunchesPast'"
                 :link="'https://api.spacexdata.com/v3/launches/past'"
             />
             <h3>{{getLocalCategory.dragons}}</h3>
             <jsonDescription 
                 :title="'все версии аппарата crew dragon'"
-                :data="getDragons"
+                :getter="'getDragons'"
+                :action="'fetchDragonsAll'"
                 :link="'https://api.spacexdata.com/v3/dragons'"
             />
             <h3>{{getLocalCategory.missions}}</h3>
             <jsonDescription 
                 :title="'все миссии'"
-                :data="getMissions"
+                :action="'fetchMissions'"
+                :getter="'getMissions'"
                 :link="'https://api.spacexdata.com/v3/missions'"
             />
         </div>
@@ -91,31 +103,21 @@ export default {
         About,
         jsonDescription,
     },
-    mounted() {
-        this.$store.dispatch('fetchAboutCompany');
-        this.$store.dispatch('fetchLandpadsAll');
-        this.$store.dispatch('fetchCapsulesAll');
-        this.$store.dispatch('fetchCapsulesPast');
-        this.$store.dispatch('fetchCapsulesUpcoming');
-        this.$store.dispatch('fetchLaunchesAll');
-        this.$store.dispatch('fetchLaunchesPast');
-        this.$store.dispatch('fetchLaunchesUpcoming');
-        this.$store.dispatch('fetchDragonsAll');
-        this.$store.dispatch('fetchRockets');
-        this.$store.dispatch('fetchMissions');
+    async mounted() {
+        // this.$store.dispatch('fetchAboutCompany');
+        // this.$store.dispatch('fetchLandpadsAll');
+        // this.$store.dispatch('fetchCapsulesAll');
+        // this.$store.dispatch('fetchCapsulesPast');
+        // this.$store.dispatch('fetchCapsulesUpcoming');
+        // this.$store.dispatch('fetchLaunchesAll');
+        // this.$store.dispatch('fetchLaunchesPast');
+        // this.$store.dispatch('fetchLaunchesUpcoming');
+        // this.$store.dispatch('fetchDragonsAll');
+        // this.$store.dispatch('fetchRockets');
+        // this.$store.dispatch('fetchMissions');
     },
     computed:{
-        ...mapGetters(['getAboutCompany']),
-        ...mapGetters(['getLandpads']),
-        ...mapGetters(['getCapsules']),
-        ...mapGetters(['getPastCapsules']),
-        ...mapGetters(['getUpcomingCapsules']),
-        ...mapGetters(['getLaunches']),
-        ...mapGetters(['getLaunchesUpcoming']),
-        ...mapGetters(['getLaunchesPast']),
-        ...mapGetters(['getDragons']),
-        ...mapGetters(['getRockets']),
-        ...mapGetters(['getMissions']),
+        ...mapGetters(['getAboutCompany','getLandpads','getCapsules','getPastCapsules','getUpcomingCapsules','getLaunches','getLaunchesUpcoming','getLaunchesPast','getDragons','getRockets','getMissions']),
         //local
         ...mapGetters(['getLocalCategory']),
     },    

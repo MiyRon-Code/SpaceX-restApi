@@ -48,39 +48,33 @@ export default   new Vuex.Store({
   },
   actions: {
     //aboutCompany
-    fetchAboutCompany(ctx){
+    async fetchAboutCompany(ctx){
       this.scene =   new THREE.Scene(),
       axios.get('https://api.spacexdata.com/v3/info')
       .then(function (response) {
-          // handle success
           ctx.commit('updateAboutCompany',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
     //capsules
-    fetchCapsulesAll(ctx){
+    async fetchCapsulesAll(ctx){
         axios.get('https://api.spacexdata.com/v3/capsules')
         .then(function (response) {
-            // handle success
             ctx.commit('updateCapsules',response)
         })
         .catch(function (error) {
-            // handle error
             console.log(error);
         })
     },
 
-    fetchCapsulesPast(ctx){
+    async fetchCapsulesPast(ctx){
       axios.get('https://api.spacexdata.com/v3/capsules/past')
       .then(function (response) {
-          // handle success
           ctx.commit('updateCapsulesPast',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
@@ -88,11 +82,9 @@ export default   new Vuex.Store({
     fetchCapsulesUpcoming(ctx){
       axios.get('https://api.spacexdata.com/v3/capsules/upcoming')
       .then(function (response) {
-          // handle success
           ctx.commit('updateCapsulesUpcoming',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
@@ -103,11 +95,9 @@ export default   new Vuex.Store({
     fetchDragonsAll(ctx){
       axios.get('https://api.spacexdata.com/v3/dragons')
       .then(function (response) {
-          // handle success
           ctx.commit('updateDragons',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
@@ -119,11 +109,9 @@ export default   new Vuex.Store({
     fetchLandpadsAll(ctx){
       axios.get('https://api.spacexdata.com/v3/launchpads')
       .then(function (response) {
-          // handle success
           ctx.commit('updateLandpads',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
@@ -132,33 +120,27 @@ export default   new Vuex.Store({
     fetchLaunchesAll(ctx){
       axios.get('https://api.spacexdata.com/v3/launches')
       .then(function (response) {
-          // handle success
           ctx.commit('updateLaunches',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
     fetchLaunchesPast(ctx){
       axios.get('https://api.spacexdata.com/v3/launches/past')
       .then(function (response) {
-          // handle success
           ctx.commit('updateLaunchesPast',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
     fetchLaunchesUpcoming(ctx){
       axios.get('https://api.spacexdata.com/v3/launches/upcoming')
       .then(function (response) {
-          // handle success
           ctx.commit('updateLaunchesUpcoming',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
@@ -167,11 +149,9 @@ export default   new Vuex.Store({
     fetchRockets(ctx){
       axios.get('https://api.spacexdata.com/v3/rockets')
       .then(function (response) {
-          // handle success
           ctx.commit('updateRockets',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },
@@ -180,11 +160,9 @@ export default   new Vuex.Store({
     fetchMissions(ctx){
       axios.get('https://api.spacexdata.com/v3/missions')
       .then(function (response) {
-          // handle success
           ctx.commit('updateMissions',response)
       })
       .catch(function (error) {
-          // handle error
           console.log(error);
       })
     },

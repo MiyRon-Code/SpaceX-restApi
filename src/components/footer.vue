@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div class="footer" v-if="getAboutCompany">
         <div class="container">
             <div class="footer-inner">
             <button class="logo" @click="$router.push({name:'main'})">
@@ -34,10 +34,10 @@
 <script>
 import {mapGetters} from 'vuex'
 export default {
-    mounted() {
-            this.$store.dispatch('fetchAboutCompany');
+    async mounted() {
+          await  this.$store.dispatch('fetchAboutCompany');
     },
-     computed : {
+    computed : {
         ...mapGetters(['getAboutCompany']),
         // Другие вычисляемые свойства
     },

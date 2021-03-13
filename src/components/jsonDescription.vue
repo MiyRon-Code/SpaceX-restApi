@@ -24,40 +24,49 @@
                         </button>
                     </div>
             </div>
-            <div class="status" v-show="show">
-                статус {{data.status}}
+            <div>
+                <div class="status" v-show="show">
+                    статус {{data.status}}
+                    <button class="execute-button" @click="fetchData">show responce</button>
+                </div>
+                <div class="json-description-items" v-show="show">
+                    <span class="type"><span>headers</span></span>
+                    <textarea class="textarea-head" name="" id="" cols="30" rows="10" v-model="strJsonHeaders" disabled></textarea>
+                </div>
+                <div class="json-description-items" v-show="show">
+                    <span class="type"><span>body</span></span>
+                    <textarea class="textarea-body" name="" id="" cols="30" rows="10" v-model="strJsonBody" disabled></textarea>
+                </div>
             </div>
-            <div class="json-description-items" v-show="show">
-                <span class="type"><span>headers</span></span>
-                <textarea class="textarea-head" name="" id="" cols="30" rows="10" v-model="strJsonHeaders" disabled></textarea>
-            </div>
-            <div class="json-description-items" v-show="show">
-                <span class="type"><span>body</span></span>
-                <textarea class="textarea-body" name="" id="" cols="30" rows="10" v-model="strJsonBody" disabled></textarea>
-            </div>
+            
             </div>
         </div>
     </div>
 </template>
 <script>
-
+//import {mapGetters} from 'vuex'
 export default {
     props:{
-        data: Object,
+        action: String,
+        getter: String,
         link: String,
         title: String,
     },
     data:function (){
         return{
+            data:{
+                status: -1,
+                data: "null",
+                headers:"null",
+            },
             show: false,
-            strJsonHeaders: JSON.stringify( this.data.headers, null, '\t'),
-            strJsonBody: JSON.stringify( this.data.data, null, '\t'),
             indicator: false
         }
     },
     methods:{
         changeMode: function (){
             this.show = !this.show;
+            this.$store.dispatch(this.action)
         },
         copyLink: function(){
             navigator.clipboard.writeText(this.link)
@@ -67,18 +76,41 @@ export default {
             .catch( () => {
                 this.indicator = false;
             });
-        }
+        },
+        fetchData: async function(){
+            console.log(this.getter + ' ' + this.action)
+            this.data = this.getData
+            
+        },
+    },
+    computed: {
+        strJsonHeaders(){
+            return JSON.stringify( this.data.headers, null, '\t');
+        },
+        strJsonBody(){
+            return JSON.stringify( this.data.data, null, '\t');
+        },
+        getData() {
+            let data = eval('this.$store.getters.' + this.getter)
+            return data;
+        }   
     }
 }
 
 </script>
 <style scoped>
+.execute-button{
+    background-color: orangered;
+    border:none;
+}
     .status{
         padding: 4px;
         background-color: rgb(47, 255, 141);
         color: black;
         font-size: 13px;
         font-weight: 600;
+        display: flex;
+        justify-content: space-between;
     }
     .buttons{
         display: flex;

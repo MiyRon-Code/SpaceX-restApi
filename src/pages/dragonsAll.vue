@@ -1,5 +1,5 @@
 <template>
-    <div class="dragonsAll">
+    <div class="dragonsAll" @click="check">
         <div class="container">
             <div class="dragonsAll-inner">
                  <h5>всего драконов: {{getDragons.data.length}}</h5>
@@ -16,9 +16,13 @@
     import Dragon from '@/components/dragon.vue'
 
     export default{
-        data(){
-            return{
-               
+        methods:{
+            check: function(){
+                alert()
+                console.log(mapGetters(['getDragons']))
+                console.log(this.getDragons)
+                let test = eval('this.getDragons')
+                console.log(test)
             }
         },
         components:{
