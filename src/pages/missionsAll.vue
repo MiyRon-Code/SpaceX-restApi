@@ -2,7 +2,7 @@
     <div class="missionsAll">
         <div class="container">
             <div class="missionsAll-inner">
-                 <h5>всего миссий: {{getMissions.data.length}}</h5>
+                 <h5>{{getLocalHelpers.total}} {{getLocalCategory.missions}}: {{getMissions.data.length}}</h5>
                  <Mission v-for="mission in getMissions.data" :key="(mission,index)" :data="mission"/>
             </div>
             <chartLine
@@ -33,7 +33,7 @@
           this.$store.dispatch('fetchMissions');
         },
         computed : {
-            ...mapGetters(['getMissions']),
+            ...mapGetters(['getMissions','getLocalCategory','getLocalHelpers']),
             getDataForChart(){
                 let data = []
                 for( let i=0; i<10; i++){

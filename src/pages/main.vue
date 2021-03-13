@@ -87,7 +87,7 @@ export default {
         }
     },
      computed : {
-        ...mapGetters(['getAboutCompany']),
+        ...mapGetters(['getAboutCompany','getLocalDescription']),
     },
     data (){
             return{
@@ -143,7 +143,7 @@ created(){
     header.classList.add('about-header')
     description.classList.add('about-desc')
     header.innerHTML="UI SpaceX-Api"
-    description.innerHTML="визуализация данных из SpaceX RestApi"
+    description.innerHTML=`${this.getLocalDescription.main}`
     headerWrapper.appendChild(header); 
     headerWrapper.appendChild(description);
     this.container.appendChild(headerWrapper) 

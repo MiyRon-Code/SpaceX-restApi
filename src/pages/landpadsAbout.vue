@@ -3,7 +3,7 @@
         <About 
         :impPath="'https://cms.qz.com/wp-content/uploads/2017/02/spacex-falcon-9-landing-cape-canaveral-crs-10.jpg?quality=75&strip=all&w=1200&h=900&crop=1'"
         :header ="`${getLocalCategory.landpads}`"
-        :description="'Landpads - посадочная площадка SpaceX '" />
+        :description="`${getLocalDescription.landpads}`" />
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
         About
     },
     computed:{
-        ...mapGetters(['getLocalCategory'])
+        ...mapGetters(['getLocalCategory','getLocalDescription'])
     }
 }
 </script>

@@ -282,6 +282,9 @@ export default   new Vuex.Store({
     },
     getLocalHelpers: state =>{
       return state.local.helpers
+    },
+    getLocalDescription: state =>{
+      return state.local.description
     }
   },
   modules: {

@@ -2,7 +2,7 @@
     <div class="rocketsAll">
         <div class="container">
             <div class="rocketsAll-inner">
-                 <h5>всего ракет: {{getRockets.data.length}}</h5>
+                 <h5>{{getLocalHelpers.total}} {{getLocalCategory.rockets}}: {{getRockets.data.length}}</h5>
                  <Rocket v-for="(rocket,index) in getRockets.data" :key="index" :data="rocket"
                     
                  />
@@ -25,7 +25,7 @@
             this.$store.dispatch('fetchRockets');
         },
         computed : {
-            ...mapGetters(['getRockets']),
+            ...mapGetters(['getRockets','getLocalCategory','getLocalHelpers']),
         },
     }
 </script>

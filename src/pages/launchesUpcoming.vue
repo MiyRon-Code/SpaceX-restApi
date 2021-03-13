@@ -5,7 +5,7 @@
                  <div class="chart">
                  </div>
                  
-                 <h5>всего запусков: {{getLaunchesUpcoming.data.length}}</h5>
+                 <h5>{{getLocalHelpers.upcoming}} {{getLocalCategory.launches}}: {{getLaunchesUpcoming.data.length}}</h5>
                  <Launche v-for="(launche,index) in getLaunchesUpcoming.data" :key="index" :data="launche"/>
             </div>
         </div>
@@ -31,7 +31,7 @@
             Launche,
         },
         computed : {
-            ...mapGetters(['getLaunchesUpcoming']),
+            ...mapGetters(['getLaunchesUpcoming','getLocalCategory','getLocalHelpers']),
         },
     }
 </script>

@@ -4,7 +4,7 @@
             <About 
             :impPath="'https://cdn.pixabay.com/photo/2015/03/26/18/35/satellite-693194_960_720.jpg'"
             :header ="`${getLocalCategory.description}`"
-            :description="'Description - описание Json данных каждого запроса. '" 
+            :description="`${getLocalDescription.description}`" 
             
             />
             <h3>{{getLocalCategory.company}}</h3>
@@ -118,7 +118,7 @@ export default {
     },
     computed:{
         //local
-        ...mapGetters(['getLocalCategory','getLocalHelpers']),
+        ...mapGetters(['getLocalCategory','getLocalHelpers','getLocalDescription']),
     },    
 
 

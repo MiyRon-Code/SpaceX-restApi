@@ -3,7 +3,7 @@
         <About 
         :impPath="'https://cdn.pixabay.com/photo/2015/03/26/18/36/spacecraft-693231_960_720.jpg'"
         :header ="`${getLocalCategory.capsules}`"
-        :description="'Capsules  — что-то'" />
+        :description="`${getLocalDescription.capsules}`" />
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
         About
     },
     computed:{
-        ...mapGetters(['getLocalCategory'])
+        ...mapGetters(['getLocalCategory','getLocalDescription'])
     }
 }
 </script>

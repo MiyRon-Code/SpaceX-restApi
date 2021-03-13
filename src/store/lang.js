@@ -18,8 +18,18 @@ export const russian = {
         past: "прошедшие",
         upcoming: "предстоящие",
         contacts: "контакты",
-        total: "всего",
-      }
+        total: "все",
+      },
+      description:{
+        main: "Визуализация данных из SpaceX RestApi.",
+        description: "Описание всех данных в формате JSON.",
+        missions: "Информация о всех миссиях SpaceX.",
+        launches: "Информация о запусках SpaceX.",
+        rockets: "ракеты разработанные SpaceX.",
+        capsules: "Все капсулы участвующие в миссиях",
+        dragons: "американский многоразовый пилотируемый космический корабль компании SpaceX, разработанный по заказу НАСА",
+        landpads: "посадочная площадка SpaceX",
+       }
 }
 
 export const english = {
@@ -43,5 +53,15 @@ export const english = {
         upcoming: "upcoming",
         contacts: "contacts",
         total: "total",
-      }
+      },
+      description:{
+        main: "Data visualization from SpaceX RestAPI.",
+        description: "Description of all data in JSON format.",
+        missions: "Information about all SpaceX missions.",
+        launches: "Information about SpaceX launches.",
+        rockets: "rockets developed by SpaceX.",
+        capsules: "All capsules participating in the missions",
+        dragons: "the American reusable manned spacecraft of the SpaceX company, developed by order of NASA",
+        landpads: "SpaceX landing pad",
+       }
 }

@@ -2,7 +2,7 @@
     <div class="capsules">
         <div class="container">
             <div class="capsules-inner">
-                 <h5>всего запусков: {{getLaunches.data.length}}</h5>
+                 <h5>{{getLocalHelpers.total}} {{getLocalCategory.launches}}: {{getLaunches.data.length}}</h5>
                  <Launche v-for="(launche,index) in getLaunches.data" :key="index" :data="launche"/>
             </div>
         </div>
@@ -20,7 +20,7 @@
             Launche,
         },
         computed : {
-            ...mapGetters(['getLaunches']),
+            ...mapGetters(['getLaunches','getLocalCategory','getLocalHelpers']),
         },
         mounted(){
             this.$store.dispatch('fetchLaunchesAll')            
