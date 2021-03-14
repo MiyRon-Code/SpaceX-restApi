@@ -285,6 +285,9 @@ export default   new Vuex.Store({
     },
     getLocalDescription: state =>{
       return state.local.description
+    },
+    getLocalCard: state =>{
+      return state.local.card
     }
   },
   modules: {

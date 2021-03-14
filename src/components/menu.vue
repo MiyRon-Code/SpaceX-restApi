@@ -1,13 +1,14 @@
 <template>
     <div class="menu">
                     <!-- главная кнопка -->
-                    <button :class='["main-item", "menu-item",{"menu-item-active":activeButton==-1}]' @click="activeButton=-1; $router.push({name:mainRoute})">что это?</button>
+                    <button :class='["main-item", "menu-item",{"menu-item-active":activeButton==-1}]' @click="activeButton=-1; $router.push({name:mainRoute})">{{getLocalHelpers.whatisit}}</button>
                     <!--создаём кнопки -->
                     <button v-for="(route,index) in routes" :key="index" :class='["menu-item",{"menu-item-active":activeButton==index}]' @click="activeButton=index; $router.push({name:route})">{{names[index]||'none'}}</button>
                     <!--вставляем по клику перенаправление на наш роут и имя кнопки-->
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
     props:{
             //роут на главную страницу раздела
@@ -21,6 +22,9 @@ export default {
         return{
             activeButton:-1
         }
+    },
+    computed:{
+        ...mapGetters(['getLocalHelpers'])
     }
     
 }

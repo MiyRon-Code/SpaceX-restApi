@@ -29,13 +29,25 @@ export const russian = {
         capsules: "Все капсулы участвующие в миссиях",
         dragons: "американский многоразовый пилотируемый космический корабль компании SpaceX, разработанный по заказу НАСА",
         landpads: "посадочная площадка SpaceX",
+       },
+       card:{
+         name:"имя",
+         status:"статус",
+         totalLandings: "всего запусков",
+         successfulLandings:"всего успешных запусков",
+         landingType: "тип посадки",
+         region: "регион",
+         location: "локация",
+         coordinates: "координаты",
+         description: "показать описание",
+         chartShow: "показать данные в виде графика",
+         chartClose: "скрыть данные в виде графика"
        }
 }
 
 export const english = {
     lang: "en",
       category:{
-        whatisit: "what is it?",
         description: "description",
         company: "about company",
         missions: "missions",
@@ -48,6 +60,7 @@ export const english = {
         navigation: "navigation",
       },
       helpers:{
+        whatisit: "what is it?",
         all: "all",
         past: "past",
         upcoming: "upcoming",
@@ -63,5 +76,18 @@ export const english = {
         capsules: "All capsules participating in the missions",
         dragons: "the American reusable manned spacecraft of the SpaceX company, developed by order of NASA",
         landpads: "SpaceX landing pad",
-       }
+      },
+      card:{
+        name:"name",
+        status:"status",
+        totalLandings: "total landings",
+        successfulLandings:"total successful landings",
+        landingType: "landing type",
+        region: "region",
+        location: "location",
+        coordinates: "coordinates",
+        description: "show a description",
+        chartShow: "show this data as a graph",
+        chartClose: "hide data in the graph view"
+      }
 }

@@ -4,39 +4,39 @@
             <div v-show="checked" class="landpad-body">
                 <ul class="landpad-info">
 
-                    <li class="landpad-info-item">Кол-во: попыток высадок на платформу:       {{data.attempted_landings}}</li>
+                    <li class="landpad-info-item">{{getLocalCard.totalLandings}}:       {{data.attempted_launches}}</li>
                    
-                    <li class="landpad-info-item">успешные посадки:       {{data.successful_landings}}</li>
-                    <li class="landpad-info-item">тип посадки:       {{data.landing_type}}</li>
-                    <li class="landpad-info-item">регион:       {{data.location.region}}</li>
-                    <li class="landpad-info-item">локация:       {{data.location.name}}</li>
-                    <li class="landpad-info-item" ><span>координаты : <span class="location">широта   {{data.location.latitude}}</span>  <span class="location">долгота{{data.location.longitude}}</span> </span> <a target="_blank" :href="`https://www.google.ru/maps/place/@${data.location.latitude},${data.location.longitude},17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d${data.location.latitude}!4d${data.location.longitude}`"><div class="search-button" title="найти на карте">  <img class="search-button-img" src="@/assets/icons/place.svg" /></div> </a> </li>
-                    <li class="landpad-info-item">статус:       {{data.status}}</li>
+                    <li class="landpad-info-item">{{getLocalCard.successfulLandings}}:       {{data.successful_launches}}</li>
+                    <li class="landpad-info-item">{{getLocalCard.landingType}}:       {{data.vehicles_launched}}</li>
+                    <li class="landpad-info-item">{{getLocalCard.region}}:       {{data.location.region}}</li>
+                    <li class="landpad-info-item">{{getLocalCard.location}}:       {{data.location.name}}</li>
+                    <li class="landpad-info-item" ><span>{{getLocalCard.coordinates}}: <span class="location">широта   {{data.location.latitude}}</span>  <span class="location">долгота{{data.location.longitude}}</span> </span> <a target="_blank" :href="`https://www.google.ru/maps/place/@${data.location.latitude},${data.location.longitude},17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d${data.location.latitude}!4d${data.location.longitude}`"><div class="search-button" title="найти на карте">  <img class="search-button-img" src="@/assets/icons/place.svg" /></div> </a> </li>
+                    <li class="landpad-info-item">{{getLocalCard.status}}:       {{data.status}}</li>
                     <description
                         :show="true"
                         :text="data.details"
                     />
-                    <button :class="['landpad-info-item show-chart',{'show-chart-active':showChart}]" @click="showChart = !showChart"><span v-show="!showChart"> Показать данные в виде графика </span> <span v-show="showChart">Скрыть данные в виде графика </span> </button>
+                    <button :class="['landpad-info-item show-chart',{'show-chart-active':showChart}]" @click="showChart = !showChart"><span v-show="!showChart">{{getLocalCard.chartShow}} </span> <span v-show="showChart">{{getLocalCard.chartClose}}</span> </button>
                 
 
                 </ul>
                 <div class="chart-info" v-show="showChart">
                     <div class="chart">
                         <chart
-                        :labels="['успешные посадки','всего посадок']"
-                        :data="[data.successful_landings,data.attempted_landings]"
+                        :labels="[`${getLocalCard.successfulLandings}`,`${getLocalCard.totalLandings}`]"
+                        :data="[data.attempted_launches,data.attempted_launches]"
                         />
                     </div>
                     <div class="chart">
                         <chartLine
-                        :labels="['','успешные посадки','всего посадок']"
-                        :data="[0,data.successful_landings,data.attempted_landings]"
+                        :labels="['',`${getLocalCard.successfulLandings}`,`${getLocalCard.totalLandings}`]"
+                        :data="[0,data.attempted_launches,data.attempted_launches]"
                         />
                     </div>
                     <div class="chart">
                         <chartBar
-                        :labels="['','успешные посадки','всего посадок']"
-                        :data="[0,data.successful_landings,data.attempted_landings]"
+                        :labels="['',`${getLocalCard.successfulLandings}`,`${getLocalCard.totalLandings}`]"
+                        :data="[0,data.attempted_launches,data.attempted_launches]"
                         />
                     </div>
                 </div>
@@ -50,6 +50,7 @@ import chartLine from '@/components/chartLine.vue'
 import chartBar from '@/components/chartBar.vue'
 
 import description from '@/components/description.vue'
+import { mapGetters } from 'vuex'
 
 export default {
     props:{
@@ -66,6 +67,9 @@ export default {
         chartLine,
         chartBar,
         description
+    },
+    computed: {
+        ...mapGetters(['getLocalCard'])
     }
 }
 </script>
