@@ -34,7 +34,7 @@
             <div class="slide">
                 <div class="info-item">
                     <span class="category">Количество сотрудников</span>
-                    <span class="category-info">{{getAboutCompany.data.employees}} человек</span>
+                    <span class="category-info">{{getAboutCompany.data.employees}}{{getLocalCard.humans}}</span>
                 </div>    
             </div>  
              <div class="slide">
@@ -87,7 +87,7 @@ export default {
         }
     },
      computed : {
-        ...mapGetters(['getAboutCompany','getLocalDescription']),
+        ...mapGetters(['getAboutCompany','getLocalDescription',,'getLocalCard']),
     },
     data (){
             return{

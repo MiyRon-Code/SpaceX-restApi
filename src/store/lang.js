@@ -41,7 +41,8 @@ export const russian = {
          coordinates: "координаты",
          description: "показать описание",
          chartShow: "показать данные в виде графика",
-         chartClose: "скрыть данные в виде графика"
+         chartClose: "скрыть данные в виде графика",
+         humans: "сотрудников",
        }
 }
 
@@ -88,6 +89,7 @@ export const english = {
         coordinates: "coordinates",
         description: "show a description",
         chartShow: "show this data as a graph",
-        chartClose: "hide data in the graph view"
+        chartClose: "hide data in the graph view",
+        humans: "employees",
       }
 }
