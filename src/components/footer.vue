@@ -23,9 +23,9 @@
             </div>
              <ul class="footer-list">
                 <h5>{{getLocalCategory.sourse}}</h5>
-                <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/SpaceX-restApi" target="blank">репозиторий этого проекта на GitHub</a></li>
-                <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/" target="blank">мой GitHub</a></li>
-                <li class="footer-list-item"><a href="">{{getLocalCategory.license}}</a></li>
+                <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/SpaceX-restApi" target="blank">{{getLocalCategory.repository}}</a></li>
+                <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/" target="blank">{{getLocalCategory.myGitHub}}</a></li>
+                <li class="footer-list-item"><a href="https://github.com/MiyRon-Code/SpaceX-restApi/blob/master/LICENSE" target="blank">{{getLocalCategory.license}}</a></li>
             </ul>
             </div>
         </div>

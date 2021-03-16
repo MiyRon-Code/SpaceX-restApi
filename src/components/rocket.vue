@@ -9,12 +9,12 @@
             <h5 class="rocket-desc">{{data.description}}</h5>
         </div>
         <div class="rocket-body" >
-            <div :class="['rocket','id',{'active-rocket':data.active}]" >версия: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">АКТИВНАЯ!</div></span>       </div>
+            <div :class="['rocket','id',{'active-rocket':data.active}]" >{{getLocalCard.version}}: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">{{getLocalCard.active}}!</div></span>       </div>
             <div class="slider">
                     <VueSlickCarousel v-bind="settings">
                         <div :class="['slider-item',{'meter':this.americanNotation}]" @click="changeNotation">
                             <div class="slide">
-                                 <h5>диаметр</h5>
+                                 <h5>{{getLocalCard.diameter}}</h5>
                                 <img src="@/assets/icons/diameter.svg" alt="" class="slider-item-icon">
                                 <span class="slider-item-info" v-show="americanNotation">
                                         {{data.diameter.meters}} meters
@@ -26,7 +26,7 @@
                         </div>
                         <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
                             <div class="slide">
-                                 <h5>высота</h5>
+                                 <h5>{{getLocalCard.height}}</h5>
                                 <img src="@/assets/icons/height.svg" alt="" class="slider-item-icon">
                                 <span class="slider-item-info" v-show="americanNotation">
                                         {{data.height.meters}} meters
@@ -39,7 +39,7 @@
                         </div>
                         <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
                             <div class="slide">
-                                 <h5>масса</h5>
+                                 <h5>{{getLocalCard.mass}}</h5>
                                 <img src="@/assets/icons/weight.svg" alt="" class="slider-item-icon">
                                 <span class="slider-item-info" v-show="americanNotation">
                                         {{data.mass.kg}} kg
@@ -51,7 +51,7 @@
                         </div>
                         <div class="slider-item">
                             <div class="slide">
-                                 <h5>стоимость за запуск</h5>
+                                 <h5>{{getLocalCard.costPerLaunch}}</h5>
                                 <img src="@/assets/icons/dollar.svg" alt="" class="slider-item-icon">
                                  <span class="slider-item-info">
                                         {{data.mass.lb}} $
@@ -60,7 +60,7 @@
                         </div>
                         <div class="slider-item">
                             <div class="slide">
-                                 <h5>дата первого вылета</h5>
+                                 <h5>{{getLocalCard.dateFirstFlight}}</h5>
                                 <img src="@/assets/icons/rocket.svg" alt="" class="slider-item-icon">
                                  <span class="slider-item-info">
                                         {{data.first_flight}}
@@ -69,16 +69,16 @@
                         </div>
                         <div class="slider-item">
                             <div class="slide">
-                                 <h5>время горения</h5>
+                                 <h5>{{getLocalCard.fireTime}}</h5>
                                 <img src="@/assets/icons/fire.svg" alt="" class="slider-item-icon">
                                  <span class="slider-item-info">
-                                        {{data.first_stage.burn_time_sec+data.second_stage.burn_time_sec}} сек
+                                        {{data.first_stage.burn_time_sec+data.second_stage.burn_time_sec}} sec
                                 </span>
                             </div>
                         </div>
                         <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
                             <div class="slide">
-                                 <h5>тяга в вакуме</h5>
+                                 <h5>{{getLocalCard.thrustVacuum}}</h5>
                                 <img src="@/assets/icons/rocket-flying.svg" alt="" class="slider-item-icon">
                                 <span class="slider-item-info" v-show="americanNotation">
                                         {{data.engines.thrust_vacuum.kN}} kN
@@ -90,7 +90,7 @@
                         </div>
                          <div class="slider-item">
                             <div class="slide">
-                                 <h5>процент успешных запусков</h5>
+                                 <h5>{{getLocalCard.preSuccessfulLandings}}</h5>
                                 <img src="@/assets/icons/pie-chart.svg" alt="" class="slider-item-icon">
                                  <span class="slider-item-info">
                                         {{data.success_rate_pct}} %
@@ -99,7 +99,7 @@
                         </div>
                         <div class="slider-item">
                             <div class="slide">
-                                 <h5>количество топлива</h5>
+                                 <h5>{{getLocalCard.fuelQuantity}}</h5>
                                 <img src="@/assets/icons/fuel.svg" alt="" class="slider-item-icon">
                                  <span class="slider-item-info">
                                         {{data.first_stage.fuel_amount_tons+data.second_stage.fuel_amount_tons}} тонн
@@ -114,7 +114,7 @@
                 <wikiButton
                     :link="data.wikipedia"
                 />
-                прочтите статью на википедии!
+                {{getLocalCard.readWiki}}!
             </div>
         </div>
     </div>
@@ -126,6 +126,7 @@ import wikiButton from '@/components/wikiButton.vue'
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import { mapGetters } from 'vuex'
 
 export default {
     components:{
@@ -155,6 +156,9 @@ export default {
         changeNotation: function(){
             this.americanNotation = !this.americanNotation;
         }
+    },
+    computed:{
+        ...mapGetters(['getLocalCard'])
     }
 }
 </script>

@@ -3,13 +3,13 @@
             <div class="id">id : {{data.id}}  <input type="checkbox" class="more" v-model="checked"> </div>
             <div v-show="checked" class="dragon-body">
                 <ul class="dragon-info">
-                    <li class="dragon-info-item">масса (кг): {{data.dry_mass_kg}}</li>
-                    <li class="dragon-info-item">масса (фунт): {{data.dry_mass_lb}}</li>
-                    <li class="dragon-info-item">вместимость экипажа: {{data.crew_capacity}}</li>
-                    <li class="dragon-info-item">первый полёт: {{data.first_flight}}</li>
-                    <li class="dragon-info-item">высота грузового отсека (метры): {{data.height_w_trunk.meters}}</li>
-                    <li class="dragon-info-item">высота грузового отсека (футов): {{data.height_w_trunk.feet}}</li>
-                    <li class="dragon-info-item">стартовая масса полезной нагрузки (кг): {{data.launch_payload_mass.kg}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.mass}} (kg): {{data.dry_mass_kg}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.mass}} (lb): {{data.dry_mass_lb}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.crewCapacity}}: {{data.crew_capacity}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.date}}: {{data.first_flight}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.cargoBayHeight}} (meters): {{data.height_w_trunk.meters}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.cargoBayHeight}} (feet): {{data.height_w_trunk.feet}}</li>
+                    <li class="dragon-info-item">{{getLocalCard.startWeight}} (kg): {{data.launch_payload_mass.kg}}</li>
                     
                     <Description
                         :show="false"
@@ -21,6 +21,7 @@
 </template>
 <script>
 import Description from "@/components/description.vue"
+import { mapGetters } from 'vuex'
 export default {
     props:{
         data: Object
@@ -32,6 +33,9 @@ export default {
     },
     components:{
         Description,
+    },
+    computed:{
+        ...mapGetters(['getLocalCard'])
     }
 }
 </script>

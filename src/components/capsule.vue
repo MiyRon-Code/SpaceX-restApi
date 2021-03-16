@@ -1,16 +1,19 @@
 <template>
     <div class="capsula">
-            <div class="id">серийный номер : {{data.capsule_serial}}  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id">{{getLocalCard.serialNumber}} : {{data.capsule_serial}}  <input type="checkbox" class="more" v-model="checked"> </div>
             <div v-show="checked" class="capsula-body">
                 <ul class="capsula-info">
-                    <li class="capsula-info-item">Кол-во: высадок:       {{data.landings}}</li>
-                    <li class="capsula-info-item">дата запуска:       {{data.original_launch}}</li>
-                    <li class="capsula-info-item">кол-во повторного использования:      {{data.reuse_count}}</li>
-                    <li class="capsula-info-item">статус:      {{data.status}}</li>
-                    <li class="capsula-info-item">тип:      {{data.type}}</li>
-                    <li class="capsula-info-item missions">миссии: 
+                    <li class="capsula-info-item">{{getLocalCard.landingCount}}:       {{data.landings}}</li>
+                    <li class="capsula-info-item">{{getLocalCard.date}}:       {{data.original_launch}} <span v-show="!data.original_launch">{{getLocalCard.indefiniteDate}}</span> </li>
+                    <li class="capsula-info-item">{{getLocalCard.reuseCount}}:      {{data.reuse_count}}</li>
+                    <li class="capsula-info-item">{{getLocalCard.status}}:      {{data.status}}</li>
+                    <li class="capsula-info-item">{{getLocalCard.type}}:      {{data.type}}</li>
+                    <li class="capsula-info-item missions">{{getLocalCard.missions}}:
+                        <div class="mission-item noMissions" v-show="!data.missions.length">
+                            {{getLocalCard.noMissions}}
+                        </div> 
                         <div class="mission-item" v-for="(mission, index ) in data.missions" :key="index">
-                            имя:{{mission.name}}      вылет:{{mission.flight}}
+                            {{getLocalCard.name}}:{{mission.name}}      {{getLocalCard.flight}}:{{mission.flight}}
                         </div>
                     </li>
                 </ul>
@@ -18,6 +21,7 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
     props:{
         data: Object
@@ -26,6 +30,9 @@ export default {
         return{
             checked : false,
         }
+    },
+    computed:{
+        ...mapGetters(['getLocalCard'])
     }
 }
 </script>
@@ -77,5 +84,8 @@ export default {
 
 }
 
+.noMissions{
+    background-color: rgb(149, 213, 255);
+}
 
 </style>

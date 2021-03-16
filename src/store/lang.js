@@ -11,6 +11,9 @@ export const russian = {
         landpads: "пусковые площадки",
         sourse: "исходники",
         navigation: "навигация",
+        license: "лицензия",
+        myGitHub: "мой GitHub",
+        repository: "репозиторий этого проекта на GitHub"
       },
       helpers:{
         whatisit: "что это?",
@@ -19,7 +22,7 @@ export const russian = {
         upcoming: "предстоящие",
         contacts: "контакты",
         total: "все",
-        license: "лицензия"
+        description:"показать описание"
       },
       description:{
         main: "Визуализация данных из SpaceX RestApi.",
@@ -54,8 +57,31 @@ export const russian = {
          totalEmployees: "Количество сотрудников",
          totalVehicles: "количество едениц техники в операции",
          version: "версия",
+         active:"Активная",
+         mass:"масса",
+         fireTime:"общее время горения",
+         diameter: "диаметр",
+         height: "высота",
+         fuelQuantity: "количество топлива",
+         preSuccessfulLandings:"процент успешных запусков",
+         costPerLaunch:"стоимость за запуск",
+         dateFirstFlight: "дата первого вылета",
+         thrustVacuum:"тяга в вакууме",
+         serialNumber: "серийный номер",
+         readWiki: "прочитайте статью на википедии",
+         flight:"вылет",
+         missions:"миссии",
+         date:"дата",
+         type:"тип",
+         reuseCount: "Количество повторного использования",
+         indefiniteDate: "неопределённая дата",
+         noMissions: "нет миссий",
+         landingCount: "количество высадок",
+         crewCapacity: "вместимость экипажа",
+         cargoBayHeight: "высота грузового отсека",
+         startWeight: "стартовый вес полезной нагрузки"
         }
-}
+      }
 
 export const english = {
     lang: "en",
@@ -70,7 +96,9 @@ export const english = {
         landpads: "landpads",
         sourse: "sourse",
         navigation: "navigation",
-        license: "license"
+        license: "license",
+        myGitHub: "my GitHub",
+        repository: "repository of this project on GitHub"
       },
       helpers:{
         whatisit: "what is it?",
@@ -79,6 +107,7 @@ export const english = {
         upcoming: "upcoming",
         contacts: "contacts",
         total: "total",
+        description:"show а descripton"
       },
       description:{
         main: "Data visualization from SpaceX RestAPI.",
@@ -114,5 +143,28 @@ export const english = {
         totalVehicles: "total Vehicles",
         version: "version",
         rocket: "rocket",
+        active:"Active",
+        mass:"mass",
+        fireTime:"total fuel burn time",
+        diameter: "diameter",
+        height: "height",
+        fuelQuantity: "fuel quantity",
+        preSuccessfulLandings:"percentage of successful launches",
+        costPerLaunch:"cost per launch",
+        dateFirstFlight: "first launch date",
+        thrustVacuum: "vacuum thrust",
+        serialNumber: "serial number",
+        readWiki: "read the article on wikipedia",
+        flight:"flight",
+        missions:"missions",
+        date:"date",
+        type:"type",
+        indefiniteDate: "indefinite date",
+        reuseCount: "reuse count",
+        noMissions: "no missions",
+        landingCount: "landing count",
+        crewCapacity: "crew capacity",
+        cargoBayHeight: "cargo bay height",
+        startWeight: "starting weight of the payload",
       }
 }
