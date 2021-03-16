@@ -15,7 +15,7 @@ export default {
         About
     },
     computed:{
-        ...mapGetters(['getLocalCategory'])
+        ...mapGetters(['getLocalCategory','getLocalDescription'])
     }
 }
 </script>

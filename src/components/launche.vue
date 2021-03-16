@@ -1,11 +1,11 @@
 <template>
     <div class="launche">
-            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id запуска: {{data.id}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> имя миссии : {{data.mission_name}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id: {{data.flight_number}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> {{getLocalCard.name}}: {{data.mission_name}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
             <div v-show="checked" class="launche-body">
                 <ul class="launche-info">
-                    <li class="launche-info-item">год запуска: {{data.launch_year}}</li>
-                    <li class="launche-info-item">аппарат: {{data.rocket.rocket_name}}</li>
-                    <li class="launche-info-item">версия-аппарата: {{data.rocket.rocket_type}}</li>
+                    <li class="launche-info-item">{{getLocalCard.year}}: {{data.launch_year}}</li>
+                    <li class="launche-info-item">{{getLocalCard.rocket}}: {{data.rocket.rocket_name}}</li>
+                    <li class="launche-info-item">{{getLocalCard.version}}: {{data.rocket.rocket_type}}</li>
                     <Date
                         :data="data"
                     />
@@ -16,10 +16,12 @@
 </template>
 <script>
 import Date  from "@/components/date.vue"
+import { mapGetters } from 'vuex'
 
 export default {
     props:{
         data: Object
+        ,
     },
     data(){
         return{
@@ -28,6 +30,9 @@ export default {
     },
     components:{
         Date
+    },
+    computed:{
+        ...mapGetters(['getLocalCard'])
     }
 }
 </script>

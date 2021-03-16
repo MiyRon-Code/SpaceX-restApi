@@ -1,8 +1,8 @@
 <template>
     <div class="mission">
         <div class="mission-header">
-           <div>имя миссии<span class="mission-name">{{data.mission_name}}</span></div>
-           <div class="payload_ids">количество едениц техники в операции<span class="mission-name">{{data.payload_ids.length}}</span></div>
+           <div>{{getLocalCard.name}}<span class="mission-name">{{data.mission_name}}</span></div>
+           <div class="payload_ids">{{getLocalCard.totalVehicles}}<span class="mission-name">{{data.payload_ids.length}}</span></div>
         </div>
         <div class="mission-body">
             <wikiButton :link="data.wikipedia"/>
@@ -15,6 +15,7 @@
 import wikiButton from '@/components/wikiButton.vue' 
 import twitterButton from '@/components/twitterButton.vue' 
 import websiteButton from '@/components/websiteButton.vue' 
+import { mapGetters } from 'vuex'
 export default {
     props:{
         data: Object
@@ -23,6 +24,9 @@ export default {
         wikiButton,
         twitterButton,
         websiteButton,
+    },
+    computed:{
+        ...mapGetters(['getLocalCard'])
     }
 }
 </script>

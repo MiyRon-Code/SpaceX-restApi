@@ -136,7 +136,7 @@ export default   new Vuex.Store({
 
     //rockets
     fetchRockets(ctx){
-      axios.get('https://api.spacexdata.com/v3/rockets')
+      axios.get('https://api.spacex.land/rest/rockets')
       .then(function (response) {
           ctx.commit('updateRockets',response)
       })

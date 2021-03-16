@@ -7,19 +7,19 @@
           <VueSlickCarousel v-bind="firstCarousel" v-on:click="deleted">
             <div class="slide">
                 <div class="info-item">
-                    <span class="category">Генеральный директор компании (CEO)</span>
+                    <span class="category">{{getLocalCard.ceo}} (CEO)</span>
                     <span class="category-info">{{getAboutCompany.data.ceo}}</span>
                 </div>    
             </div>    
             <div class="slide">
                 <div class="info-item">
-                    <span class="category">Главный операционный директор (COO)</span>
+                    <span class="category">{{getLocalCard.coo}} (COO)</span>
                     <span class="category-info">{{getAboutCompany.data.coo}}</span>
                 </div>
             </div>  
             <div class="slide">
                 <div class="info-item">
-                    <span class="category">Технический директор (CTO)</span>
+                    <span class="category">{{getLocalCard.cto}} (CTO)</span>
                     <span class="category-info">{{getAboutCompany.data.cto}}</span>
                 </div>
             </div> 
@@ -27,25 +27,25 @@
           <VueSlickCarousel v-bind="secondCarousel">
             <div class="slide">
                 <div class="info-item">
-                    <span class="category">Штаб Квартира</span>
+                    <span class="category">{{getLocalCard.headquarters}}</span>
                     <span class="category-info">{{getAboutCompany.data.headquarters.state}}, {{getAboutCompany.data.headquarters.city}}, {{getAboutCompany.data.headquarters.address}}</span>
                 </div>    
             </div>  
             <div class="slide">
                 <div class="info-item">
-                    <span class="category">Количество сотрудников</span>
-                    <span class="category-info">{{getAboutCompany.data.employees}}{{getLocalCard.humans}}</span>
+                    <span class="category">{{getLocalCard.totalEmployees}}</span>
+                    <span class="category-info">{{getAboutCompany.data.employees}} {{getLocalCard.humans}}</span>
                 </div>    
             </div>  
              <div class="slide">
                 <div class="info-item">
-                    <span class="category">Компания основана в</span>
-                    <span class="category-info">{{getAboutCompany.data.founded}} году</span>
+                    <span class="category">{{getLocalCard.DateOfFoundation}}</span>
+                    <span class="category-info">{{getAboutCompany.data.founded}} {{getLocalCard.year}}</span>
                 </div>    
             </div>  
             <div class="slide">
                 <div class="info-item">
-                    <span class="category">Основатель</span>
+                    <span class="category">{{getLocalCard.founder}}</span>
                     <span class="category-info">{{getAboutCompany.data.founder}}</span>
                 </div>    
             </div>    
@@ -87,7 +87,7 @@ export default {
         }
     },
      computed : {
-        ...mapGetters(['getAboutCompany','getLocalDescription',,'getLocalCard']),
+        ...mapGetters(['getAboutCompany','getLocalDescription','getLocalCard']),
     },
     data (){
             return{
@@ -121,7 +121,7 @@ created(){
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
         const renderer = new THREE.WebGLRenderer( {alpha: true});
-        renderer.setSize( window.innerWidth-17, window.innerHeight);
+        renderer.setSize( window.innerWidth-12, window.innerHeight);
         
        
 

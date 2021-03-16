@@ -19,6 +19,7 @@ export const russian = {
         upcoming: "предстоящие",
         contacts: "контакты",
         total: "все",
+        license: "лицензия"
       },
       description:{
         main: "Визуализация данных из SpaceX RestApi.",
@@ -43,7 +44,17 @@ export const russian = {
          chartShow: "показать данные в виде графика",
          chartClose: "скрыть данные в виде графика",
          humans: "сотрудников",
-       }
+         cto: "Технический директор",
+         ceo: "Генеральный директор",
+         coo: "Главный операционный директор",
+         DateOfFoundation:"Компания основана в",
+         year: "год",
+         founder: "Основатель",
+         headquarters: "Штаб-квартира",
+         totalEmployees: "Количество сотрудников",
+         totalVehicles: "количество едениц техники в операции",
+         version: "версия",
+        }
 }
 
 export const english = {
@@ -59,6 +70,7 @@ export const english = {
         landpads: "landpads",
         sourse: "sourse",
         navigation: "navigation",
+        license: "license"
       },
       helpers:{
         whatisit: "what is it?",
@@ -91,5 +103,16 @@ export const english = {
         chartShow: "show this data as a graph",
         chartClose: "hide data in the graph view",
         humans: "employees",
+        cto: "Chief technology officer",
+        ceo: "Chief executive officer",
+        coo: "Chief operating officer",
+        DateOfFoundation: "Date of foundation",
+        year: "year",
+        founder: "Founder",
+        headquarters: "Headquarters",
+        totalEmployees: "Total employees",
+        totalVehicles: "total Vehicles",
+        version: "version",
+        rocket: "rocket",
       }
 }
