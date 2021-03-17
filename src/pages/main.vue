@@ -76,10 +76,13 @@ export default {
         
         this.$store.dispatch('createScene');
         this.$store.dispatch('fetchAboutCompany');
+
+
     },
     methods: {
         deleted: function(){
-            document.body.removeChild(this.container)
+            document.body.removeChild(this.container);
+            this.$store.dispatch('plsClearScene');
         },
         onWindowResize: function(camera, renderer){
             alert("resize")
@@ -120,7 +123,7 @@ beforeDestroy(){
 },
 async created(){
         await this.$store.dispatch('createScene')
-        const scene = this.getScene;
+        const scene = this.$store.state.scene;
         console.log("======================")
         console.log(scene)
         console.log("======================")
@@ -175,59 +178,45 @@ async created(){
     root.rotation.x = -Math.PI / 2;
     scene.add(root);
     });
-    
+    const light = new THREE.PointLight( 0xffffff, 1, 100 );
+    light.position.set( 0, 0, 50 );
+    scene.add( light );
 
+    const light2 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light2.position.set( 0, 50, 50 );
+    scene.add( light2 );
 
-    
+    const light3 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light3.position.set( 0, -50, 50 );
+    scene.add( light3 );
 
-    
+    const light4 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light4.position.set( 0, 150, 50 );
+    scene.add( light4 );
 
-        
-        const light = new THREE.PointLight( 0xffffff, 1, 100 );
-        light.position.set( 0, 0, 50 );
-        scene.add( light );
+    const light5 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light5.position.set( 0, 0, -50 );
+    scene.add( light5 );
 
-        const light2 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light2.position.set( 0, 50, 50 );
-        scene.add( light2 );
+    const light6 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light6.position.set( 0, 50, -50 );
+    scene.add( light6 );
 
+    const light7 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light7.position.set( 0, -50, -50 );
+    scene.add( light7 );
 
-        const light3 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light3.position.set( 0, -50, 50 );
-        scene.add( light3 );
+    const light8 = new THREE.PointLight( 0xffffff, 1, 100 );
+    light8.position.set( 0, 150, -50 );
+    scene.add( light8 );
 
-        const light4 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light4.position.set( 0, 150, 50 );
-        scene.add( light4 );
+    const light9 = new THREE.PointLight( 0xffffff, 2, 100 );
+    light9.position.set( 90, 0, 0 );
+    scene.add( light9 );
 
-
-        //
-        const light5 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light5.position.set( 0, 0, -50 );
-        scene.add( light5 );
-
-        const light6 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light6.position.set( 0, 50, -50 );
-        scene.add( light6 );
-
-
-        const light7 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light7.position.set( 0, -50, -50 );
-        scene.add( light7 );
-
-        const light8 = new THREE.PointLight( 0xffffff, 1, 100 );
-        light8.position.set( 0, 150, -50 );
-        scene.add( light8 );
-
-        //
-
-        const light9 = new THREE.PointLight( 0xffffff, 2, 100 );
-        light9.position.set( 90, 0, 0 );
-        scene.add( light9 );
-
-        const light10 = new THREE.PointLight( 0xffffff, 2, 100 );
-        light10.position.set( -90, 0, 0 );
-        scene.add( light10 );
+    const light10 = new THREE.PointLight( 0xffffff, 2, 100 );
+    light10.position.set( -90, 0, 0 );
+    scene.add( light10 );
 
         window.addEventListener( 'resize', ()=>{onWindowResize()});
 
@@ -242,6 +231,7 @@ async created(){
             camera.updateProjectionMatrix();
             renderer.setSize( window.innerWidth, window.innerHeight );
         }
+        
         
 
         function animate() {

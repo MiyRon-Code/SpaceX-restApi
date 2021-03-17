@@ -37,9 +37,14 @@ export default   new Vuex.Store({
   actions: {
     
     async createScene(ctx){
-      console.log("scene will created")
+     // console.log("scene will created")
       let scene = new THREE.Scene()
       await ctx.commit('updateScene',scene)
+    },
+
+    async plsClearScene(ctx){
+      console.log("scene will clear")
+      await ctx.commit('clearScene')
     },
     
     //aboutCompany
@@ -172,12 +177,18 @@ export default   new Vuex.Store({
   mutations: {
 
     updateScene(state,scene){
-      console.log("scene will updated")
+      // console.log("scene will updated")
       state.scene = scene;
 
-      console.log("============STORE=====")
-      console.log(state.scene)
-      console.log("============STORE=====")
+      // console.log("============STORE=====")
+      // console.log(state.scene)
+      // console.log("============STORE=====")
+    },
+
+    clearScene(state){
+      while(state.scene.children.length > 0){ 
+        state.scene.remove(state.scene.children[0]); 
+      }
     },
 
 
@@ -235,10 +246,10 @@ export default   new Vuex.Store({
   },
   getters: {
     getScene: state =>{
-      console.log("scene will geted")
-      console.log("========GET=========")
-      console.log(state.scene)
-      console.log("========GET=========")
+      // console.log("scene will geted")
+      // console.log("========GET=========")
+      // console.log(state.scene)
+      // console.log("========GET=========")
       return state.scene;
     },
     //aboutCompany get
