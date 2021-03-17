@@ -12,8 +12,7 @@ import * as THREE from 'three';
 export default   new Vuex.Store({
 
   state: {
-    scene:  new THREE.Scene(),
-
+    scene:  1,
     //данные
     aboutCompany: null,
     capsules: null,
@@ -36,9 +35,15 @@ export default   new Vuex.Store({
 
   },
   actions: {
+    
+    async createScene(ctx){
+      console.log("scene will created")
+      let scene = new THREE.Scene()
+      await ctx.commit('updateScene',scene)
+    },
+    
     //aboutCompany
     async fetchAboutCompany(ctx){
-      this.scene =   new THREE.Scene(),
       axios.get('https://api.spacexdata.com/v3/info')
       .then(function (response) {
           ctx.commit('updateAboutCompany',response)
@@ -165,6 +170,17 @@ export default   new Vuex.Store({
     }
   },
   mutations: {
+
+    updateScene(state,scene){
+      console.log("scene will updated")
+      state.scene = scene;
+
+      console.log("============STORE=====")
+      console.log(state.scene)
+      console.log("============STORE=====")
+    },
+
+
     updateLocalLang(state, lang){
       state.local = lang;
     },
@@ -218,6 +234,13 @@ export default   new Vuex.Store({
     },
   },
   getters: {
+    getScene: state =>{
+      console.log("scene will geted")
+      console.log("========GET=========")
+      console.log(state.scene)
+      console.log("========GET=========")
+      return state.scene;
+    },
     //aboutCompany get
     getAboutCompany: state => {
       return  state.aboutCompany

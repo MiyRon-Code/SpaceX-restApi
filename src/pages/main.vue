@@ -73,6 +73,8 @@ export default {
     },
 
     mounted() {
+        
+        this.$store.dispatch('createScene');
         this.$store.dispatch('fetchAboutCompany');
     },
     methods: {
@@ -87,7 +89,7 @@ export default {
         }
     },
      computed : {
-        ...mapGetters(['getAboutCompany','getLocalDescription','getLocalCard']),
+        ...mapGetters(['getAboutCompany','getLocalDescription','getLocalCard',"getScene"]),
     },
     data (){
             return{
@@ -116,8 +118,12 @@ export default {
 beforeDestroy(){
     this.deleted()
 },
-created(){
-        const scene = new THREE.Scene();
+async created(){
+        await this.$store.dispatch('createScene')
+        const scene = this.getScene;
+        console.log("======================")
+        console.log(scene)
+        console.log("======================")
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
         const renderer = new THREE.WebGLRenderer( {alpha: true});
@@ -163,7 +169,6 @@ created(){
     objLoader.load('/models/Falcon.obj', (root) => {
     root.name="rocket"
     root.material = rocketMaterial;
-    console.log(root);
     root.position.x =120;
     root.position.y =0;
     root.position.z = 120;
@@ -238,6 +243,7 @@ created(){
             renderer.setSize( window.innerWidth, window.innerHeight );
         }
         
+
         function animate() {
                 
             requestAnimationFrame( animate );
