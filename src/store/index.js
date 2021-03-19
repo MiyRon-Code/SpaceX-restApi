@@ -7,17 +7,18 @@ Vue.use(Vuex);
 
 import {russian,english} from   '../store/lang.js'
 
+import apiModule from '../store/modules/apiModule.js'
+
 import * as THREE from 'three';
 
 export default   new Vuex.Store({
 
   state: {
     scene:  1,
-    //данные
-    aboutCompany: null,
-    capsules: null,
-    capsulesPast: null,
-    capsulesUpcoming: null,
+    
+    //loader
+    loader: false,
+
     dragons: null,
     landpads: null,
     launches: null,
@@ -25,10 +26,6 @@ export default   new Vuex.Store({
     launchesPast: null,
     rockets:null,
     missions: false,
-
-    //loader
-    loader: false,
-
     //локализация 
     //по умолчание engish
     local: english
@@ -47,48 +44,6 @@ export default   new Vuex.Store({
       await ctx.commit('clearScene')
     },
     
-    //aboutCompany
-    async fetchAboutCompany(ctx){
-      axios.get('https://api.spacexdata.com/v3/info')
-      .then(function (response) {
-          ctx.commit('updateAboutCompany',response)
-      })
-      .catch(function (error) {
-          console.log(error);
-      })
-    },
-    //capsules
-    async fetchCapsulesAll(ctx){
-        axios.get('https://api.spacexdata.com/v3/capsules')
-        .then(function (response) {
-            ctx.commit('updateCapsules',response)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    },
-
-    async fetchCapsulesPast(ctx){
-      axios.get('https://api.spacexdata.com/v3/capsules/past')
-      .then(function (response) {
-          ctx.commit('updateCapsulesPast',response)
-      })
-      .catch(function (error) {
-          console.log(error);
-      })
-    },
-    
-    fetchCapsulesUpcoming(ctx){
-      axios.get('https://api.spacexdata.com/v3/capsules/upcoming')
-      .then(function (response) {
-          ctx.commit('updateCapsulesUpcoming',response)
-      })
-      .catch(function (error) {
-          console.log(error);
-      })
-    },
-
-
 
     //dragons
     fetchDragonsAll(ctx){
@@ -179,10 +134,6 @@ export default   new Vuex.Store({
     updateScene(state,scene){
       // console.log("scene will updated")
       state.scene = scene;
-
-      // console.log("============STORE=====")
-      // console.log(state.scene)
-      // console.log("============STORE=====")
     },
 
     clearScene(state){
@@ -200,22 +151,11 @@ export default   new Vuex.Store({
       state.missions = missions;
     },
 
-    //company
-    updateAboutCompany(state, info){
-      state.aboutCompany = info;
-    },
 
 
-    //capsules Update
-    updateCapsules(state, capsules){
-        state.capsules = capsules;
-    },
-    updateCapsulesPast(state, capsules){
-      state.capsulesPast = capsules;
-    },
-    updateCapsulesUpcoming(state, capsules){
-      state.capsulesUpcoming = capsules;
-    },
+
+    
+
 
 
     //dragons Update
@@ -246,32 +186,16 @@ export default   new Vuex.Store({
   },
   getters: {
     getScene: state =>{
-      // console.log("scene will geted")
-      // console.log("========GET=========")
-      // console.log(state.scene)
-      // console.log("========GET=========")
       return state.scene;
     },
-    //aboutCompany get
-    getAboutCompany: state => {
-      return  state.aboutCompany
-    },
+    
 
     //loaderStatus get
     getLoaderStatus: state => {
       return  state.loader
     },
 
-    //capsules get
-    getCapsules: state => {
-        return  state.capsules
-    },
-    getPastCapsules: state => {
-      return  state.capsulesPast
-    },
-    getUpcomingCapsules: state => {
-      return  state.capsulesUpcoming
-    },
+    
 
     //dragons get
     getDragons: state => {
@@ -325,6 +249,6 @@ export default   new Vuex.Store({
     }
   },
   modules: {
-
-  },
+    apiModule,
+  }
 });
