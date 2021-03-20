@@ -38,17 +38,23 @@ export default {
     position:relative; 
     min-height:100vh; 
     padding-bottom: 320px;
-     
+    width: 100vw;
+    overflow: hidden;
   }
   .container{
-    width: 1150px;
+    max-width: 1150px;
     margin:  0 auto;
     height: 100%;
-    overflow: visible;
   }
   *{
     font-family: 'Lexend Giga', sans-serif;
     font-family: 'Montserrat', sans-serif;
   }
+
+  @media (max-width: 480px) {
+  .container{
+     max-width: 100%;
+  }
+}
 
 </style>
