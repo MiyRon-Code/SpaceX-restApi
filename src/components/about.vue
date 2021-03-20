@@ -5,8 +5,7 @@
                     <div class="about-preview-info">
                         <h1 class="about-header">{{header}}</h1>
                         <p class="about-desc">{{description}}</p>
-                    </div>
-                    
+                    </div>    
             </div>
     </div>
 </template>
@@ -37,6 +36,7 @@ h1{
   height: 100vh;
   transition: 1s;
   display: flex;
+  overflow: hidden;
 }
 .about-preview-img{
     object-fit: cover;
@@ -75,4 +75,15 @@ h1{
     background-color: rgb(0, 0, 0);
     color:white
 }
+
+
+  @media (max-width: 480px) {
+    .about-header{
+      display: none;
+    }
+    .about-desc {
+       width: 80%;
+    }
+  }
+
 </style>

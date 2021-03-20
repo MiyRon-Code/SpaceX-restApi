@@ -98,4 +98,12 @@ export default {
         background-color: white;
     }
 
+
+    @media (max-width: 480px) {
+        .nav-item{
+            font-size: 12px;
+            display: none;
+        }
+    }
+
 </style>
