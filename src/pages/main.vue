@@ -3,8 +3,8 @@
         <div class="main-iiner">
             <portal-target name="destination"></portal-target>
         <div class="container">
-        <div class="slider">
-            <VueSlickCarousel v-bind="firstCarousel" v-on:click="deleted">
+        <div class="slider"></div>
+          <VueSlickCarousel v-bind="firstCarousel" v-on:click="deleted">
             <div class="slide">
                 <div class="info-item">
                     <span class="category">{{getLocalCard.ceo}} (CEO)</span>
@@ -51,109 +51,9 @@
             </div>    
           </VueSlickCarousel>
         </div>
-          
-        </div>
         </div>
     </div>
 </template>
-
-<style>
-::-webkit-scrollbar {
-    width: 12px; /* ширина для вертикального скролла */
-    height: 8px; /* высота для горизонтального скролла */
-    background-color:#143861;
-}
-
-/* ползунок скроллбара */
-::-webkit-scrollbar-thumb {
-    background-color:  rgba(137, 64, 255,.5);
-    border-radius: 20px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color:  rgba(137, 64, 255,1);
-}
-
-
-.main{
-width:100%;
-}
-
-.info-item{
-    margin: 6px 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center
-
-}
-.category{
-    color: rgb(3, 36, 75);
-    font-size: 13px;
-    font-weight: 600;
-}
-.category-info{
-    font-size: 13px;
-}
-.about-preview{
-  width: 100%;
-  height: 100vh;
-  transition: 1s;
-  display: flex;
-}
-.about-preview-img{
-    object-fit: cover;
-    width: 50%;
-    height: 100vh;
-    transition: 1s;
-}
-.about-preview:hover .about-preview-img{
-  width: 100%;
-  height: 100vh;
-}
-
-
-.about-preview-info{
-    position: absolute;
-    top: 35%;
-    left: 55%;
-}
-.about-header{
-    padding: 0px 15px;
-    font-size: 55px;
-    /*screen */
-    mix-blend-mode:lighten;
-    background-blend-mode:multiply ;
-    background-color: rgb(255, 255, 255);
-    color:rgba(0, 0, 0);;
-}
-.about-desc{
-    transition: 3s;
-    font-size: 16px;
-    line-height: 17px;
-    padding: 15px;
-    width: 400px;
-    mix-blend-mode:screen;
-    background-blend-mode:multiply ;
-    background-color: rgb(0, 0, 0);
-    color:white
-}
-
-@media (max-width: 480px) {
-    .about-desc{
-        font-size: 15px;
-        padding: 10px;
-        width: 200px;
-    }
-    .about-preview-info{
-        position: absolute;
-        top: 35%;
-        left: 15%;
-    }
-}
-
-</style>
-
-
 <script>
 import {mapGetters} from 'vuex'
 
@@ -184,6 +84,12 @@ export default {
             document.body.removeChild(this.container);
             this.$store.dispatch('plsClearScene');
         },
+        onWindowResize: function(camera, renderer){
+            alert("resize")
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }
     },
      computed : {
         ...mapGetters(['getAboutCompany','getLocalDescription','getLocalCard',"getScene"]),
@@ -216,12 +122,6 @@ beforeDestroy(){
     this.deleted()
 },
 async created(){
-        if(window.innerWidth<480){
-            alert('mobile')
-        }
-        else{
-            alert('desktop')
-        }
         await this.$store.dispatch('createScene')
         const scene = this.$store.state.scene;
         console.log("======================")
@@ -348,3 +248,80 @@ async created(){
 
 }
 </script>
+<style>
+::-webkit-scrollbar {
+    width: 12px; /* ширина для вертикального скролла */
+    height: 8px; /* высота для горизонтального скролла */
+    background-color:#143861;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color:  rgba(137, 64, 255,.5);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color:  rgba(137, 64, 255,1);
+}
+
+.info-item{
+    margin: 6px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+
+}
+.category{
+    color: rgb(3, 36, 75);
+    font-size: 13px;
+    font-weight: 600;
+}
+.category-info{
+    font-size: 13px;
+}
+.about-preview{
+  width: 100%;
+  height: 100vh;
+  transition: 1s;
+  display: flex;
+}
+.about-preview-img{
+    object-fit: cover;
+    width: 50%;
+    height: 100vh;
+    transition: 1s;
+}
+.about-preview:hover .about-preview-img{
+  width: 100%;
+  height: 100vh;
+}
+
+
+.about-preview-info{
+    position: absolute;
+    top: 35%;
+    left: 55%;
+}
+.about-header{
+    padding: 0px 15px;
+    font-size: 55px;
+    /*screen */
+    mix-blend-mode:lighten;
+    background-blend-mode:multiply ;
+    background-color: rgb(255, 255, 255);
+    color:rgba(0, 0, 0);;
+}
+.about-desc{
+    transition: 3s;
+    font-size: 16px;
+    line-height: 17px;
+    padding: 15px;
+    width: 400px;
+    mix-blend-mode:screen;
+    background-blend-mode:multiply ;
+    background-color: rgb(0, 0, 0);
+    color:white
+}
+
+</style>
