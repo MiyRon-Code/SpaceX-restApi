@@ -1,6 +1,6 @@
 <template>
     <div class="capsula" @click="toggle">
-            <div class="id">{{getLocalCard.serialNumber}} : {{data.capsule_serial}} <input class="checkbox" type="checkbox" name="" id=""> <div class="indicator"></div> </div>
+            <div class="id">{{getLocalCard.serialNumber}} : {{data.capsule_serial}} <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div> </div>
             <div v-show="checked" class="capsula-body">
                 <ul class="capsula-info">
                     <li class="capsula-info-item">{{getLocalCard.landingCount}}:       {{data.landings}}</li>
@@ -59,11 +59,11 @@ export default {
     margin-bottom:5px; 
     position: relative;
 }
-.capsula:hover .id{
+.id:hover {
     color: white;
     background-color: #4b28f7;
 }
-.capsula:hover .indicator{
+.id:hover  .indicator{
     border-color: 6px solid transparent; border-right: 6px solid white;
 }
 .indicator{
@@ -81,6 +81,7 @@ export default {
 }
 
 .id{
+    cursor: pointer;
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;

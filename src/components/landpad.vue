@@ -1,6 +1,6 @@
 <template>
-    <div class="landpad">
-            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id : {{data.id}} </div> <div class="preview-info-item"> имя : {{data.name}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
+    <div class="landpad" @click="toggle">
+            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id : {{data.id}} </div> <div class="preview-info-item"> имя : {{data.name}} </div></div>  <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div></div>
             <div v-show="checked" class="landpad-body">
                 <ul class="landpad-info">
 
@@ -70,12 +70,31 @@ export default {
     },
     computed: {
         ...mapGetters(['getLocalCard'])
+    },
+    methods:{
+        toggle: function(){
+            this.checked = !this.checked;
+        }
     }
 }
 </script>
 <style scoped>
-body{
-    background-color: red
+@keyframes indicator{
+    0%{
+        transform: translateX(-2px);
+    }
+    50%{
+        transform: translateX(7px);
+    }
+    100%{
+        transform: translateX(-2px);
+    }
+}
+.checkbox{
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    opacity: 0;
 }
 .show-chart{
      padding: 5px;
@@ -103,7 +122,29 @@ body{
     display: flex;
     justify-content: space-between;
 }
+.id:hover {
+    color: white;
+    background-color: #4b28f7;
+}
+.id:hover  .indicator{
+    border-color: 6px solid transparent; border-right: 6px solid white;
+}
+.indicator{
+    transition: .3s;
+    border: 6px solid transparent; border-right: 6px solid #4b28f7;
+    border-radius: 4px;
+}
+.id input:focus  ~ .indicator{
+    animation: 2s indicator infinite;
+}
+.id input:checked ~ .indicator{
+    animation: none;
+    transition: 1s;
+    transform: rotate(-90deg);
+}
+
 .id{
+    cursor: pointer;
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
@@ -112,6 +153,7 @@ body{
     justify-content: space-between;
     padding: 10px;
 }
+
 .landpad-body{
        padding: 10px;
     box-sizing: border-box;
