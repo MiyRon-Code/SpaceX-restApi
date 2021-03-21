@@ -1,6 +1,6 @@
 <template>
     <div class="dragon">
-            <div class="id">id : {{data.id}}  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id" @click="toggle">id : {{data.id}}  <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div> </div>
             <div v-show="checked" class="dragon-body">
                 <ul class="dragon-info">
                     <li class="dragon-info-item">{{getLocalCard.mass}} (kg): {{data.dry_mass_kg}}</li>
@@ -36,6 +36,11 @@ export default {
     },
     computed:{
         ...mapGetters(['getLocalCard'])
+    },
+    methods:{
+        toggle: function(){
+            this.checked = !this.checked;
+        }
     }
 }
 </script>
@@ -45,7 +50,47 @@ export default {
     background-color: #EEEEEE;
     margin-bottom:5px; 
 }
+@keyframes indicator{
+    0%{
+        transform: translateX(-2px);
+    }
+    50%{
+        transform: translateX(7px);
+    }
+    100%{
+        transform: translateX(-2px);
+    }
+}
+
+.id:hover {
+    color: white;
+    background-color: #4b28f7;
+}
+.id:hover  .indicator{
+    border-color: 6px solid transparent; border-right: 6px solid white;
+}
+.indicator{
+    transition: .3s;
+    border: 6px solid transparent; border-right: 6px solid #4b28f7;
+    border-radius: 4px;
+}
+.id input:focus  ~ .indicator{
+    animation: 2s indicator infinite;
+}
+.id input:checked ~ .indicator{
+    animation: none;
+    transition: 1s;
+    transform: rotate(-90deg);
+}
+.checkbox{
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    opacity: 0;
+}
+
 .id{
+    cursor: pointer;
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;

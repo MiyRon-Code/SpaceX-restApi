@@ -1,6 +1,6 @@
 <template>
     <div class="launche">
-            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id: {{data.flight_number}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> {{getLocalCard.name}}: {{data.mission_name}} </div></div>  <input type="checkbox" class="more" v-model="checked"> </div>
+            <div class="id" @click="toggle"><div class="preview-info"> <div class="preview-info-item"> id: {{data.flight_number}} </div> <div class="preview-info-item" v-show="data.mission_id!=''"> {{getLocalCard.name}}: {{data.mission_name}} </div></div>  <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div> </div>
             <div v-show="checked" class="launche-body">
                 <ul class="launche-info">
                     <li class="launche-info-item">{{getLocalCard.year}}: {{data.launch_year}}</li>
@@ -33,11 +33,63 @@ export default {
     },
     computed:{
         ...mapGetters(['getLocalCard'])
+    },
+    methods:{
+        toggle: function(){
+            this.checked = !this.checked;
+        }
     }
 }
 </script>
 <style scoped>
+@keyframes indicator{
+    0%{
+        transform: translateX(-2px);
+    }
+    50%{
+        transform: translateX(7px);
+    }
+    100%{
+        transform: translateX(-2px);
+    }
+}
+.id:hover {
+    color: white;
+    background-color: #4b28f7;
+}
+.id:hover  .indicator{
+    border-color: 6px solid transparent; border-right: 6px solid white;
+}
+.indicator{
+    transition: .3s;
+    border: 6px solid transparent; border-right: 6px solid #4b28f7;
+    border-radius: 4px;
+}
+.id input:focus  ~ .indicator{
+    animation: 2s indicator infinite;
+}
+.id input:checked ~ .indicator{
+    animation: none;
+    transition: 1s;
+    transform: rotate(-90deg);
+}
 
+.id{
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.checkbox{
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    opacity: 0;
+}
 .launche{
     color: black;
     background-color: #EEEEEE;

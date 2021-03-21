@@ -5,11 +5,7 @@
                  <h5>{{getLocalHelpers.total}} {{getLocalCategory.missions}}: {{getMissions.data.length}}</h5>
                  <Mission v-for="mission in getMissions.data" :key="(mission,index)" :data="mission"/>
             </div>
-            <chartLine
-                :data="getDataForChart"
-                :labels="getTitleForChart"
-            />
-            {{getDataForChart}}
+           
         </div>
     </div>
 </template>
@@ -19,7 +15,6 @@
 
     /*components*/
     import Mission from '@/components/mission.vue'
-    import chartLine from '@/components/chartLine.vue'
     export default{
         data(){
             return{
@@ -27,7 +22,7 @@
             }
         },
         components:{
-            Mission,chartLine
+            Mission
         },
         mounted() {
           this.$store.dispatch('fetchMissions');

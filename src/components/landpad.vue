@@ -1,6 +1,6 @@
 <template>
-    <div class="landpad" @click="toggle">
-            <div class="id"><div class="preview-info"> <div class="preview-info-item"> id : {{data.id}} </div> <div class="preview-info-item"> имя : {{data.name}} </div></div>  <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div></div>
+    <div class="landpad">
+            <div class="id" @click="toggle"><div class="preview-info"> <div class="preview-info-item"> id : {{data.id}} </div> <div class="preview-info-item"> имя : {{data.name}} </div></div>  <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div></div>
             <div v-show="checked" class="landpad-body">
                 <ul class="landpad-info">
 

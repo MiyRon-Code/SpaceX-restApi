@@ -1,6 +1,6 @@
 <template>
-    <div class="capsula" @click="toggle">
-            <div class="id">{{getLocalCard.serialNumber}} : {{data.capsule_serial}} <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div> </div>
+    <div class="capsula">
+            <div class="id"  @click="toggle">{{getLocalCard.serialNumber}} : {{data.capsule_serial}} <input class="checkbox" type="checkbox" name="" id="" v-model="checked"> <div class="indicator"></div> </div>
             <div v-show="checked" class="capsula-body">
                 <ul class="capsula-info">
                     <li class="capsula-info-item">{{getLocalCard.landingCount}}:       {{data.landings}}</li>
