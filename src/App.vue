@@ -53,6 +53,9 @@ export default {
     .container{
       max-width: 100%;
     }
+    body{
+      padding-bottom:440px;
+    }
   }
 
 </style>

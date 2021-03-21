@@ -1,19 +1,25 @@
 <template>
     <div class="header">
         <div class="container">
-            <div class="header-inner">
+            <div :class="['header-inner', {'header-inner-mobile':mobile}]">
                 <div class="logo" @click="$router.push({name:'main'})">
                     SpaceX-Api
                 </div>
-                <div class="nav">
-                        <button class="nav-item" @click="$router.push({name:'description'})">{{getLocalCategory.description}}</button>
-                        <button class="nav-item" @click="$router.push({name:'missions'})">{{getLocalCategory.missions}}</button>
-                        <button class="nav-item" @click="$router.push({name:'launches'})">{{getLocalCategory.launches}}</button>
-                        <button class="nav-item" @click="$router.push({name:'rockets'})">{{getLocalCategory.rockets}}</button>
-                        <button class="nav-item" @click="$router.push({name:'capsules'})">{{getLocalCategory.capsules}}</button>
-                        <button class="nav-item" @click="$router.push({name:'dragons'})">{{getLocalCategory.dragons}}</button>
-                        <button class="nav-item" @click="$router.push({name:'landpads'})">{{getLocalCategory.landpads}}</button>
+                <div :class="['nav', {'mobile':mobile}]">
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'description'})">{{getLocalCategory.description}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'missions'})">{{getLocalCategory.missions}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'launches'})">{{getLocalCategory.launches}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'rockets'})">{{getLocalCategory.rockets}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'capsules'})">{{getLocalCategory.capsules}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'dragons'})">{{getLocalCategory.dragons}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'landpads'}); changeMode">{{getLocalCategory.landpads}}</button>
                         <button class="lang" @click="changeLocal">{{getLocalLang}}</button>
+                        <div class="burger">                                                        
+                            <input type="checkbox" id="checkbox" class="mobile-menu__checkbox" v-model="mobile">
+                            <label for="checkbox" class="mobile-menu__btn">
+                                <div class="mobile-menu__icon"></div>
+                            </label>
+                        </div>
                 </div>
 
             </div>
@@ -24,11 +30,20 @@
 <script>
 import {mapGetters} from 'vuex'
 export default {
+    data: function(){
+        return{
+            mobile: false
+        }
+    },
     computed:{
         ...mapGetters(['getLocalCategory']),
         ...mapGetters(['getLocalLang'])
     },
     methods:{
+        changeMode: function(){
+            alert("change")
+            this.mobile = !this.mobile;
+        },
         changeLocal: function(){
             this.$store.dispatch('changeLocalLang')
         }
@@ -36,6 +51,12 @@ export default {
 }
 </script>
 <style scoped>
+    .mobile-menu__checkbox {
+        display: none;
+    }
+    .burger{
+        position: relative;
+    }
     a{
         text-decoration: none;
         color: white;
@@ -97,13 +118,85 @@ export default {
         top:30px;
         background-color: white;
     }
-
-
     @media (max-width: 480px) {
+        
+        .burger{
+            display: flex;
+            align-items: center;
+        }
         .nav-item{
             font-size: 12px;
             display: none;
         }
+        .nav-item-mobile{
+            display: block;
+        }
+        .header-inner-mobile{
+            padding: 0;
+        }
+        .mobile{
+            background-color: darkblue;
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            z-index: 10;
+        }
+        /* burger */
+        .mobile-menu__icon {
+        display: block;
+        position: relative;
+        background: rgba(255, 255, 255, 1);
+        width: 30px;
+        height: 4px;
+        transition: 0.4s;
+        }
+        .mobile-menu__icon::after, .mobile-menu__icon::before {
+        content: "";
+        display: block;
+        position: absolute;
+        background: rgba(255, 255, 255, 1);
+        width: 100%;
+        height: 4px;
+        transition: 0.4s;
+        }
+        .mobile-menu__icon::after {
+        top: -10px;
+        }
+        .mobile-menu__icon::before {
+        top: 10px;
+        } 
+
+        .mobile-menu__checkbox:checked ~ .mobile-menu__btn .mobile-menu__icon {
+        background: transparent;
+        }
+        .mobile-menu__checkbox:checked ~ .mobile-menu__btn .mobile-menu__icon::before, .mobile-menu__checkbox:checked ~ .mobile-menu__btn .mobile-menu__icon::after {
+        top: 0;
+        }
+        .mobile-menu__checkbox:checked ~ .mobile-menu__btn .mobile-menu__icon::after {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        }
+        .mobile-menu__checkbox:checked ~ .mobile-menu__btn .mobile-menu__icon::before {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        }
+
     }
+
+    @media (max-width: 960px) {
+        .nav-item{
+            margin-left: 20px;
+        }
+    }
+
+    @media (max-width: 891px) {
+        .nav-item{
+            margin-left: 10px;
+        }
+    }
+
 
 </style>

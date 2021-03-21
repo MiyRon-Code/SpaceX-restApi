@@ -127,10 +127,11 @@ async created(){
         console.log("======================")
         console.log(scene)
         console.log("======================")
-        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        alert(window.screen.width)
+        const camera = new THREE.PerspectiveCamera( 75, window.screen.width / window.innerHeight, 0.1, 1000 );
 
         const renderer = new THREE.WebGLRenderer( {alpha: true});
-        renderer.setSize( window.innerWidth-12, window.innerHeight);
+        renderer.setSize( window.screen.width, window.innerHeight);
         
        
 
@@ -153,9 +154,6 @@ async created(){
     description.classList.add('about-desc')
     header.innerHTML="UI SpaceX-Api"
     description.innerHTML=`${this.getLocalDescription.main}`
-    headerWrapper.appendChild(header); 
-    headerWrapper.appendChild(description);
-    this.container.appendChild(headerWrapper) 
     this.container.appendChild(renderer.domElement)
     document.body.appendChild(this.container)
     
@@ -227,9 +225,9 @@ async created(){
         camera.position.y = 150;
         function onWindowResize(){
 
-            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.aspect = window.screen.width / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( window.screen.width, window.innerHeight );
         }
         
         

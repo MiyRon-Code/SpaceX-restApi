@@ -12,7 +12,7 @@
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.website}`" target="blank">official website</a></li>
                 <li class="footer-list-item"><a :href="`${getAboutCompany.data.links.elon_twitter}`" target="blank">Elon Twitter</a></li>
             </ul>
-            <div class="footer-list-btn">
+            <div class="footer-list-btn" id="navigation">
                 <h5>{{getLocalCategory.navigation}}</h5>
                 <button class="footer-list-item-btn" @click="$router.push({name:'description'})" >{{getLocalCategory.description}}</button>
                 <button class="footer-list-item-btn" @click="$router.push({name:'launches'})" >{{getLocalCategory.launches}}</button>
@@ -171,5 +171,25 @@ export default {
     a{
         text-decoration: none;
         color: white;
+    }
+
+    @media(max-width: 480px)  {
+        .logo{
+            padding: 0;
+        }
+        .footer{
+            background-color: black;
+            height: 440px;
+        }
+        .footer-inner{
+            padding:0px 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        #navigation{
+            display: none;
+        }
     }
 </style>

@@ -1,12 +1,12 @@
 <template>
     <div class="about">
-            <div class="about-preview">
-                <img class="about-preview-img" :src="impPath" alt="">
-                    <div class="about-preview-info">
-                        <h1 class="about-header">{{header}}</h1>
-                        <p class="about-desc">{{description}}</p>
-                    </div>    
-            </div>
+        <div class="about-preview">
+            <img class="about-preview-img" :src="impPath" alt="">
+            <div class="about-preview-info">
+                <h1 class="about-header">{{header}}</h1>
+                <p class="about-desc">{{description}}</p>
+            </div>    
+        </div>
     </div>
 </template>
 
@@ -41,12 +41,12 @@ h1{
 .about-preview-img{
     object-fit: cover;
     width: 50%;
-    height: 100vh;
+    height: 100%;
     transition: 1s;
 }
 .about-preview:hover .about-preview-img{
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 
@@ -62,7 +62,7 @@ h1{
     mix-blend-mode:lighten;
     background-blend-mode:multiply ;
     background-color: rgb(255, 255, 255);
-    color:rgba(0, 0, 0);;
+    color:rgba(0, 0, 0);
 }
 .about-desc{
     transition: 3s;
@@ -73,13 +73,13 @@ h1{
     mix-blend-mode:screen;
     background-blend-mode:multiply ;
     background-color: rgb(0, 0, 0);
-    color:white
+    color:white;
 }
 
 
   @media (max-width: 480px) {
     .about-header{
-      display: none;
+      width: 80%;
     }
     .about-desc {
        width: 80%;
