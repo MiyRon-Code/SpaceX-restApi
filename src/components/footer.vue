@@ -15,6 +15,7 @@
             <div class="footer-list-btn" id="navigation">
                 <h5>{{getLocalCategory.navigation}}</h5>
                 <button class="footer-list-item-btn" @click="$router.push({name:'description'})" >{{getLocalCategory.description}}</button>
+                <button class="footer-list-item-btn" @click="$router.push({name:'missions'})" >{{getLocalCategory.missions}}</button>
                 <button class="footer-list-item-btn" @click="$router.push({name:'launches'})" >{{getLocalCategory.launches}}</button>
                 <button class="footer-list-item-btn" @click="$router.push({name:'rockets'})">{{getLocalCategory.rockets}}</button>
                 <button class="footer-list-item-btn" @click="$router.push({name:'capsules'})">{{getLocalCategory.capsules}}</button>
@@ -85,7 +86,7 @@ export default {
         position: absolute; 
         bottom: 0; 
         color:white;
-        height: 320px;
+        height: 330px;
         width: 100%;
         background: linear-gradient(80deg, #2B04E8,rgb(137, 64, 255));
        
@@ -172,7 +173,11 @@ export default {
         text-decoration: none;
         color: white;
     }
-
+    @media (max-width: 768px){
+        #navigation{
+            display: none;
+        }
+    }
     @media(max-width: 480px)  {
         .logo{
             padding: 0;

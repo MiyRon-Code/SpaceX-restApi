@@ -20,8 +20,7 @@ import { mapGetters } from 'vuex'
 
 export default {
     props:{
-        data: Object
-        ,
+        data: Object,
     },
     data(){
         return{
@@ -141,7 +140,6 @@ export default {
     font-size: 8px;
     display: flex;
     flex-direction: column;
-
 }
 
 

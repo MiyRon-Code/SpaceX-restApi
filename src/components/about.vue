@@ -69,22 +69,66 @@ h1{
     font-size: 16px;
     line-height: 17px;
     padding: 15px;
-    width: 400px;
+    width: 100%;
     mix-blend-mode:screen;
     background-blend-mode:multiply ;
     background-color: rgb(0, 0, 0);
     color:white;
 }
-
-
-  @media (max-width: 480px) {
+  @media (max-width: 1070px) {
     .about-header{
-        font-size: 22px;
+      font-size: 40px;
       width: 80%;
     }
     .about-desc {
        width: 80%;
     }
   }
+    @media (max-width: 768px) {
+    .about-header{
+      font-size:35px;
+      width: 80%;
+    }
+    .about-desc {
+       width: 80%;
+    }
+  }
+  @media (max-width: 480px) {
+    .about-header{
+        font-size: 22px;
+        width: 80%;
+    }
+    .about-desc {
+        font-size: 17px;
+        width: 80%;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .about-header{
+        font-size: 22px;
+        width: 80%;
+    }
+    .about-desc {
+        font-size: 17px;
+        width: 80%;
+    }
+    .about-preview{
+      width: 100%;
+      height: 70vh;
+      transition: 1s;
+    }
+    .about-preview-info{
+      position: absolute;
+      top: 45%;
+      left: 45%;
+    }
+    .about{
+      margin: 30px 0px;
+    } 
+  }
+
+
+
 
 </style>

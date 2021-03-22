@@ -1,5 +1,111 @@
 <template>
-    <div class="rocket">
+<div class="rocket">
+    <div class="rocket-info">
+        <div class="preview">
+            <div class="wiki"></div>
+            <wikiButton
+                :link="data.wikipedia"
+            />
+            <img src="@/assets/falcon.jpg" alt="" class="rocket-preview-img">
+        </div>
+        <VueSlickCarousel v-bind="settings" class="slider"> 
+            <div class="slide" @click="toggleNotation">
+                <div :class="['slide-content-wrapper', {'si':americanNotation}]">
+                    <h5>{{getLocalCard.diameter}}</h5>
+                    <img src="@/assets/icons/diameter.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info" v-show="americanNotation">
+                            {{data.diameter.meters}} meters
+                    </span>
+                        <span class="slider-item-info" v-show="!americanNotation">
+                            {{data.diameter.feet}} feet
+                    </span>
+                </div>                
+            </div>
+            <div class="slide">
+                <div :class="['slide-content-wrapper', {'si':americanNotation}]">
+                    <h5>{{getLocalCard.height}}</h5>
+                    <img src="@/assets/icons/height.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info" v-show="americanNotation">
+                        {{data.height.meters}} meters
+                    </span>
+                    <span class="slider-item-info" v-show="!americanNotation">
+                        {{data.height.feet}} feet
+                    </span>
+                </div> 
+            </div>
+            <div class="slide">
+                <div :class="['slide-content-wrapper', {'si':americanNotation}]">
+                    <h5>{{getLocalCard.mass}}</h5>
+                    <img src="@/assets/icons/weight.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info" v-show="americanNotation">
+                            {{data.mass.kg}} kg
+                    </span>
+                        <span class="slider-item-info" v-show="!americanNotation">
+                            {{data.mass.lb}} lb
+                    </span>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h5>{{getLocalCard.costPerLaunch}}</h5>
+                    <img src="@/assets/icons/dollar.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info">
+                        {{data.mass.lb}} $
+                    </span>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h5>{{getLocalCard.dateFirstFlight}}</h5>
+                    <img src="@/assets/icons/rocket.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info">
+                        {{data.first_flight}}
+                    </span>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h5>{{getLocalCard.fireTime}}</h5>
+                    <img src="@/assets/icons/fire.svg" alt="" class="slider-item-icon">
+                        <span class="slider-item-info">
+                            {{data.first_stage.burn_time_sec+data.second_stage.burn_time_sec}} sec
+                    </span>
+                </div>
+            </div>
+            <div class="slide">
+                <div :class="['slide-content-wrapper', {'si':americanNotation}]">
+                    <h5>{{getLocalCard.thrustVacuum}}</h5>
+                    <img src="@/assets/icons/rocket-flying.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info" v-show="americanNotation">
+                            {{data.engines.thrust_vacuum.kN}} kN
+                    </span>
+                    <span class="slider-item-info" v-show="!americanNotation">
+                            {{data.engines.thrust_vacuum.lbf}} lbf
+                    </span>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h5>{{getLocalCard.preSuccessfulLandings}}</h5>
+                    <img src="@/assets/icons/pie-chart.svg" alt="" class="slider-item-icon">
+                    <span class="slider-item-info">
+                        {{data.success_rate_pct}} %
+                    </span>                    
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h5>{{getLocalCard.fuelQuantity}}</h5>
+                    <img src="@/assets/icons/fuel.svg" alt="" class="slider-item-icon">
+                        <span class="slider-item-info">
+                            {{data.first_stage.fuel_amount_tons+data.second_stage.fuel_amount_tons}} тонн
+                    </span>                    
+                </div>
+            </div>
+        </VueSlickCarousel>
+    </div>
+</div>
+    <!-- <div class="rocket">
         <div class="rocket-preview">
             <div class="flag">
                 <img src="@/assets/flags/United States.png"  alt="" class="flag-img">
@@ -10,106 +116,67 @@
         </div>
         <div class="rocket-body" >
             <div :class="['rocket','id',{'active-rocket':data.active}]" >{{getLocalCard.version}}: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">{{getLocalCard.active}}!</div></span>       </div>
-            <div class="slider">
-                    <VueSlickCarousel v-bind="settings">
-                        <div :class="['slider-item',{'meter':this.americanNotation}]" @click="changeNotation">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.diameter}}</h5>
-                                <img src="@/assets/icons/diameter.svg" alt="" class="slider-item-icon">
-                                <span class="slider-item-info" v-show="americanNotation">
-                                        {{data.diameter.meters}} meters
-                                </span>
-                                 <span class="slider-item-info" v-show="!americanNotation">
-                                        {{data.diameter.feet}} feet
-                                </span>
-                            </div>
-                        </div>
-                        <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.height}}</h5>
-                                <img src="@/assets/icons/height.svg" alt="" class="slider-item-icon">
-                                <span class="slider-item-info" v-show="americanNotation">
-                                        {{data.height.meters}} meters
-                                </span>
-                                 <span class="slider-item-info" v-show="!americanNotation">
-                                        {{data.height.feet}} feet
-                                </span>
-                            </div>
-                           
-                        </div>
-                        <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.mass}}</h5>
-                                <img src="@/assets/icons/weight.svg" alt="" class="slider-item-icon">
-                                <span class="slider-item-info" v-show="americanNotation">
-                                        {{data.mass.kg}} kg
-                                </span>
-                                 <span class="slider-item-info" v-show="!americanNotation">
-                                        {{data.mass.lb}} lb
-                                </span>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.costPerLaunch}}</h5>
-                                <img src="@/assets/icons/dollar.svg" alt="" class="slider-item-icon">
-                                 <span class="slider-item-info">
-                                        {{data.mass.lb}} $
-                                </span>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.dateFirstFlight}}</h5>
-                                <img src="@/assets/icons/rocket.svg" alt="" class="slider-item-icon">
-                                 <span class="slider-item-info">
-                                        {{data.first_flight}}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.fireTime}}</h5>
-                                <img src="@/assets/icons/fire.svg" alt="" class="slider-item-icon">
-                                 <span class="slider-item-info">
-                                        {{data.first_stage.burn_time_sec+data.second_stage.burn_time_sec}} sec
-                                </span>
-                            </div>
-                        </div>
-                        <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.thrustVacuum}}</h5>
-                                <img src="@/assets/icons/rocket-flying.svg" alt="" class="slider-item-icon">
-                                <span class="slider-item-info" v-show="americanNotation">
-                                        {{data.engines.thrust_vacuum.kN}} kN
-                                </span>
-                                 <span class="slider-item-info" v-show="!americanNotation">
-                                        {{data.engines.thrust_vacuum.lbf}} lbf
-                                </span>
-                            </div>
-                        </div>
-                         <div class="slider-item">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.preSuccessfulLandings}}</h5>
-                                <img src="@/assets/icons/pie-chart.svg" alt="" class="slider-item-icon">
-                                 <span class="slider-item-info">
-                                        {{data.success_rate_pct}} %
-                                </span>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="slide">
-                                 <h5>{{getLocalCard.fuelQuantity}}</h5>
-                                <img src="@/assets/icons/fuel.svg" alt="" class="slider-item-icon">
-                                 <span class="slider-item-info">
-                                        {{data.first_stage.fuel_amount_tons+data.second_stage.fuel_amount_tons}} тонн
-                                </span>
-                            </div>
-                        </div>
-                    </VueSlickCarousel>
-            </div>
-            
-           
+            <VueSlickCarousel v-bind="settings" class="slider">
+                <div :class="['slider-item',{'meter':this.americanNotation}]" @click="changeNotation">
+                    <div class="slide">
+                        <h5>{{getLocalCard.diameter}}</h5>
+                        <img src="@/assets/icons/diameter.svg" alt="" class="slider-item-icon">
+                        <span class="slider-item-info" v-show="americanNotation">
+                                {{data.diameter.meters}} meters
+                        </span>
+                            <span class="slider-item-info" v-show="!americanNotation">
+                                {{data.diameter.feet}} feet
+                        </span>
+                    </div>
+                </div>
+                <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
+                    <div class="slide">
+                        <h5>{{getLocalCard.height}}</h5>
+                        <img src="@/assets/icons/height.svg" alt="" class="slider-item-icon">
+                        <span class="slider-item-info" v-show="americanNotation">
+                                {{data.height.meters}} meters
+                        </span>
+                            <span class="slider-item-info" v-show="!americanNotation">
+                                {{data.height.feet}} feet
+                        </span>
+                    </div>
+                </div>
+                <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
+                    <div class="slide">
+                        
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="slide">
+                        
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="slide">
+
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="slide">
+                            
+                    </div>
+                </div>
+                <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
+                    <div class="slide">
+                        
+                    </div>
+                </div>
+                    <div class="slider-item">
+                    <div class="slide">
+
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="slide">
+                        
+                    </div>
+                </div>
+            </VueSlickCarousel>
             <div class="buttons">
                 <wikiButton
                     :link="data.wikipedia"
@@ -117,7 +184,7 @@
                 {{getLocalCard.readWiki}}!
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 <script>
 import wikiButton from '@/components/wikiButton.vue'
@@ -149,11 +216,40 @@ export default {
                 "slidesToScroll": 1,
                 "touchThreshold": 5,
                 "autoplay":true,
+                "responsive": [
+                    {
+                    "breakpoint": 1024,
+                    "settings": {
+                        "arrows": false,
+                        "slidesToShow": 3,
+                        "slidesToScroll": 3,
+                        "infinite": true,
+                        "dots": true
+                    }
+                    },
+                    {
+                    "breakpoint": 600,
+                    "settings": {
+                        "arrows": false,
+                        "slidesToShow": 2,
+                        "slidesToScroll": 2,
+                        "initialSlide": 2
+                    }
+                    },
+                    {
+                    "breakpoint": 480,
+                    "settings": {
+                        "arrows": false,
+                        "slidesToShow": 1,
+                        "slidesToScroll": 1
+                    }
+                    }
+                ]
             }
         }
     },
     methods:{
-        changeNotation: function(){
+        toggleNotation: function(){
             this.americanNotation = !this.americanNotation;
         }
     },
@@ -165,6 +261,81 @@ export default {
 
 <style scoped>
 
+.rocket-info{
+    display: flex;
+    justify-content: space-between;
+}
+.slider{
+    width: 75%;
+}
+.slide{
+    box-sizing: border-box;
+    height: 400px;
+    background:linear-gradient(  #2948ff, #2B04E8);
+}
+.si{
+    background: linear-gradient( #393cfc, #6229ff);
+}
+.slide-content-wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.slider-item-icon{
+    width: 120px;
+    height: 120px;
+}
+.preview{
+    width: 25%;
+    height: 400px;
+    background-color: blue;
+}
+.rocket-preview-img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.wiki{
+    margin: 10px;
+    transition: .2s;
+    opacity: .5;
+    position: absolute;
+}
+.wiki:hover{
+    opacity: 1;
+    position: absolute;
+}
+    @media (max-width: 1070px) {
+        .preview{
+            width: 30%;
+        }
+        .slider{
+            width: 70%;
+        }
+    }
+
+    @media (max-width:768px) {
+        .preview{
+            width: 40%;
+        }
+        .slider{
+            width: 60%;
+        }
+    }
+
+    @media (max-width:480px) {
+        .preview{
+            width: 50%;
+        }
+        .slider{
+            width: 50%;
+        }
+    }
+
+/*
     .rocket{
         position: relative;
         display:flex;
@@ -192,11 +363,7 @@ export default {
     .rocket-preview:active  ~ .rocket-body{
         display: none;
     }
-    .rocket-preview-img{
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
+
     .rocket-body{
         display: flex;
         flex-direction: column;
@@ -272,10 +439,9 @@ export default {
     }
 
     .slider{
-        width: 700px;
+        width: 100%;
     }
     .slide{
-        width: 100%;
         height: 100%;
          display: flex;
         flex-direction: column;
@@ -284,6 +450,7 @@ export default {
         color:white;
     }
     .slider-item{
+        width: 25%;
         height: 400px;
         cursor:move;
         background: linear-gradient( #396afc, #2948ff);
@@ -291,10 +458,7 @@ export default {
     .meter{
          background: linear-gradient( #393cfc, #6229ff);
     }
-    .slider-item-icon{
-        width: 120px;
-        height: 120px;
-    }
+
     .slider-item-info{
         font-size: 26px; 
     }
@@ -304,5 +468,5 @@ export default {
         align-items: center;
         font-size: 12px;
         letter-spacing: 1.5px; 
-    }
+    } */
 </style>

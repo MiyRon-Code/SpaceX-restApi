@@ -129,7 +129,7 @@ export default {
     }
     .title{
         position: absolute;
-        top: -16px;
+        top: -17px;
         left: 55px;
         height: 17px;
         width:fit-content;
@@ -276,17 +276,87 @@ export default {
             background-color: #e0f8ff;
         }
     }
-    @media (max-width: 480px) {
+    @media (max-width: 1070px) {
     .about-header{
-        font-size: 22px;
+      font-size: 40px;
       width: 80%;
     }
-    .json-description-req{
-          padding: 7px 5px;
-    }
-    .json-description-link{
-       font-size: 12px;
+    .about-desc {
+       width: 80%;
     }
   }
+    @media (max-width: 768px) {
+        .about-header{
+            font-size: 22px;
+            width: 80%;
+        }
+        .json-description-req{
+            padding: 7px 5px;
+        }
+        .json-description-link{
+            font-size: 12px;
+        }
+    }
+    @media (max-width: 480px) {
+        .json-description{
+            margin: 25px 0px 25px 0px;
+        }
+        .about-header{
+            font-size: 22px;
+            width: 80%;
+        }
+        .json-description-req{
+            top: -20px;
+            padding: 3px 5px;
+            font-size: 12px;
+            position: absolute;
+        }
+        .json-description-link{
+            overflow: hidden;
+            font-size: 12px;
+        }
+        .copy-link{
+            height: 100%;
+            padding: 2px;
+            margin: 0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .show-json{
+            height: 100%;
+            padding: 2px;
+            margin: 0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .icon{
+            width: 15px;
+            height: 15px;
+            margin: 3px;
+        }
+        .indicator{
+            font-size: 12px;
+            position: absolute;
+            top: -19px;
+            left: 75%;
+            z-index: 10;
+            padding: 2px;
+            background-color: rgb(0, 55, 128);
+            color:white;
+        }
+        .buttons{
+            flex-direction: column;
+        }
+        .copy-link div{
+            display: none;
+        }
+        .show-json div{
+             display: none;
+        }
+    }
 
 </style>

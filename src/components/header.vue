@@ -121,7 +121,21 @@ export default {
         top:30px;
         background-color: white;
     }
-    @media (max-width: 480px) {
+    
+
+    @media (max-width: 1070px) {
+        .nav-item{
+            margin-left: 15px;
+        }
+    }
+
+    @media (max-width: 891px) {
+        .nav-item{
+            margin-left: 10px;
+        }
+    }
+
+    @media (max-width: 768px) {
         
         .burger{
             display: flex;
@@ -141,7 +155,7 @@ export default {
         }
         .mobile{
             padding: 30px 0px;
-            background-color: darkblue;
+            background-color: #2B04E8;
             height: 100vh;
             width: 100%;
             position: fixed;
@@ -157,7 +171,7 @@ export default {
         position: relative;
         background: rgba(255, 255, 255, 1);
         width: 30px;
-        height: 4px;
+        height: 3px;
         transition: 0.4s;
         }
         .mobile-menu__icon::after, .mobile-menu__icon::before {
@@ -166,7 +180,7 @@ export default {
         position: absolute;
         background: rgba(255, 255, 255, 1);
         width: 100%;
-        height: 4px;
+        height: 3px;
         transition: 0.4s;
         }
         .mobile-menu__icon::after {
@@ -192,18 +206,5 @@ export default {
         }
 
     }
-
-    @media (max-width: 960px) {
-        .nav-item{
-            margin-left: 20px;
-        }
-    }
-
-    @media (max-width: 891px) {
-        .nav-item{
-            margin-left: 10px;
-        }
-    }
-
 
 </style>
