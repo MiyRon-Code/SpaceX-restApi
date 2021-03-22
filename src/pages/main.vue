@@ -127,11 +127,10 @@ async created(){
         console.log("======================")
         console.log(scene)
         console.log("======================")
-        alert(window.screen.width)
         const camera = new THREE.PerspectiveCamera( 75, window.screen.width / window.innerHeight, 0.1, 1000 );
 
         const renderer = new THREE.WebGLRenderer( {alpha: true});
-        renderer.setSize( window.screen.width, window.innerHeight);
+        renderer.setSize( window.screen.width - 1, window.innerHeight);
         
        
 
@@ -227,7 +226,7 @@ async created(){
 
             camera.aspect = window.screen.width / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize( window.screen.width, window.innerHeight );
+            renderer.setSize( window.screen.width-1, window.innerHeight );
         }
         
         

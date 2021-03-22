@@ -52,4 +52,12 @@ export default {
     font-weight: 800;
     margin: 0px 10px;
 }
+
+@media (max-width: 480px){
+    .mission-header{
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+    }
+}
 </style>

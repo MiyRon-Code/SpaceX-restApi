@@ -79,6 +79,7 @@ h1{
 
   @media (max-width: 480px) {
     .about-header{
+        font-size: 22px;
       width: 80%;
     }
     .about-desc {

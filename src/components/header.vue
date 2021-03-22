@@ -6,15 +6,15 @@
                     SpaceX-Api
                 </div>
                 <div :class="['nav', {'mobile':mobile}]">
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'description'})">{{getLocalCategory.description}}</button>
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'missions'})">{{getLocalCategory.missions}}</button>
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'launches'})">{{getLocalCategory.launches}}</button>
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'rockets'})">{{getLocalCategory.rockets}}</button>
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'capsules'})">{{getLocalCategory.capsules}}</button>
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'dragons'})">{{getLocalCategory.dragons}}</button>
-                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'landpads'}); changeMode">{{getLocalCategory.landpads}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'description'}); toggleMobile()">{{getLocalCategory.description}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'missions'}); toggleMobile() ">{{getLocalCategory.missions}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'launches'}); toggleMobile()">{{getLocalCategory.launches}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'rockets'}); toggleMobile()">{{getLocalCategory.rockets}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'capsules'}); toggleMobile()">{{getLocalCategory.capsules}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'dragons'}); toggleMobile()">{{getLocalCategory.dragons}}</button>
+                        <button :class="['nav-item', {'nav-item-mobile':mobile}]" @click="$router.push({name:'landpads'}); toggleMobile()">{{getLocalCategory.landpads}}</button>
                         <button class="lang" @click="changeLocal">{{getLocalLang}}</button>
-                        <div class="burger">                                                        
+                        <div :class="['burger', {'burger-mobile':mobile}]">                                                        
                             <input type="checkbox" id="checkbox" class="mobile-menu__checkbox" v-model="mobile">
                             <label for="checkbox" class="mobile-menu__btn">
                                 <div class="mobile-menu__icon"></div>
@@ -40,8 +40,7 @@ export default {
         ...mapGetters(['getLocalLang'])
     },
     methods:{
-        changeMode: function(){
-            alert("change")
+        toggleMobile: function(){
             this.mobile = !this.mobile;
         },
         changeLocal: function(){
@@ -56,6 +55,10 @@ export default {
     }
     .burger{
         position: relative;
+    }
+    .burger-mobile{
+        left:calc(100% - 30px) ;
+        position: absolute;
     }
     a{
         text-decoration: none;
@@ -125,7 +128,9 @@ export default {
             align-items: center;
         }
         .nav-item{
-            font-size: 12px;
+            text-transform: uppercase;
+            padding-left: 30px ;
+            font-size: 16px;
             display: none;
         }
         .nav-item-mobile{
@@ -135,11 +140,13 @@ export default {
             padding: 0;
         }
         .mobile{
+            padding: 30px 0px;
             background-color: darkblue;
             height: 100vh;
             width: 100%;
             position: fixed;
             display: flex;
+            align-items: flex-start;
             justify-content: space-between;
             flex-direction: column;
             z-index: 10;

@@ -276,4 +276,17 @@ export default {
             background-color: #e0f8ff;
         }
     }
+    @media (max-width: 480px) {
+    .about-header{
+        font-size: 22px;
+      width: 80%;
+    }
+    .json-description-req{
+          padding: 7px 5px;
+    }
+    .json-description-link{
+       font-size: 12px;
+    }
+  }
+
 </style>
