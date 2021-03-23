@@ -1,7 +1,9 @@
 export const russian = {
     lang: "ru",
       category:{
+        info: "информация",
         description: "описание",
+        api: "о Api",
         company: "о компании",
         missions: "миссии",
         launches: "запуски",
@@ -22,7 +24,8 @@ export const russian = {
         upcoming: "предстоящие",
         contacts: "контакты",
         total: "все",
-        description:"показать описание"
+        description:"показать описание",
+        copied: "скопировано"
       },
       description:{
         main: "Визуализация данных из SpaceX RestApi.",
@@ -86,7 +89,9 @@ export const russian = {
 export const english = {
     lang: "en",
       category:{
+        info: "info",
         description: "description",
+        api: "about Api",
         company: "about company",
         missions: "missions",
         launches: "launches",
@@ -107,7 +112,8 @@ export const english = {
         upcoming: "upcoming",
         contacts: "contacts",
         total: "total",
-        description:"show а descripton"
+        description:"show а descripton",
+        copied: "copied"
       },
       description:{
         main: "Data visualization from SpaceX RestAPI.",

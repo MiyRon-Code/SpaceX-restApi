@@ -5,14 +5,13 @@
             :impPath="'https://cdn.pixabay.com/photo/2015/03/26/18/35/satellite-693194_960_720.jpg'"
             :header ="`${getLocalCategory.description}`"
             :description="`${getLocalDescription.description}`" 
-            
             />
-            <h3>{{getLocalCategory.company}}</h3>
+            <h3>{{getLocalCategory.info}}</h3>
             <jsonDescription 
-                :title="`${getLocalCategory.company}`"
-                :link="'https://api.spacexdata.com/v3/info'"
-                :action="'fetchAboutCompany'"
-                :getter="'getAboutCompany'"
+                :title="`${getLocalCategory.api}`"
+                :link="'https://api.spacexdata.com/v3'"
+                :action="'fetchAboutApi'"
+                :getter="'getAboutApi'"
             />
             <jsonDescription 
                 :title="`${getLocalCategory.company}`"

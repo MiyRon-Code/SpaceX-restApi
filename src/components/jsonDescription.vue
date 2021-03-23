@@ -3,7 +3,7 @@
         <div class="container">
             <div class="json-description-inner">
                 <div class="title">{{title}}</div>
-                <div class="indicator" v-show="indicator">скопиравано!</div>
+                <div class="indicator" v-show="indicator">{{getLocalHelpers.copied}}!</div>
                 <div class="json-description-head">        
                     <div class="json-description-info">
                         <div class="json-description-req">
@@ -24,16 +24,16 @@
                         </button>
                     </div>
             </div>
-            <div>
-                <div class="status" v-show="show">
-                    статус {{data.status}}
-                    <button class="execute-button" @click="fetchData">show responce</button>
+            <div v-show="show">
+                <button class="execute-button" @click="fetchData" v-show="data.status == -1" ></button>
+                <div class="status" >
+                    {{getLocalCard.status}} {{data.status}}
                 </div>
-                <div class="json-description-items" v-show="show">
+                <div class="json-description-items">
                     <span class="type"><span>headers</span></span>
                     <textarea class="textarea-head" name="" id="" cols="30" rows="10" v-model="strJsonHeaders" disabled></textarea>
                 </div>
-                <div class="json-description-items" v-show="show">
+                <div class="json-description-items">
                     <span class="type"><span>body</span></span>
                     <textarea class="textarea-body" name="" id="" cols="30" rows="10" v-model="strJsonBody" disabled></textarea>
                 </div>
@@ -44,7 +44,7 @@
     </div>
 </template>
 <script>
-//import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 export default {
     props:{
         action: String,
@@ -84,6 +84,7 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(['getLocalHelpers','getLocalCard']),
         strJsonHeaders(){
             return JSON.stringify( this.data.headers, null, '\t');
         },
@@ -100,8 +101,26 @@ export default {
 </script>
 <style scoped>
 .execute-button{
-    background-color: orangered;
+    position: absolute;
+    z-index: 5;
+    top: calc(50% - 40px);
+    left: calc(50% - 40px);
+    background-color: #5009FF;
     border:none;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+}
+.execute-button::before{
+    content: '';
+    position: absolute;
+    left: calc(50% - 6px) ;
+    border:  15px solid transparent; border-left: 20px solid white;
+}
+.execute-button:hover{
+    background-color: rgb(59, 87, 245);
 }
     .status{
         padding: 4px;

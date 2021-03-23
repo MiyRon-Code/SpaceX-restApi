@@ -2,10 +2,12 @@
 <div class="rocket">
     <div class="rocket-info">
         <div class="preview">
-            <div class="wiki"></div>
-            <wikiButton
-                :link="data.wikipedia"
-            />
+            <div class="name-rocket">
+                <wikiButton
+                    :link="data.wikipedia"
+                />
+                <div>{{data.id}}</div>
+            </div>
             <img src="@/assets/falcon.jpg" alt="" class="rocket-preview-img">
         </div>
         <VueSlickCarousel v-bind="settings" class="slider"> 
@@ -105,86 +107,6 @@
         </VueSlickCarousel>
     </div>
 </div>
-    <!-- <div class="rocket">
-        <div class="rocket-preview">
-            <div class="flag">
-                <img src="@/assets/flags/United States.png"  alt="" class="flag-img">
-            </div>
-            <img src="@/assets/falcon.jpg" alt="" class="rocket-preview-img">
-            <h1 class="rocket-version">{{data.id}}</h1>
-            <h5 class="rocket-desc">{{data.description}}</h5>
-        </div>
-        <div class="rocket-body" >
-            <div :class="['rocket','id',{'active-rocket':data.active}]" >{{getLocalCard.version}}: {{data.id}} <span class="status"> <div class="isActive" v-show="data.active">{{getLocalCard.active}}!</div></span>       </div>
-            <VueSlickCarousel v-bind="settings" class="slider">
-                <div :class="['slider-item',{'meter':this.americanNotation}]" @click="changeNotation">
-                    <div class="slide">
-                        <h5>{{getLocalCard.diameter}}</h5>
-                        <img src="@/assets/icons/diameter.svg" alt="" class="slider-item-icon">
-                        <span class="slider-item-info" v-show="americanNotation">
-                                {{data.diameter.meters}} meters
-                        </span>
-                            <span class="slider-item-info" v-show="!americanNotation">
-                                {{data.diameter.feet}} feet
-                        </span>
-                    </div>
-                </div>
-                <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
-                    <div class="slide">
-                        <h5>{{getLocalCard.height}}</h5>
-                        <img src="@/assets/icons/height.svg" alt="" class="slider-item-icon">
-                        <span class="slider-item-info" v-show="americanNotation">
-                                {{data.height.meters}} meters
-                        </span>
-                            <span class="slider-item-info" v-show="!americanNotation">
-                                {{data.height.feet}} feet
-                        </span>
-                    </div>
-                </div>
-                <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
-                    <div class="slide">
-                        
-                    </div>
-                </div>
-                <div class="slider-item">
-                    <div class="slide">
-                        
-                    </div>
-                </div>
-                <div class="slider-item">
-                    <div class="slide">
-
-                    </div>
-                </div>
-                <div class="slider-item">
-                    <div class="slide">
-                            
-                    </div>
-                </div>
-                <div :class="['slider-item',{'meter':this.americanNotation}]"  @click="changeNotation">
-                    <div class="slide">
-                        
-                    </div>
-                </div>
-                    <div class="slider-item">
-                    <div class="slide">
-
-                    </div>
-                </div>
-                <div class="slider-item">
-                    <div class="slide">
-                        
-                    </div>
-                </div>
-            </VueSlickCarousel>
-            <div class="buttons">
-                <wikiButton
-                    :link="data.wikipedia"
-                />
-                {{getLocalCard.readWiki}}!
-            </div>
-        </div>
-    </div> -->
 </template>
 <script>
 import wikiButton from '@/components/wikiButton.vue'
@@ -292,22 +214,31 @@ export default {
     width: 25%;
     height: 400px;
     background-color: blue;
+    position: relative;
 }
 .rocket-preview-img{
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
-.wiki{
-    margin: 10px;
-    transition: .2s;
-    opacity: .5;
+.name-rocket{
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 900;
+    z-index: 3;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    background: linear-gradient( rgba(0,0,0,0),  rgba(0,0,0,0.2));
+    box-sizing: border-box;
 }
-.wiki:hover{
-    opacity: 1;
-    position: absolute;
-}
+
     @media (max-width: 1070px) {
         .preview{
             width: 30%;
@@ -334,139 +265,4 @@ export default {
             width: 50%;
         }
     }
-
-/*
-    .rocket{
-        position: relative;
-        display:flex;
-    }
-    .rocket-preview{
-        cursor: pointer;
-        width:300px;
-        height: 500px;
-        transition: 1s;
-    }
-    .rocket-preview:active{
-        width:350px;
-        height: 500px;
-        position: relative;
-    }
-    .rocket-preview:hover .flag{
-        opacity: 1;
-    }
-    .rocket-preview:active .rocket-version {
-        display: block;
-    }
-    .rocket-preview:active  .rocket-desc{
-        display: block;
-    }
-    .rocket-preview:active  ~ .rocket-body{
-        display: none;
-    }
-
-    .rocket-body{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .flag{
-        transition: .1s;
-        opacity: 0;
-        top: 10px;
-        left:10px;
-        position: absolute;
-        height: 40px;
-        width: 70px;
-    }
-    .flag-img{
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-    .rocket-version{
-        display: none;
-    }
-    .rocket-version{
-        position: absolute;
-        z-index: 1;
-        color: white;
-        font-size: 30px;
-        top: calc(50% - 30px);
-        left: 70%;
-        text-transform: uppercase;
-        mix-blend-mode:lighten;
-        background-blend-mode:multiply ;
-        background-color: rgb(255, 255, 255);
-        color:rgba(0, 0, 0);
-    }
-
-    .id{
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-    }
-    .isActive{
-    margin: 0px 5px;
-    }
-    @keyframes  active {
-        0%{
-            background-color: rgb(13, 115, 231);
-        }
-        50%{
-            background-color: rgb(8, 101, 207);
-        }
-        0%{
-            background-color: rgb(13, 115, 231);
-        }
-    }
-    .rocket-desc{
-            display: none;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            color: white;
-            top: calc(50% + 10px);
-            left: 70%;
-            width: 500px;
-            background-color: rgb(13, 115, 231);
-            color:white;
-            line-height: 20px;
-            mix-blend-mode:lighten;
-    }
-
-    .slider{
-        width: 100%;
-    }
-    .slide{
-        height: 100%;
-         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        color:white;
-    }
-    .slider-item{
-        width: 25%;
-        height: 400px;
-        cursor:move;
-        background: linear-gradient( #396afc, #2948ff);
-    }
-    .meter{
-         background: linear-gradient( #393cfc, #6229ff);
-    }
-
-    .slider-item-info{
-        font-size: 26px; 
-    }
-    .buttons{
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        letter-spacing: 1.5px; 
-    } */
 </style>

@@ -3,6 +3,7 @@ export default{
     state: () => ({
       //данные
       aboutCompany: null,
+      api: null,
       capsules: null,
       capsulesPast: null,
       capsulesUpcoming: null,
@@ -15,11 +16,21 @@ export default{
       missions: false, 
     }),
     actions: {
-      //aboutCompany
+    //fetch info
     fetchAboutCompany({commit}){
       axios.get('https://api.spacexdata.com/v3/info')
       .then(function (response) {
           commit('updateAboutCompany',response)
+      })
+      .catch(function (error) {
+          console.log(error);
+      })
+    },
+
+    fetchAboutApi({commit}){
+      axios.get('https://api.spacexdata.com/v3')
+      .then(function (response) {
+          commit('updateAboutApi',response)
       })
       .catch(function (error) {
           console.log(error);
@@ -132,11 +143,13 @@ export default{
 
   },
     mutations: {
-      //company
+      //info
       updateAboutCompany(state, info){
           state.aboutCompany = info;
       },
-
+      updateAboutApi(state, info){
+        state.api = info;
+      },
       //capsules Update
       updateCapsules(state, capsules){
           state.capsules = capsules;
@@ -180,9 +193,13 @@ export default{
     },
 
     getters: { 
-      //aboutCompany get
+      //info get
       getAboutCompany:state => {
         return  state.aboutCompany
+      },
+
+      getAboutApi:state => {
+        return  state.api
       },
 
       //capsules get
