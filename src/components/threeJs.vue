@@ -17,7 +17,7 @@
             <button class="controls-button" id="prev" title="previous">
                 <img src="@/assets/icons/left-arrow.svg" alt="" class="ico">
             </button>
-            <button class="controls-button" id="next" title="next">
+            <button class="controls-button" id="next" title="next" @click="loadNextModel">
                 <img src="@/assets/icons/right-arrow.svg" alt="" class="ico">
             </button>
             <button class="controls-button" id="lock" title="block control">
@@ -36,7 +36,29 @@ import {mapGetters} from 'vuex'
 export default {
     data: function(){
         return{
-            controll: true
+            controll: true,
+            objLoader : new OBJLoader(),
+            modelIndex: 0,
+            models:[
+                {
+                    path: '/models/Falcon.obj',
+                    coords: {
+                        x:120,
+                        y: 0,
+                        z:120
+                    },
+                    scale: 1
+                },
+                {
+                    path: '/models/SpaceX Crew Dragon.obj',
+                    coords: {
+                        x:0,
+                        y:0,
+                        z:0
+                    },
+                    scale:11
+                },
+            ]
         }
     },
      computed : {
@@ -59,6 +81,44 @@ export default {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize( window.innerWidth, window.innerHeight );
+        },
+        deleteModel: function(){
+            var model = this.$store.state.scene.getObjectByName("model");
+            this.$store.state.scene.remove( model );
+        },
+        loadModel: function(){
+            this.deleteModel();
+            this.objLoader.load(this.models[this.modelIndex].path, (root) => {
+                root.name="model"
+                root.position.x =this.models[this.modelIndex].coords.x;
+                root.position.y =this.models[this.modelIndex].coords.y;
+                root.position.z =this.models[this.modelIndex].coords.z;
+                root.rotation.x = -Math.PI / 2;
+                this.$store.state.scene.add(root);
+            });
+        },
+        loadNextModel: function(){
+            this.deleteModel();
+            console.log("===")
+            console.log(this.modelIndex)
+            console.log(this.models.length-1)
+            console.log("===")
+            if(this.modelIndex<this.models.length-1){
+                this.modelIndex++
+            }            
+            else{
+                this.modelIndex =0;
+            }
+            this.objLoader.load(this.models[this.modelIndex].path, (root) => {
+                root.name="model"
+                root.position.x =this.models[this.modelIndex].coords.x;
+                root.position.y =this.models[this.modelIndex].coords.y;
+                root.position.z =this.models[this.modelIndex].coords.z;
+                root.rotation.x = -Math.PI / 2;
+                root.scale.set(this.models[this.modelIndex].scale,this.models[this.modelIndex].scale,this.models[this.modelIndex].scale)
+                this.$store.state.scene.add(root);
+            });
+            
         }
     },
     beforeDestroy(){
@@ -83,7 +143,7 @@ export default {
         controls.minDistance = 12;
         controls.maxDistance = 72;
 
-
+    this.loadModel();
     
     const loader = new THREE.TextureLoader();
     let rocketMaterial = new THREE.MeshBasicMaterial({color: 0xffff00,wireframe:true})
@@ -92,17 +152,8 @@ export default {
         map: texture,
     }); 
     })
+    console.log(rocketMaterial)
 
-    const objLoader = new OBJLoader();
-    objLoader.load('/models/Falcon.obj', (root) => {
-    root.name="rocket"
-    root.material = rocketMaterial;
-    root.position.x =120;
-    root.position.y =0;
-    root.position.z = 120;
-    root.rotation.x = -Math.PI / 2;
-    scene.add(root);
-    });
     const light = new THREE.PointLight( 0xffffff, 1, 100 );
     light.position.set( 0, 0, 50 );
     scene.add( light );
@@ -176,6 +227,9 @@ export default {
 }
 .active-controll{
     position: relative;
+}
+#main-renderer{
+cursor:move;
 }
 #prev{
     position: absolute;
