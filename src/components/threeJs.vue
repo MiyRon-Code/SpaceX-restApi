@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="active-controll" v-show="!controll">
-            <button class="controls-button" id="prev" title="previous">
+            <button class="controls-button" id="prev" title="previous" @click="loadPrevModel">
                 <img src="@/assets/icons/left-arrow.svg" alt="" class="ico">
             </button>
             <button class="controls-button" id="next" title="next" @click="loadNextModel">
@@ -31,32 +31,56 @@
 <script>
 import * as THREE from 'three';
 import  {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
-import  {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {mapGetters} from 'vuex'
 export default {
     data: function(){
         return{
             controll: true,
-            objLoader : new OBJLoader(),
+            objLoader : new GLTFLoader(),
             modelIndex: 0,
             models:[
                 {
-                    path: '/models/Falcon.obj',
-                    coords: {
-                        x:120,
-                        y: 0,
-                        z:120
-                    },
-                    scale: 1
-                },
-                {
-                    path: '/models/SpaceX Crew Dragon.obj',
+                    path: '/models/falconheavy.glb',
                     coords: {
                         x:0,
                         y:0,
                         z:0
                     },
-                    scale:11
+                    rotate:{
+                        x:0,
+                        y:0,
+                        z:0
+                    },
+                    scale: 1
+                },
+                {
+                    path: '/models/crewdragon.glb',
+                    coords: {
+                        x:-20,
+                        y:-10,
+                        z:15,
+                    },
+                    rotate:{
+                        x:0,
+                        y:0,
+                        z:0
+                    },
+                    scale:0.5
+                },
+                                {
+                    path: '/models/starship.glb',
+                    coords: {
+                        x:0,
+                        y:-45,
+                        z:0
+                    },
+                    rotate:{
+                        x: Math.PI/2,
+                        y:0,
+                        z:0
+                    },
+                    scale:3
                 },
             ]
         }
@@ -77,10 +101,9 @@ export default {
             this.$store.dispatch('plsClearScene');
         },
         onWindowResize: function(camera, renderer){
-            alert("resize")
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( window.screen.width - 17, window.innerHeight);
         },
         deleteModel: function(){
             var model = this.$store.state.scene.getObjectByName("model");
@@ -88,37 +111,36 @@ export default {
         },
         loadModel: function(){
             this.deleteModel();
-            this.objLoader.load(this.models[this.modelIndex].path, (root) => {
-                root.name="model"
-                root.position.x =this.models[this.modelIndex].coords.x;
-                root.position.y =this.models[this.modelIndex].coords.y;
-                root.position.z =this.models[this.modelIndex].coords.z;
-                root.rotation.x = -Math.PI / 2;
-                this.$store.state.scene.add(root);
+            this.objLoader.load( this.models[this.modelIndex].path,  ( model )=>{
+              let object = model.scene;
+              object.name = "model";
+              object.position.x =  this.models[this.modelIndex].coords.x; 
+              object.position.y =  this.models[this.modelIndex].coords.y;
+              object.position.z =  this.models[this.modelIndex].coords.z;
+              object.rotation.y = this.models[this.modelIndex].rotate.x;
+              object.scale.set(this.models[this.modelIndex].scale,this.models[this.modelIndex].scale,this.models[this.modelIndex].scale)
+              this.$store.state.scene.add(object);
+            }, undefined, function ( error ) {
+                console.error( error );
             });
         },
         loadNextModel: function(){
-            this.deleteModel();
-            console.log("===")
-            console.log(this.modelIndex)
-            console.log(this.models.length-1)
-            console.log("===")
             if(this.modelIndex<this.models.length-1){
-                this.modelIndex++
-            }            
-            else{
-                this.modelIndex =0;
+                this.modelIndex++;
             }
-            this.objLoader.load(this.models[this.modelIndex].path, (root) => {
-                root.name="model"
-                root.position.x =this.models[this.modelIndex].coords.x;
-                root.position.y =this.models[this.modelIndex].coords.y;
-                root.position.z =this.models[this.modelIndex].coords.z;
-                root.rotation.x = -Math.PI / 2;
-                root.scale.set(this.models[this.modelIndex].scale,this.models[this.modelIndex].scale,this.models[this.modelIndex].scale)
-                this.$store.state.scene.add(root);
-            });
-            
+            else{
+                this.modelIndex=0;
+            }
+            this.loadModel();
+        },
+        loadPrevModel: function(){
+            if(this.modelIndex>0){
+                this.modelIndex--;
+            }
+            else{
+                this.modelIndex=this.models.length-1;
+            }
+             this.loadModel();
         }
     },
     beforeDestroy(){
@@ -127,91 +149,49 @@ export default {
     async created(){
         await this.$store.dispatch('createScene')
         const scene = this.$store.state.scene;
-        console.log("======================")
-        console.log(scene)
-        console.log("======================")
+       
+        //init camera       
         const camera = new THREE.PerspectiveCamera( 75, window.screen.width / window.innerHeight, 0.1, 1000 );
-        let mycanvas = await  document.getElementById('main-renderer')
-        console.log(mycanvas)
-        const renderer = new THREE.WebGLRenderer( {alpha: true, canvas: mycanvas});
-        renderer.setSize( window.screen.width - 1, window.innerHeight);
-        
-       
-
-        const controls = new OrbitControls( camera, renderer.domElement );
-        controls.autoRotate=true;
-        controls.minDistance = 12;
-        controls.maxDistance = 72;
-
-    this.loadModel();
-    
-    const loader = new THREE.TextureLoader();
-    let rocketMaterial = new THREE.MeshBasicMaterial({color: 0xffff00,wireframe:true})
-    loader.load('/texture/images/FalconTexture.png', (texture) => {
-        rocketMaterial = new THREE.MeshBasicMaterial({
-        map: texture,
-    }); 
-    })
-    console.log(rocketMaterial)
-
-    const light = new THREE.PointLight( 0xffffff, 1, 100 );
-    light.position.set( 0, 0, 50 );
-    scene.add( light );
-
-    const light2 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light2.position.set( 0, 50, 50 );
-    scene.add( light2 );
-
-    const light3 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light3.position.set( 0, -50, 50 );
-    scene.add( light3 );
-
-    const light4 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light4.position.set( 0, 150, 50 );
-    scene.add( light4 );
-
-    const light5 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light5.position.set( 0, 0, -50 );
-    scene.add( light5 );
-
-    const light6 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light6.position.set( 0, 50, -50 );
-    scene.add( light6 );
-
-    const light7 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light7.position.set( 0, -50, -50 );
-    scene.add( light7 );
-
-    const light8 = new THREE.PointLight( 0xffffff, 1, 100 );
-    light8.position.set( 0, 150, -50 );
-    scene.add( light8 );
-
-    const light9 = new THREE.PointLight( 0xffffff, 2, 100 );
-    light9.position.set( 90, 0, 0 );
-    scene.add( light9 );
-
-    const light10 = new THREE.PointLight( 0xffffff, 2, 100 );
-    light10.position.set( -90, 0, 0 );
-    scene.add( light10 );
-
-        window.addEventListener( 'resize', ()=>{onWindowResize()});
-
-
-        renderer.setClearColor(0x2B04E8, 1)
-       
         camera.position.z = 1;
         camera.position.y = 150;
-        function onWindowResize(){
+    
+        window.addEventListener( 'resize', ()=>{onWindowResize()});
+        //get myCanvas
+        let mycanvas = await  document.getElementById('main-renderer')
+      
+        //init renderer 
+        const renderer = new THREE.WebGLRenderer( {alpha: true, canvas: mycanvas});//bind renderer to my canvas
+        renderer.setSize( window.screen.width - 17, window.innerHeight);
+        renderer.setClearColor(0x2B04E8, 1)
+        
+        //init controls
+        const controls = new OrbitControls( camera, renderer.domElement );
+        controls.autoRotate=true;
+        controls.minDistance = 20;
+        controls.maxDistance = 120;
 
+        //init first model 
+        this.loadModel();
+
+        //init lights
+        const globalLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
+        scene.add( globalLight );
+
+        const light = new THREE.PointLight( 0xffffff, 1.02, 100 );
+        light.position.set( 0, -35, 0 );
+        scene.add( light );
+
+        const light2 = new THREE.PointLight( 0xffffff, 1.02, 100 );
+        light2.position.set( 0, -35, -80 );
+        scene.add( light2 );
+
+        function onWindowResize(){
             camera.aspect = window.screen.width / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize( window.screen.width-24, window.innerHeight );
         }
-        
-        
 
-        function animate() {
-                
+        function animate() {        
             requestAnimationFrame( animate );
             controls.update();
             renderer.render( scene, camera );
@@ -239,13 +219,13 @@ cursor:move;
 #next{
     position: absolute;
     animation: unset;
-    transform: translate( calc(100vw - 70px), calc(50vh - 40px));
+    transform: translate( calc(100vw - 60px), calc(50vh - 40px));
 }
 #lock
 {
     position: absolute;
     animation: unset;
-    transform: translate( calc(50vw - 40px), calc(100vh - 100px));
+    transform: translate( calc(50vw - 20px), calc(100vh - 100px));
 }
 .threeJs{
     position: relative;
