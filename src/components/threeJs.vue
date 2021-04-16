@@ -49,17 +49,17 @@ export default {
                     },
                     rotate:{
                         x:0,
-                        y:0,
+                        y:Math.PI,
                         z:0
                     },
                     scale: 1
                 },
                 {
-                    path: '/models/crewdragon.glb',
+                    path: '/models/crewdragonp.glb',
                     coords: {
-                        x:-20,
-                        y:-10,
-                        z:15,
+                        x:0,
+                        y:0,
+                        z:0,
                     },
                     rotate:{
                         x:0,
@@ -69,14 +69,14 @@ export default {
                     scale:0.5
                 },
                                 {
-                    path: '/models/starship.glb',
+                    path: '/models/starshipglass.glb',
                     coords: {
                         x:0,
-                        y:-45,
+                        y:0,
                         z:0
                     },
                     rotate:{
-                        x: Math.PI/2,
+                        x:0,
                         y:0,
                         z:0
                     },
@@ -117,7 +117,8 @@ export default {
               object.position.x =  this.models[this.modelIndex].coords.x; 
               object.position.y =  this.models[this.modelIndex].coords.y;
               object.position.z =  this.models[this.modelIndex].coords.z;
-              object.rotation.y = this.models[this.modelIndex].rotate.x;
+              object.rotation.x += Math.PI;
+              object.rotation.y += Math.PI + Math.PI/2;
               object.scale.set(this.models[this.modelIndex].scale,this.models[this.modelIndex].scale,this.models[this.modelIndex].scale)
               this.$store.state.scene.add(object);
             }, undefined, function ( error ) {
@@ -172,17 +173,17 @@ export default {
 
         //init first model 
         this.loadModel();
-
+        
         //init lights
         const globalLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
         scene.add( globalLight );
 
         const light = new THREE.PointLight( 0xffffff, 1.02, 100 );
-        light.position.set( 0, -35, 0 );
+        light.position.set( 0, 35, 0 );
         scene.add( light );
 
         const light2 = new THREE.PointLight( 0xffffff, 1.02, 100 );
-        light2.position.set( 0, -35, -80 );
+        light2.position.set( 0, 35, -80 );
         scene.add( light2 );
 
         function onWindowResize(){

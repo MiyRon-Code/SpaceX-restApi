@@ -52,7 +52,7 @@ h1{
 
 .about-preview-info{
     position: absolute;
-    top: 45%;
+    top: 35%;
     left: 55%;
 }
 .about-header{
