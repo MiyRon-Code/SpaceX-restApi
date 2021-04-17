@@ -1,0 +1,1 @@
+.menu{display:flex}.menu-item{cursor:pointer;text-transform:uppercase;padding:5px;background-color:#5009ff;color:#fff;margin-right:5px;border-radius:5px;font-size:12px;border:none}.menu-item-active{background-color:#8b09ff}.main-item{background-color:#1332e4;margin-right:5px;transition:.5s}.main-item.menu-item-active{background-color:#8b09ff;margin-right:5px;color:#fff}

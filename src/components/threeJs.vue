@@ -1,6 +1,6 @@
 <template>
     <div class="threeJs">
-        <div class="controll" v-show="controll" >
+        <div class="controll" v-show="controll" id="test-controll" >
             <div class="container">
                 <div class="controll-inner">
                     <div class="about-preview-info">
@@ -23,6 +23,7 @@
             <button class="controls-button" id="lock" title="block control">
                 <img src="@/assets/icons/block.svg" alt="" class="ico" @click="toggleControll">
             </button>
+            <p class="model-name">{{models[this.modelIndex].name}}</p>
         </div>
         <canvas id="main-renderer"></canvas>
        
@@ -41,12 +42,8 @@ export default {
             modelIndex: 0,
             models:[
                 {
+                    name: 'Falcon Heavy',
                     path: '/models/falconheavy.glb',
-                    coords: {
-                        x:0,
-                        y:0,
-                        z:0
-                    },
                     rotate:{
                         x:0,
                         y:Math.PI,
@@ -55,32 +52,24 @@ export default {
                     scale: 1
                 },
                 {
-                    path: '/models/crewdragonp.glb',
-                    coords: {
-                        x:0,
-                        y:0,
-                        z:0,
-                    },
+                    name: 'Crew Dragon',
+                    path: '/models/crewdragon.glb',
                     rotate:{
                         x:0,
                         y:0,
                         z:0
                     },
-                    scale:0.5
+                    scale:0.4
                 },
-                                {
-                    path: '/models/starshipglass.glb',
-                    coords: {
-                        x:0,
-                        y:0,
-                        z:0
-                    },
+                {
+                    name: 'Starship',
+                    path: '/models/starship.glb',
                     rotate:{
                         x:0,
                         y:0,
                         z:0
                     },
-                    scale:3
+                    scale:5
                 },
             ]
         }
@@ -114,12 +103,11 @@ export default {
             this.objLoader.load( this.models[this.modelIndex].path,  ( model )=>{
               let object = model.scene;
               object.name = "model";
-              object.position.x =  this.models[this.modelIndex].coords.x; 
-              object.position.y =  this.models[this.modelIndex].coords.y;
-              object.position.z =  this.models[this.modelIndex].coords.z;
+              console.log(model)
               object.rotation.x += Math.PI;
               object.rotation.y += Math.PI + Math.PI/2;
               object.scale.set(this.models[this.modelIndex].scale,this.models[this.modelIndex].scale,this.models[this.modelIndex].scale)
+              
               this.$store.state.scene.add(object);
             }, undefined, function ( error ) {
                 console.error( error );
@@ -148,6 +136,7 @@ export default {
         this.deleted()
     },
     async created(){
+
         await this.$store.dispatch('createScene')
         const scene = this.$store.state.scene;
        
@@ -162,7 +151,7 @@ export default {
       
         //init renderer 
         const renderer = new THREE.WebGLRenderer( {alpha: true, canvas: mycanvas});//bind renderer to my canvas
-        renderer.setSize( window.screen.width - 17, window.innerHeight);
+        renderer.setSize( window.screen.width - getScrollbarWidth(), window.innerHeight);
         renderer.setClearColor(0x2B04E8, 1)
         
         //init controls
@@ -186,16 +175,48 @@ export default {
         light2.position.set( 0, 35, -80 );
         scene.add( light2 );
 
+
+        const light3 = new THREE.PointLight( 0xffffff, 1.02, 100 );
+        light3.position.set( 0, 35, -80 );
+        scene.add( light3 );
+
+        const path = "/texture/";
+        const format = '.png';
+        const urls = [
+            path + 'px' + format, path + 'nx' + format,
+            path + 'py' + format, path + 'ny' + format,
+            path + 'pz' + format, path + 'nz' + format
+        ];
+
+
+        const reflectionCube = new THREE.CubeTextureLoader().load( urls );
+        reflectionCube.encoding = THREE.sRGBEncoding;
+
+        renderer.background = reflectionCube;
+         
         function onWindowResize(){
+            console.log('asdasd')
             camera.aspect = window.screen.width / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize( window.screen.width-24, window.innerHeight );
+            renderer.setSize( window.screen.width-getScrollbarWidth(), window.innerHeight );
         }
 
         function animate() {        
             requestAnimationFrame( animate );
             controls.update();
             renderer.render( scene, camera );
+        }
+        function getScrollbarWidth() {
+            const outer = document.createElement('div');
+            outer.style.visibility = 'hidden';
+            outer.style.overflow = 'scroll'; 
+            outer.style.msOverflowStyle = 'scrollbar'; 
+            document.body.appendChild(outer);
+            const inner = document.createElement('div');
+            outer.appendChild(inner);
+            const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+            outer.parentNode.removeChild(outer);
+            return scrollbarWidth;
         }
         animate();
     }    
@@ -228,6 +249,15 @@ cursor:move;
     animation: unset;
     transform: translate( calc(50vw - 20px), calc(100vh - 100px));
 }
+.model-name{
+    position: absolute;
+    font-size: 30px;
+    font-weight: 900;
+    font-family: monospace;
+    color:white;
+    transform: translateY(calc(100vh - 120px));
+    animation: fadein 1s;
+}
 .threeJs{
     position: relative;
 }
@@ -240,6 +270,14 @@ cursor:move;
     }
     100%{
         transform: scale(1);
+    }
+}
+@keyframes fadein {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
     }
 }
 .controls-button{

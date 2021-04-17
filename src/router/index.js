@@ -3,119 +3,70 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-/*pages*/
-import main from '@/pages/main.vue'
-//missions
-import missions from '@/pages/missions.vue'
-import missionsAbout from '@/pages/missionsAbout.vue'
-import missionsAll from '@/pages/missionsAll.vue'
-//capsules
-import capsules from '@/pages/capsules.vue'
-import capsulesAbout from '@/pages/capsulesAbout.vue'
-import capsulesPast from '@/pages/capsulesPast.vue'
-import capsulesUpcoming from '@/pages/capsulesUpcoming.vue'
-import capsulesAll from '@/pages/capsulesAll.vue'
-//dragons
-import dragons from '@/pages/dragons.vue'
-import dragonsAll from '@/pages/dragonsAll.vue'
-import dragonsAbout from '@/pages/dragonsAbout.vue'
-
-//lanpads
-import landpads from '@/pages/landpads.vue'
-import landpadsAbout from '@/pages/landpadsAbout.vue'
-import landpadsAll from '@/pages/landpadsAll.vue'
-import landpadsPast from '@/pages/landpadsAll.vue'
-import landpadsUpcoming from '@/pages/landpadsAll.vue'
-
-//rockets
-import rockets from '@/pages/rockets.vue'
-import rocketsAbout from '@/pages/rocketsAbout.vue'
-import rocketsAll from '@/pages/rocketsAll.vue'
-
-//launches
-import launches from '@/pages/launches.vue'
-import launchesAbout from '@/pages/launchesAbout.vue'
-import launchesAll from '@/pages/launchesAll.vue'
-import launchesUpcoming from '@/pages/launchesUpcoming.vue'
-
-//description
-import description from '@/pages/description.vue'
-
 export default new VueRouter({
     mode:'history',
     routes: [
         {
             name: 'main',
             path: '',
-            component: main
+            component: () => import("@/pages/main.vue")
         },
         {
             path: '/missions',
-            component: missions,
+            component: () => import("@/pages/missions.vue"),
             children:[
                 {
                     name: 'missions',
                     path: '',
-                    component: missionsAbout,
+                    component: () => import("@/pages/missionsAbout.vue"),
                 },
                 {
                     name: 'missions-all',
                     path: 'all',
-                    component: missionsAll,
+                    component: () => import("@/pages/missionsAll.vue"),
                 },
             ]
         },
         {
 
             path: '/rockets',
-            component: rockets,
+            component: () => import("@/pages/rockets.vue"),
             children:[
                 {
                     name: 'rockets',
                     path: '',
-                    component: rocketsAbout
+                    component: () => import("@/pages/rocketsAbout.vue")
                 },
                 {
                     path: 'all',
                     name: 'rockets-all',
-                    component: rocketsAll,
+                    component: () => import("@/pages/rocketsAll.vue"),
                 },
-                {
-                    path: 'past',
-                    name: 'rockets-past',
-                    component: capsulesPast,
-                },
-                {
-                    path: 'upcoming',
-                    name: 'rockets-upcoming',
-                    component: capsulesUpcoming,
-                    
-                }
             ]
         },
         {
             path: '/capsules',
-            component: capsules,
+            component: () => import("@/pages/capsules.vue"),
             children:[
                 { 
                     name: 'capsules',
                     path: '', 
-                    component: capsulesAbout,
+                    component: () => import("@/pages/capsulesAbout.vue"),
                 },
                 {
                     path: 'all',
                     name: 'capsules-all',
-                    component: capsulesAll,
+                    component: () => import("@/pages/capsulesAll.vue"),
                 },
                 {
                     path: 'past',
                     name: 'capsules-past',
-                    component: capsulesPast,
+                    component: () => import("@/pages/capsulesPast.vue"),
                 },
                 {
                     path: 'upcoming',
                     name: 'capsules-upcoming',
-                    component: capsulesUpcoming,
+                    component: () => import("@/pages/capsulesUpcoming.vue"),
                     
                 }
             ]
@@ -123,83 +74,56 @@ export default new VueRouter({
         {
 
             path: '/dragons',
-            component: dragons,
+            component: () => import("@/pages/dragons.vue"),
             children:[
                 {
                     name: 'dragons',
                     path: '',
-                    component: dragonsAbout
+                    component: () => import("@/pages/dragonsAbout.vue"),
                 },
                 {
                     path: 'all',
                     name: 'dragons-all',
-                    component: dragonsAll,
+                    component: () => import("@/pages/dragonsAll.vue"),
                 },
-                {
-                    path: 'past',
-                    name: 'dragons-past',
-                    component: capsulesPast,
-                },
-                {
-                    path: 'upcoming',
-                    name: 'dragons-upcoming',
-                    component: capsulesUpcoming,
-                    
-                }
             ]
         },
         {
             
             path: '/landpads',
-            component: landpads,
+            component: () => import("@/pages/landpads.vue"),
             children:[
                 {
                     path: '',
                     name: 'landpads',
-                    component: landpadsAbout
+                    component: () => import("@/pages/landpadsAbout.vue"),
                 },
                 {
                     path: 'all',
                     name: 'landpads-all',
-                    component: landpadsAll,
+                    component: () => import("@/pages/landpadsAll.vue"),
                 },
-                {
-                    path: 'past',
-                    name: 'landpads-past',
-                    component: landpadsPast,
-                },
-                {
-                    path: 'upcoming',
-                    name: 'landpads-upcoming',
-                    component: landpadsUpcoming,
-                    
-                }
             ]
         },
         {
             
             path: '/launches',
-            component: launches,
+            component: () => import("@/pages/launches.vue"),
             children:[
                 {
                     path: '',
                     name: 'launches',
-                    component: launchesAbout
+                    component: () => import("@/pages/launchesAbout.vue"),
                 },
                 {
                     path: 'all',
                     name: 'launches-all',
-                    component: launchesAll,
-                },
-                {
-                    path: 'past',
-                    name: 'launches-past',
-                    component: landpadsPast,
+                    component: () => import("@/pages/launchesAll.vue"),
                 },
                 {
                     path: 'upcoming',
                     name: 'launches-upcoming',
-                    component: launchesUpcoming,
+                    component: () => import("@/pages/launchesUpcoming.vue"),
                     
                 }
             ]
@@ -207,8 +131,8 @@ export default new VueRouter({
         {
             
             path: '/description',
-            component: description,
             name: 'description',
+            component: () => import("@/pages/description.vue"),
         },
     ]
   })
