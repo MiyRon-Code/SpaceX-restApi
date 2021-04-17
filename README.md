@@ -29,7 +29,7 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-###Acknowledgements:heart:
+### Acknowledgements:heart:
 thank you to these guys for their work
 
 `3d model CREWDRAGON` - This thing was created by Thingiverse user Maxlarsen, and is licensed under `cc-nc`.
